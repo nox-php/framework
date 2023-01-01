@@ -14,10 +14,6 @@ class AdminServiceProvider extends PluginServiceProvider
     {
         parent::packageRegistered();
 
-        $this->app->beforeResolving('filament', static function () {
-            info('resolving filament');
-        });
-
         $this->app->scoped('filament', FilamentManager::class);
 
         $this->app->resolving('filament', function () {

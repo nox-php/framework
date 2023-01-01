@@ -24,8 +24,6 @@ class NoxServiceProvider extends AggregateServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/nox.php', 'nox');
 
         parent::register();
-
-        info('Nox registered!');
     }
 
     public function boot(): void
@@ -41,7 +39,5 @@ class NoxServiceProvider extends AggregateServiceProvider
 
             $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         }
-
-        info('Nox booted');
     }
 }
