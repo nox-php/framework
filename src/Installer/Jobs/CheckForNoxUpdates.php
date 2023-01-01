@@ -3,6 +3,7 @@
 namespace Nox\Framework\Installer\Jobs;
 
 use Composer\InstalledVersions;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -22,8 +23,26 @@ class CheckForNoxUpdates implements ShouldQueue
             return;
         }
 
-        $data = Http::get(static::$baseUrl . 'nox-php/framework.json');
+        if (!$version = $this->getLatestVersion()) {
+            info('Failed to get latest version of nox-php/framework from packagist.');
+            return;
+        }
 
-        dd(json_decode($data->body()));
+        if ($version !== $installedVersion) {
+            info('New Version available!');
+        }
+    }
+
+    protected function getLatestVersion(): ?string
+    {
+        try {
+            $response = Http::get(static::$baseUrl . 'nox-php/framework.json');
+
+            $data = json_decode($response->body(), true, 512, JSON_THROW_ON_ERROR);
+
+            return $data['packages']['nox-php/framework'][0]['version_normalized'] ?? null;
+        } catch (Exception) {
+            return null;
+        }
     }
 }
