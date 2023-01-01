@@ -2,6 +2,7 @@
 
 namespace Nox\Framework\Installer\Jobs;
 
+use Composer\InstalledVersions;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -16,8 +17,13 @@ class CheckForNoxUpdates implements ShouldQueue
 
     public function handle(): void
     {
+        $installedVersion = InstalledVersions::getVersion('nox-php/framework');
+        if ($installedVersion === 'dev-main') {
+            return;
+        }
+
         // Retrigger release
-        $data = Http::get(static::$baseUrl . 'nox-php/framework~dev.json');
+        $data = Http::get(static::$baseUrl . 'nox-php/framework.json');
 
         dd(json_decode($data->body()));
     }
