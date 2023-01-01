@@ -19,6 +19,6 @@ class CheckForNoxUpdates implements ShouldQueue
         // Retrigger release
         $data = Http::get(static::$baseUrl . 'nox-php/framework~dev.json');
 
-        dd($data->body());
+        dd(json_decode($data->body()));
     }
 }
