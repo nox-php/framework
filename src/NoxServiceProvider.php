@@ -21,23 +21,25 @@ class NoxServiceProvider extends AggregateServiceProvider
 
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/nox.php', 'nox');
+        $this->mergeConfigFrom(__DIR__ . '/../config/nox.php', 'nox');
 
         parent::register();
     }
 
     public function boot(): void
     {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nox');
+
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/nox.php' => config_path('nox.php'),
+                __DIR__ . '/../config/nox.php' => config_path('nox.php'),
             ]);
 
             $this->publishes([
-                __DIR__.'/../dist' => public_path('nox'),
+                __DIR__ . '/../dist' => public_path('nox'),
             ], 'assets');
 
-            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         }
     }
 }
