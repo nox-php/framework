@@ -43,7 +43,10 @@ class Composer
     public function update(string $package): int
     {
         return $this->run('update', [
-            'packages' => [$package]
+            'packages' => [$package],
+            '-w',
+            '-o',
+            '--no-scripts'
         ]);
     }
 

@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\URL;
 use Nox\Framework\Auth\Models\User;
 use Nox\Framework\Support\Composer;
@@ -31,33 +32,39 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
 
     public function handle(Composer $composer): void
     {
-        info('running');
-        $status = $composer->update('nox-php/framework');
+        rescue(function () use ($composer) {
+            $status = $composer->update('nox-php/framework');
 
-        info('finished: ' . $composer->getOutput()?->fetch() ?? '');
+            if ($status !== 0) {
+                $currentVersion = InstalledVersions::getVersion('nox-php/framework');
 
-        if ($status === 0) {
+                Notification::make()
+                    ->danger()
+                    ->title('Nox has unsuccessfully updated')
+                    ->body('Nox ' . $this->version . ' has failed to install, reverting back to ' . $currentVersion)
+                    ->actions([
+                        Action::make('update-nox-retry')
+                            ->button()
+                            ->label('Retry')
+                            ->url(URL::signedRoute('nox.updater', ['version' => $this->version]))
+                    ])
+                    ->sendToDatabase($this->user);
+
+                return;
+            }
+
             Notification::make()
                 ->success()
                 ->title('Nox has successfully updated')
                 ->body('Nox ' . $this->version . ' has been successfully installed')
                 ->sendToDatabase($this->user);
-        } else {
-            $currentVersion = InstalledVersions::getVersion('nox-php/framework');
 
-            Notification::make()
-                ->danger()
-                ->title('Nox has unsuccessfully updated')
-                ->body('Nox ' . $this->version . ' has failed to install, reverting back to ' . $currentVersion)
-                ->actions([
-                    Action::make('update-nox-retry')
-                        ->button()
-                        ->label('Retry')
-                        ->url(URL::signedRoute('nox.updater', ['version' => $this->version]))
-                ])
-                ->sendToDatabase($this->user);
+            Artisan::call('vendor:publish', [
+                '--tag' => 'laravel-assets',
+                '--force' => true
+            ]);
 
-            logger()->error('Error updating Nox: ' . $composer->getOutput()?->fetch() ?? '');
-        }
+            Artisan::call('package:discover');
+        });
     }
 }
