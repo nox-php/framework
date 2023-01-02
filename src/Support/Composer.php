@@ -3,7 +3,6 @@
 namespace Nox\Framework\Support;
 
 use Composer\Console\Application;
-use Composer\Factory;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -28,7 +27,7 @@ class Composer
 
         $this->output = new BufferedOutput();
 
-        return (new Application())->doRun($input, $this->output);
+        return (new Application())->run($input, $this->output);
     }
 
     public function require(string $package): int

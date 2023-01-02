@@ -10,24 +10,31 @@ use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\URL;
 use Nox\Framework\Auth\Models\User;
 use Nox\Framework\Support\Composer;
 
 class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct(
-        protected User $user,
-        protected string $version
-    )
+    protected User $user;
+
+    protected string $version;
+
+    public function __construct(User $user, string $version)
     {
+        $this->user = $user->withoutRelations();
+        $this->version = $version;
     }
 
     public function handle(Composer $composer): void
     {
+        info('running');
         $status = $composer->update('nox-php/framework');
+
+        info('finished: ' . $composer->getOutput()?->fetch() ?? '');
 
         if ($status === 0) {
             Notification::make()
@@ -50,7 +57,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                 ])
                 ->sendToDatabase($this->user);
 
-            logger()->error('Error updating Nox: ' . $composer->getErrorOutput());
+            logger()->error('Error updating Nox: ' . $composer->getOutput()?->fetch() ?? '');
         }
     }
 }
