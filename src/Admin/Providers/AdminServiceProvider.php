@@ -4,6 +4,7 @@ namespace Nox\Framework\Admin\Providers;
 
 use Filament\Facades\Filament;
 use Filament\PluginServiceProvider;
+use Illuminate\Contracts\View\View;
 use Nox\Framework\Admin\Filament\FilamentManager;
 
 class AdminServiceProvider extends PluginServiceProvider
@@ -21,6 +22,11 @@ class AdminServiceProvider extends PluginServiceProvider
                 if (config('nox.admin.register_theme')) {
 //                    Filament::registerTheme(mix('css/nox.css', 'nox'));
                 }
+
+                Filament::registerRenderHook(
+                    'content.start',
+                    static fn(): View => view('nox::filament.notifications.banners')
+                );
             });
         });
     }
