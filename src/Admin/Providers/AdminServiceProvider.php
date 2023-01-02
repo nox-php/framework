@@ -22,11 +22,6 @@ class AdminServiceProvider extends PluginServiceProvider
                 if (config('nox.admin.register_theme')) {
 //                    Filament::registerTheme(mix('css/nox.css', 'nox'));
                 }
-
-                Filament::registerRenderHook(
-                    'content.start',
-                    static fn(): View => view('nox::filament.notifications.banners')
-                );
             });
         });
     }
