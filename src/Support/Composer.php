@@ -2,98 +2,53 @@
 
 namespace Nox\Framework\Support;
 
-use Illuminate\Support\Str;
-use Symfony\Component\Process\PhpExecutableFinder;
-use Symfony\Component\Process\Process;
+use Composer\Console\Application;
+use Composer\Factory;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 class Composer
 {
-    protected string $basePath;
+    protected ?BufferedOutput $output = null;
 
-    protected array $env;
-
-    protected string $output = '';
-
-    protected string $errorOutput = '';
-
-    public function __construct(?string $basePath = null)
+    public function __construct()
     {
-        $this->basePath = Str::finish($basePath ?? base_path(), '/');
-        $this->env = $this->getEnvironment();
+        putenv('COMPOSER_HOME=' . __DIR__ . '/vendor/bin/composer');
     }
 
-    public function run(string $command, string $package, array $extraParams = []): int
+    public function run(string $command, array $extraParameters = []): int
     {
-        $this->clearOutput();
+        $input = new ArrayInput([
+            ...$extraParameters,
+            'command' => $command
+        ]);
 
-        $params = [
-            $this->phpBinary(),
-            'vendor/bin/composer',
-            '--no-ansi',
-            $command,
-            $package,
-            ...$extraParams
-        ];
+        $input->setInteractive(false);
 
-        $process = $this->newSymfonyProcess($params, $this->basePath);
+        $this->output = new BufferedOutput();
 
-        $status = $process->run(env: $this->env);
+        $composer = new Application();
+        $composer->setAutoExit(false);
 
-        $this->output = $process->getOutput();
-        $this->errorOutput = $process->getErrorOutput();
-
-        return $status;
+        return $composer->run($input, $this->output);
     }
 
-    public function update(string $package, array $extraParams = []): int
+    public function require(string $package): int
     {
-        return $this->run('update', $package, $extraParams);
+        return $this->run('require', [
+            'packages' => [$package]
+        ]);
     }
 
-    public function getOutput(): string
+    public function update(string $package): int
+    {
+        return $this->run('update', [
+            'packages' => [$package]
+        ]);
+    }
+
+    public function getOutput(): ?BufferedOutput
     {
         return $this->output;
-    }
-
-    public function getErrorOutput(): string
-    {
-        return $this->errorOutput;
-    }
-
-    protected function newSymfonyProcess($command, $path = null): Process
-    {
-        if (!is_array($command)) {
-            $command = (string)$command;
-        }
-
-        $process = is_string($command) && method_exists(Process::class, 'fromShellCommandLine')
-            ? Process::fromShellCommandline($command, $path ?? $this->basePath, $this->env)
-            : new Process($command, $path ?? $this->basePath, $this->env);
-
-        $process->setTimeout(null);
-
-        return $process;
-    }
-
-    protected function phpBinary(): string
-    {
-        return (new PhpExecutableFinder())->find();
-    }
-
-    protected function getEnvironment(): array
-    {
-        $env = collect(getenv())->only(['HOME', 'LARAVEL_SAIL', 'COMPOSER_HOME', 'APPDATA', 'LOCALAPPDATA']);
-
-        if (!$env->has('HOME') && $env->get('LARAVEL_SAIL') === '1') {
-            $env['HOME'] = '/home/sail';
-        }
-
-        return $env->all();
-    }
-
-    protected function clearOutput(): void
-    {
-        $this->output = '';
-        $this->errorOutput = '';
     }
 }

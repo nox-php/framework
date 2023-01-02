@@ -1,6 +1,6 @@
 <?php
 
-namespace Nox\Framework\Installer\Jobs;
+namespace Nox\Framework\Updater\Jobs;
 
 use Composer\InstalledVersions;
 use Exception;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\URL;
 use Nox\Framework\Auth\Models\User;
 
-class NoxUpdateCheckJob implements ShouldQueue
+class NoxCheckUpdateJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable;
 
@@ -32,25 +32,27 @@ class NoxUpdateCheckJob implements ShouldQueue
             return;
         }
 
-        if ($version !== $installedVersion) {
-            $users = User::query()
-                ->whereCan('view_admin')
-                ->lazy();
+        if (version_compare($installedVersion, $version, '>=')) {
+            return;
+        }
 
-            $notification = Notification::make()
-                ->warning()
-                ->title('A new version of Nox is available')
-                ->body('Nox ' . $version . ' is ready to be installed')
-                ->actions([
-                    Action::make('update-nox')
-                        ->button()
-                        ->label('Install')
-                        ->url(URL::signedRoute('nox.updater', ['version' => $version]))
-                ]);
+        $users = User::query()
+            ->whereCan('view_admin')
+            ->lazy();
 
-            foreach ($users as $user) {
-                $notification->sendToDatabase($user);
-            }
+        $notification = Notification::make()
+            ->warning()
+            ->title('A new version of Nox is available')
+            ->body('Nox ' . $version . ' is ready to be installed')
+            ->actions([
+                Action::make('update-nox')
+                    ->button()
+                    ->label('Install')
+                    ->url(URL::signedRoute('nox.updater', ['version' => $version]))
+            ]);
+
+        foreach ($users as $user) {
+            $notification->sendToDatabase($user);
         }
     }
 
