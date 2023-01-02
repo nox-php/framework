@@ -4,16 +4,17 @@ namespace Nox\Framework\Installer\Jobs;
 
 use Composer\InstalledVersions;
 use Exception;
+use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Notifications\Action;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\URL;
 use Nox\Framework\Auth\Models\User;
 
-class CheckForNoxUpdates implements ShouldQueue
+class NoxUpdateCheckJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable;
 
@@ -39,7 +40,13 @@ class CheckForNoxUpdates implements ShouldQueue
             $notification = Notification::make()
                 ->warning()
                 ->title('A new version of Nox is available')
-                ->body('Nox ' . $version . 'is ready to be installed');
+                ->body('Nox ' . $version . ' is ready to be installed')
+                ->actions([
+                    Action::make()
+                        ->button()
+                        ->label('Install')
+                        ->url(URL::signedRoute('nox.updater', ['version' => $version]))
+                ]);
 
             foreach ($users as $user) {
                 $notification->sendToDatabase($user);

@@ -25,4 +25,11 @@ class AdminServiceProvider extends PluginServiceProvider
             });
         });
     }
+
+    public function packageBooted(): void
+    {
+        parent::packageBooted();
+
+        $this->loadRoutesFrom(__DIR__ . '/../../../routes/admin.php');
+    }
 }
