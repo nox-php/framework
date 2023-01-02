@@ -227,7 +227,10 @@ class InstallNoxCommand extends Command
         $this->createUser();
 
         $this->components->info(
-            sprintf('Nox has been successfully installed! You can access your new site at %s', $this->siteDetails['url'])
+            sprintf(
+                'Nox has been successfully installed! You can access your new site at %s',
+                $this->siteDetails === null ? $this->siteDetails['url'] : null
+            )
         );
     }
 
@@ -255,7 +258,7 @@ class InstallNoxCommand extends Command
 
         $user = null;
         while ($user === null) {
-            $user = User::on($this->alreadyInstalled ? null : static::$databaseConnectionName)
+            $user = User::on($this->databaseDetails === null ? null : static::$databaseConnectionName)
                 ->whereNotNull(User::getDiscordIdColumnName())
                 ->where(User::getCreatedAtColumnName(), '>=', $time)
                 ->first();
