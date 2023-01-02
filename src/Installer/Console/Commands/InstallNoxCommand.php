@@ -276,6 +276,8 @@ class InstallNoxCommand extends Command
 
         $env = new Env($envPath);
 
+        $updated = false;
+
         if ($this->siteDetails !== null) {
             $env->put([
                 'APP_NAME' => $this->siteDetails['name'],
@@ -284,6 +286,8 @@ class InstallNoxCommand extends Command
                 'APP_DEBUG' => $this->siteDetails['debug'] ? 'true' : 'false',
                 'APP_URL' => $this->siteDetails['url'],
             ]);
+
+            $updated = true;
         }
 
         if ($this->databaseDetails !== null) {
@@ -304,6 +308,8 @@ class InstallNoxCommand extends Command
                     'DB_DATABASE' => $this->databaseDetails['database']
                 ]);
             }
+
+            $updated = true;
         }
 
         if ($this->discordDetails !== null) {
@@ -311,6 +317,8 @@ class InstallNoxCommand extends Command
                 'DISCORD_CLIENT_ID' => $this->discordDetails['client_id'],
                 'DISCORD_CLIENT_SECRET' => $this->discordDetails['client_secret'],
             ]);
+
+            $updated = true;
         }
 
         if ($this->emailDetails !== null) {
@@ -333,9 +341,15 @@ class InstallNoxCommand extends Command
                     'MAIL_SENDMAIL_PATH' => $this->emailDetails['path']
                 ]);
             }
+
+            $updated = true;
         }
 
-        return $env->save();
+        if ($updated) {
+            return $env->save();
+        }
+
+        return true;
     }
 
     protected function checkDatabaseDetails(): bool
