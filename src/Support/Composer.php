@@ -44,9 +44,9 @@ class Composer
     {
         return $this->run('update', [
             'packages' => [$package],
-            '-w',
-            '-o',
-            '--no-scripts'
+            '-w' => true,
+            '-o' => true,
+            '--no-scripts' => true
         ]);
     }
 
