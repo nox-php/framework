@@ -145,6 +145,21 @@ class User extends Authenticatable implements FilamentUser, HasName
         return $this->{static::getUsernameColumnName()};
     }
 
+    public function scopeWhereCan($query, $ability)
+    {
+        $query->where(function ($query) use ($ability) {
+            $query->whereHas('abilities', function ($query) use ($ability) {
+                $query->byName($ability);
+            });
+
+            $query->orWhereHas('roles', function ($query) use ($ability) {
+                $query->whereHas('abilities', function ($query) use ($ability) {
+                    $query->byName($ability);
+                });
+            });
+        });
+    }
+
     protected static function newFactory(): UserFactory
     {
         return UserFactory::new();

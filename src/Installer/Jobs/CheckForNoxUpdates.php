@@ -4,11 +4,14 @@ namespace Nox\Framework\Installer\Jobs;
 
 use Composer\InstalledVersions;
 use Exception;
+use Filament\Notifications\Notification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Notifications\Action;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Http;
+use Nox\Framework\Auth\Models\User;
 
 class CheckForNoxUpdates implements ShouldQueue
 {
@@ -29,7 +32,15 @@ class CheckForNoxUpdates implements ShouldQueue
         }
 
         if ($version !== $installedVersion) {
-            info('New Version available!');
+            $users = User::query()
+                ->whereCan('view_admin')
+                ->lazy();
+
+            Notification::make()
+                ->warning()
+                ->title('A new version of Nox is available')
+                ->body('Nox ' . $version . 'is ready to be installed')
+                ->sendToDatabase($users);
         }
     }
 
