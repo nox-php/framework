@@ -255,7 +255,7 @@ class InstallNoxCommand extends Command
 
         $user = null;
         while ($user === null) {
-            $user = User::on(static::$databaseConnectionName)
+            $user = User::on($this->alreadyInstalled ? null : static::$databaseConnectionName)
                 ->whereNotNull(User::getDiscordIdColumnName())
                 ->where(User::getCreatedAtColumnName(), '>=', $time)
                 ->first();
