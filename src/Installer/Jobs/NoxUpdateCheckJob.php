@@ -42,7 +42,7 @@ class NoxUpdateCheckJob implements ShouldQueue
                 ->title('A new version of Nox is available')
                 ->body('Nox ' . $version . ' is ready to be installed')
                 ->actions([
-                    Action::make()
+                    Action::make('update-nox')
                         ->button()
                         ->label('Install')
                         ->url(URL::signedRoute('nox.updater', ['version' => $version]))
