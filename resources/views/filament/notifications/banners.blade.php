@@ -8,7 +8,7 @@
 @if($notifications->isNotEmpty())
     <div>
         @foreach($notifications as $notification)
-            <x-nox::filament.notifications.banner :notification="Notification::fromArray($notification)"/>
+            <x-notifications::notification :notification="Notification::fromArray($notification)"/>
         @endforeach
     </div>
 @endif
