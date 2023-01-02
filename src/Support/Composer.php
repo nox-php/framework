@@ -27,7 +27,10 @@ class Composer
 
         $this->output = new BufferedOutput();
 
-        return (new Application())->run($input, $this->output);
+        $application = new Application();
+        $application->setAutoExit(false);
+
+        return $application->run($input, $this->output);
     }
 
     public function require(string $package): int
