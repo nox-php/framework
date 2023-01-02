@@ -205,16 +205,20 @@ class InstallNoxCommand extends Command
             return;
         }
 
-        $this->components->info('Generating new key');
-        $this->call('key:generate', [
-            '--force' => true,
-        ]);
+        if (!$this->alreadyInstalled) {
+            $this->components->info('Generating new key');
+            $this->call('key:generate', [
+                '--force' => true,
+            ]);
+        }
 
-        $this->components->info('Migrating the database');
-        $this->call('migrate', [
-            '--force' => true,
-            '--database' => static::$databaseConnectionName,
-        ]);
+        if ($this->databaseDetails !== null) {
+            $this->components->info('Migrating the database');
+            $this->call('migrate', [
+                '--force' => true,
+                '--database' => static::$databaseConnectionName,
+            ]);
+        }
 
         $this->call('nox:seed');
 
