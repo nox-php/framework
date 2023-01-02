@@ -36,11 +36,14 @@ class CheckForNoxUpdates implements ShouldQueue
                 ->whereCan('view_admin')
                 ->lazy();
 
-            Notification::make()
+            $notification = Notification::make()
                 ->warning()
                 ->title('A new version of Nox is available')
-                ->body('Nox ' . $version . 'is ready to be installed')
-                ->sendToDatabase($users);
+                ->body('Nox ' . $version . 'is ready to be installed');
+
+            foreach ($users as $user) {
+                $notification->sendToDatabase($user);
+            }
         }
     }
 
