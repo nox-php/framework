@@ -49,6 +49,8 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                         ->url(URL::signedRoute('nox.updater', ['version' => $this->version]))
                 ])
                 ->sendToDatabase($this->user);
+
+            logger()->error('Error updating Nox: ' . $composer->getErrorOutput());
         }
     }
 }
