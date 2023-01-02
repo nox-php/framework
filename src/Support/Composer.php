@@ -19,18 +19,16 @@ class Composer
     public function run(string $command, array $extraParameters = []): int
     {
         $input = new ArrayInput([
+            'command' => $command,
+            '-d' => base_path('/'),
             ...$extraParameters,
-            'command' => $command
         ]);
 
         $input->setInteractive(false);
 
         $this->output = new BufferedOutput();
 
-        $composer = new Application();
-        $composer->setAutoExit(false);
-
-        return $composer->run($input, $this->output);
+        return (new Application())->doRun($input, $this->output);
     }
 
     public function require(string $package): int
