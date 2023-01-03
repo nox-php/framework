@@ -2,8 +2,10 @@
 
 namespace Nox\Framework\Auth\Models;
 
+use DateTimeInterface;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -96,7 +98,7 @@ class User extends Authenticatable implements FilamentUser, HasName
 
     public function getEmailForPasswordReset()
     {
-        return $this->{static::getEmailColumnName()};
+        return $this->getEmail();
     }
 
     public function getEmailForVerification()
@@ -133,6 +135,85 @@ class User extends Authenticatable implements FilamentUser, HasName
     public function getUpdatedAtColumn(): string
     {
         return static::getUpdatedAtColumnName();
+    }
+
+    public function username(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->attributes[static::getUsernameColumnName()],
+            set: fn($value) => $this->attributes[static::getUsernameColumnName()] = $value
+        );
+    }
+
+    public function email(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->attributes[static::getEmailColumnName()],
+            set: fn($value) => $this->attributes[static::getEmailColumnName()] = $value
+        );
+    }
+
+    public function discord_id(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->attributes[static::getDiscordIdColumnName()],
+            set: fn($value) => $this->attributes[static::getDiscordIdColumnName()] = $value
+        );
+    }
+
+    public function discord_name(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->username . '#' . $this->discord_discriminator
+        );
+    }
+
+    public function discord_token(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->attributes[static::getDiscordTokenColumnName()],
+            set: fn($value) => $this->attributes[static::getDiscordTokenColumnName()] = $value
+        );
+    }
+
+    public function discord_refresh_token(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->attributes[static::getDiscordRefreshTokenColumnName()],
+            set: fn($value) => $this->attributes[static::getDiscordRefreshTokenColumnName()] = $value
+        );
+    }
+
+    public function discord_discriminator(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->attributes[static::getDiscordDiscriminatorColumnName()],
+            set: fn($value) => $this->attributes[static::getDiscordDiscriminatorColumnName()] = $value
+        );
+    }
+
+    public function discord_avatar(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->attributes[static::getDiscordAvatarColumnName()],
+            set: fn($value) => $this->attributes[static::getDiscordAvatarColumnName()] = $value
+        );
+    }
+
+    public function created_at(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->attributes[static::getCreatedAtColumnName()],
+            set: fn($value) => $this->attributes[static::getCreatedAtColumnName()] = $value
+        );
+    }
+
+    public function updated_at(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->attributes[static::getUpdatedAtColumnName()],
+            set: fn($value) => $this->attributes[static::getUpdatedAtColumnName()] = $value
+        );
     }
 
     public function canAccessFilament(): bool

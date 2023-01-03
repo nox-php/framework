@@ -6,6 +6,7 @@ use Filament\Facades\Filament;
 use Filament\PluginServiceProvider;
 use Nox\Framework\Admin\Filament\FilamentManager;
 use Nox\Framework\Admin\Filament\Resources\ActivityResource;
+use Nox\Framework\Admin\Filament\Resources\UserResource;
 
 class AdminServiceProvider extends PluginServiceProvider
 {
@@ -13,6 +14,7 @@ class AdminServiceProvider extends PluginServiceProvider
 
     protected array $resources = [
         ActivityResource::class,
+        UserResource::class
     ];
 
     public function packageRegistered(): void
@@ -34,6 +36,6 @@ class AdminServiceProvider extends PluginServiceProvider
     {
         parent::packageBooted();
 
-        $this->loadRoutesFrom(__DIR__.'/../../../routes/admin.php');
+        $this->loadRoutesFrom(__DIR__ . '/../../../routes/admin.php');
     }
 }

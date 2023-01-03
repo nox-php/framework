@@ -35,7 +35,10 @@
         "psr-4": {
             "Nox\\Framework\\": "src",
             "Nox\\Framework\\Database\\Factories\\": "database/factories"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
