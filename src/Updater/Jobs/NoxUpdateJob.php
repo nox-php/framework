@@ -68,7 +68,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                             ->button()
                             ->label('View log')
                             ->color('secondary')
-                            ->url(ActivityResource::getUrl('view', ['record' => $log->id]))
+                            ->url(ActivityResource::getUrl('view', ['record' => $log->id]), true)
                     ])
                     ->toDatabase()
             );
@@ -83,8 +83,6 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
 
         Artisan::call('package:discover');
 
-        info('notifying');
-
         $this->user->notifyNow(
             Notification::make()
                 ->success()
@@ -95,12 +93,10 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                         ->button()
                         ->label('View log')
                         ->color('secondary')
-                        ->url(ActivityResource::getUrl('view', ['record' => $log->id]))
+                        ->url(ActivityResource::getUrl('view', ['record' => $log->id]), true)
                 ])
                 ->toDatabase()
         );
-
-        info('notified');
     }
 
     protected function handleError(Exception $e, string $currentVersion): void
