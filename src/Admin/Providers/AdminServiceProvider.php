@@ -9,10 +9,19 @@ use Filament\PluginServiceProvider;
 use Illuminate\Contracts\View\View;
 use Nox\Framework\Admin\Filament\AvatarProvider\AvatarProvider;
 use Nox\Framework\Admin\Filament\FilamentManager;
-use Nox\Framework\Admin\Filament\Pages\Health;
+use Nox\Framework\Admin\Filament\Pages\Health as HealthPage;
 use Nox\Framework\Admin\Filament\Pages\Settings;
 use Nox\Framework\Admin\Filament\Resources\ActivityResource;
 use Nox\Framework\Admin\Filament\Resources\UserResource;
+use Spatie\Health\Checks\Checks\CacheCheck;
+use Spatie\Health\Checks\Checks\DatabaseCheck;
+use Spatie\Health\Checks\Checks\DebugModeCheck;
+use Spatie\Health\Checks\Checks\EnvironmentCheck;
+use Spatie\Health\Checks\Checks\OptimizedAppCheck;
+use Spatie\Health\Checks\Checks\QueueCheck;
+use Spatie\Health\Checks\Checks\ScheduleCheck;
+use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
+use Spatie\Health\Facades\Health;
 
 class AdminServiceProvider extends PluginServiceProvider
 {
@@ -25,7 +34,7 @@ class AdminServiceProvider extends PluginServiceProvider
 
     protected array $pages = [
         Settings::class,
-        Health::class
+        HealthPage::class
     ];
 
     public function packageRegistered(): void
@@ -63,5 +72,15 @@ class AdminServiceProvider extends PluginServiceProvider
         parent::packageBooted();
 
         $this->loadRoutesFrom(__DIR__ . '/../../../routes/admin.php');
+
+        Health::checks([
+            DebugModeCheck::new(),
+            EnvironmentCheck::new(),
+            OptimizedAppCheck::new(),
+            CacheCheck::new(),
+            ScheduleCheck::new(),
+            QueueCheck::new(),
+            UsedDiskSpaceCheck::new()
+        ]);
     }
 }
