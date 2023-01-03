@@ -57,7 +57,7 @@ class ActivityResource extends Resource
                         }
 
                         if ($url !== null) {
-                            Forms\Components\Actions\Action::make('view-causer')
+                            return Forms\Components\Actions\Action::make('view-causer')
                                 ->icon('heroicon-o-eye')
                                 ->url($url, true);
                         }
