@@ -12,9 +12,9 @@ use Nox\Framework\Admin\Filament\FilamentManager;
 use Nox\Framework\Admin\Filament\Pages\Health as HealthPage;
 use Nox\Framework\Admin\Filament\Pages\Settings;
 use Nox\Framework\Admin\Filament\Resources\ActivityResource;
+use Nox\Framework\Admin\Filament\Resources\ModuleResource;
 use Nox\Framework\Admin\Filament\Resources\UserResource;
 use Spatie\Health\Checks\Checks\CacheCheck;
-use Spatie\Health\Checks\Checks\DatabaseCheck;
 use Spatie\Health\Checks\Checks\DebugModeCheck;
 use Spatie\Health\Checks\Checks\EnvironmentCheck;
 use Spatie\Health\Checks\Checks\OptimizedAppCheck;
@@ -29,7 +29,8 @@ class AdminServiceProvider extends PluginServiceProvider
 
     protected array $resources = [
         ActivityResource::class,
-        UserResource::class
+        UserResource::class,
+        ModuleResource::class
     ];
 
     protected array $pages = [
