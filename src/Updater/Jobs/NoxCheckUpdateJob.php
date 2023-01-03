@@ -21,6 +21,13 @@ class NoxCheckUpdateJob implements ShouldQueue
 
     protected static string $baseUrl = 'https://repo.packagist.org/p2/';
 
+    protected ?User $user = null;
+
+    public function __construct(?User $user = null)
+    {
+        $this->user = $user?->withoutRelations();
+    }
+
     public function handle(): void
     {
         $installedVersion = InstalledVersions::getVersion('nox-php/framework');
@@ -35,14 +42,17 @@ class NoxCheckUpdateJob implements ShouldQueue
         }
 
         if (version_compare($installedVersion, $version, '>=')) {
+            Cache::forget('nox.updater.available');
             return;
         }
 
         Cache::forever('nox.updater.available', $version);
 
-        $users = User::query()
-            ->whereCan('view_admin')
-            ->lazy();
+        $users = $this->user !== null
+            ? [$this->user]
+            : User::query()
+                ->whereCan('view_admin')
+                ->lazy();
 
         $notification = Notification::make()
             ->warning()

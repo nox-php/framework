@@ -24,8 +24,13 @@ class Settings extends Page
     public function mount(): void
     {
         $this->form->fill();
+    }
 
+    protected function getViewData(): array
+    {
         $this->availableUpdateVersion = Cache::get('nox.updater.available');
+
+        return parent::getViewData();
     }
 
     public function installUpdate(): void
