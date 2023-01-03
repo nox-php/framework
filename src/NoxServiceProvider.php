@@ -11,6 +11,7 @@ use Nox\Framework\Settings\Providers\SettingsServiceProvider;
 use Nox\Framework\Transformer\Provider\TransformerServiceProvider;
 use Nox\Framework\Updater\Jobs\NoxCheckUpdateJob;
 use Spatie\Health\Commands\DispatchQueueCheckJobsCommand;
+use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\Health\Commands\ScheduleCheckHeartbeatCommand;
 
 class NoxServiceProvider extends AggregateServiceProvider
@@ -57,6 +58,7 @@ class NoxServiceProvider extends AggregateServiceProvider
             $schedule->job(new NoxCheckUpdateJob())->hourly();
             $schedule->command(DispatchQueueCheckJobsCommand::class)->everyMinute();
             $schedule->command(ScheduleCheckHeartbeatCommand::class)->everyMinute();
+            $schedule->command(RunHealthChecksCommand::class)->everyMinute();
         });
     }
 }
