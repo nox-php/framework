@@ -94,10 +94,10 @@ class UserResource extends Resource
                                     ->content(static fn(?User $record): string => $record->discord_name),
                                 Forms\Components\Placeholder::make(User::getCreatedAtColumnName())
                                     ->label('Created at')
-                                    ->content(static fn(?User $record): string => $record?->getCreatedAt()?->diffForHumans() ?? '-'),
+                                    ->content(static fn(?User $record): string => $record?->created_at?->diffForHumans() ?? '-'),
                                 Forms\Components\Placeholder::make(User::getUpdatedAtColumnName())
                                     ->label('Updated at')
-                                    ->content(static fn(?User $record): string => $record?->getUpdatedAt()?->diffForHumans() ?? '-'),
+                                    ->content(static fn(?User $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
                             ])
                     ])->build()
                 )
