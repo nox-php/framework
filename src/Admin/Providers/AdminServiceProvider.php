@@ -52,6 +52,12 @@ class AdminServiceProvider extends PluginServiceProvider
                     Filament::registerTheme(mix('css/nox.css', 'nox'));
                 }
 
+                Filament::registerNavigationGroups([
+                    'Appearance' => 1,
+                    'Extend' => 50,
+                    'System' => 100
+                ]);
+
                 Filament::registerRenderHook(
                     'footer.end',
                     static fn(): View => view(
