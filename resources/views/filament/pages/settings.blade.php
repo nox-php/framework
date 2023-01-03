@@ -2,7 +2,7 @@
     <div wire:poll>
         @if($this->availableUpdateVersion !== null)
             <x-nox::filament.settings-banner>
-                A new update for Nox is available to download (v{{ $this->availableUpdateVersion }}).
+                A new update for Nox is available to install (v{{ $this->availableUpdateVersion }}).
             </x-nox::filament.settings-banner>
         @endif
     </div>

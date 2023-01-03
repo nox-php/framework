@@ -1,3 +1,7 @@
 <?php
 
-info('update script run successfully!');
+use Illuminate\Support\Facades\Artisan;
+
+Artisan::call('vendor:publish', [
+    '--tag' => 'health-config'
+]);

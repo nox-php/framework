@@ -9,6 +9,7 @@ use Filament\PluginServiceProvider;
 use Illuminate\Contracts\View\View;
 use Nox\Framework\Admin\Filament\AvatarProvider\AvatarProvider;
 use Nox\Framework\Admin\Filament\FilamentManager;
+use Nox\Framework\Admin\Filament\Pages\Health;
 use Nox\Framework\Admin\Filament\Pages\Settings;
 use Nox\Framework\Admin\Filament\Resources\ActivityResource;
 use Nox\Framework\Admin\Filament\Resources\UserResource;
@@ -23,7 +24,8 @@ class AdminServiceProvider extends PluginServiceProvider
     ];
 
     protected array $pages = [
-        Settings::class
+        Settings::class,
+        Health::class
     ];
 
     public function packageRegistered(): void

@@ -410,4 +410,11 @@ class Settings extends Page
                 ])
         ];
     }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return Cache::has('nox.updater.available')
+            ? '1'
+            : null;
+    }
 }
