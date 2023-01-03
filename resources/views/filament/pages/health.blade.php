@@ -1,5 +1,5 @@
 <x-filament::page>
-    @if (count($storedCheckResults))
+    <div wire:poll.60s>
         <dl class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($storedCheckResults as $result)
                 @php
@@ -31,12 +31,12 @@
                 </div>
             @endforeach
         </dl>
-    @endif
 
-    @if ($lastRanAt)
-        <div
-            class="{{ $lastRanAt->diffInMinutes() > 5 ? 'text-red-400' : 'text-gray-500' }} text-md text-center font-medium">
-            Last updated {{ $lastRanAt->diffForHumans() }}
-        </div>
-    @endif
+        @if ($lastRanAt)
+            <div
+                class="{{ $lastRanAt->diffInMinutes() > 5 ? 'text-red-400' : 'text-gray-500' }} text-md text-center font-medium">
+                Last updated {{ $lastRanAt->diffForHumans() }}
+            </div>
+        @endif
+    </div>
 </x-filament::page>
