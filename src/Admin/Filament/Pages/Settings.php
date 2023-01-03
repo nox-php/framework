@@ -7,6 +7,7 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Cache;
+use Nox\Framework\Updater\Jobs\NoxCheckUpdateJob;
 use Nox\Framework\Updater\Jobs\NoxUpdateJob;
 
 class Settings extends Page
@@ -50,7 +51,13 @@ class Settings extends Page
 
     public function checkUpdate(): void
     {
+        NoxCheckUpdateJob::dispatch(Filament::auth()->user());
 
+        Notification::make()
+            ->success()
+            ->title('Checking for Nox updates in the background')
+            ->body('You will be notified if an update is available')
+            ->send();
     }
 
     protected function getActions(): array
