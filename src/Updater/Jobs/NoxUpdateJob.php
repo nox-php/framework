@@ -14,6 +14,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\URL;
+use Nox\Framework\Admin\Filament\Resources\ActivityResource;
 use Nox\Framework\Auth\Models\User;
 use Nox\Framework\Support\Composer;
 
@@ -46,6 +47,12 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
     {
         $status = $composer->update('nox-php/framework:' . $this->version);
 
+        $log = activity()
+            ->by($this->user)
+            ->event('nox.update')
+            ->withProperty('status', $status)
+            ->log($composer->getOutput()?->fetch() ?? '-');
+
         if ($status !== 0) {
             Notification::make()
                 ->danger()
@@ -56,28 +63,36 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                         ->button()
                         ->label('Retry')
                         ->url(URL::signedRoute('nox.updater', ['version' => $this->version])),
+                    Action::make('view-log')
+                        ->button()
+                        ->label('View log')
+                        ->color('secondary')
+                        ->url(ActivityResource::getUrl('view', ['record' => $log->id]))
                 ])
                 ->sendToDatabase($this->user);
-        } else {
-            Notification::make()
-                ->success()
-                ->title('Nox has successfully updated')
-                ->body('Nox ' . $this->version . ' has been successfully installed')
-                ->sendToDatabase($this->user);
 
-            Artisan::call('vendor:publish', [
-                '--tag' => 'laravel-assets',
-                '--force' => true,
-            ]);
-
-            Artisan::call('package:discover');
+            return;
         }
 
-        activity()
-            ->by($this->user)
-            ->event('nox.update')
-            ->withProperty('status', $status)
-            ->log($composer->getOutput()?->fetch() ?? '-');
+        Notification::make()
+            ->success()
+            ->title('Nox has successfully updated')
+            ->body('Nox ' . $this->version . ' has been successfully installed')
+            ->actions([
+                Action::make('view-log')
+                    ->button()
+                    ->label('View log')
+                    ->color('secondary')
+                    ->url(ActivityResource::getUrl('view', ['record' => $log->id]))
+            ])
+            ->sendToDatabase($this->user);
+
+//        Artisan::call('vendor:publish', [
+//            '--tag' => 'laravel-assets',
+//            '--force' => true,
+//        ]);
+//
+//        Artisan::call('package:discover');
     }
 
     protected function handleError(Exception $e, string $currentVersion): void
