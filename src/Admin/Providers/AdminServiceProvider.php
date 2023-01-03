@@ -41,7 +41,7 @@ class AdminServiceProvider extends PluginServiceProvider
                 }
 
                 Filament::registerRenderHook(
-                    'sidebar.end',
+                    'footer.end',
                     static fn(): View => view(
                         'nox::filament.versions',
                         [
