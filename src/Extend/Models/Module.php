@@ -3,6 +3,7 @@
 namespace Nox\Framework\Extend\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Nox\Framework\Extend\Facades\Modules;
 use Sushi\Sushi;
 
@@ -36,12 +37,14 @@ class Module extends Model
     {
         return collect(Modules::all())
             ->map(static fn($module): array => [
-                'id' => $module->getName(),
+                'id' => Str::replace('/', '-', $module->getName()),
                 'name' => $module->getName(),
                 'description' => $module->getDescription(),
                 'version' => $module->getVersion(),
+                'path' => $module->getPath(),
                 'enabled' => $module->isEnabled()
             ])
+            ->values()
             ->all();
     }
 }

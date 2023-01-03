@@ -123,6 +123,8 @@ class ModuleRepository implements ModuleRepositoryContract
         return rescue(function () use ($module) {
             $this->loadFiles($module->getFiles());
             $this->bootProviders($module->getProviders());
+
+            return true;
         }, false);
     }
 
