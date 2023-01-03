@@ -56,9 +56,13 @@ class ActivityResource extends Resource
                     ->columnSpan(2),
                 Forms\Components\KeyValue::make('properties')
                     ->label('Properties')
-                    ->afterStateHydrated(static function (Forms\Components\KeyValue $component, ?array $state) {
+                    ->afterStateHydrated(static function (Forms\Components\KeyValue $component, $record) {
+                        if ($record->properties === null) {
+                            return;
+                        }
+
                         $component->state(
-                            collect($state ?? [])
+                            $record->properties
                                 ->except(['old', 'attributes'])
                                 ->all()
                         );
