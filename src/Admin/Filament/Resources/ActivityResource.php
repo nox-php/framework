@@ -20,11 +20,13 @@ class ActivityResource extends Resource
 {
     protected static ?string $model = Activity::class;
 
+    protected static ?string $slug = 'system/activities';
+
     protected static ?string $navigationGroup = 'System';
 
     protected static ?string $navigationIcon = 'heroicon-o-table';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 50;
 
     public static function form(Form $form): Form
     {

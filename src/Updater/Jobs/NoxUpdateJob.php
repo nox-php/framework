@@ -13,6 +13,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\URL;
 use Nox\Framework\Admin\Filament\Resources\ActivityResource;
@@ -98,6 +99,8 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
         if (File::exists($path)) {
             require_once $path;
         }
+
+        Cache::forget('nox.updater.available');
 
         $this->user->notifyNow(
             Notification::make()

@@ -16,3 +16,12 @@
     @apply font-sans;
     @apply text-sm;
 }
+
+.filament-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.filament-sidebar-nav > ul {
+    padding-block-end: theme('spacing.6');
+}
