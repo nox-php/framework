@@ -56,6 +56,7 @@ class NoxServiceProvider extends AggregateServiceProvider
             $schedule = $this->app->make(Schedule::class);
 
             $schedule->job(new NoxCheckUpdateJob())->hourly();
+
             $schedule->command(DispatchQueueCheckJobsCommand::class)->everyMinute();
             $schedule->command(ScheduleCheckHeartbeatCommand::class)->everyMinute();
             $schedule->command(RunHealthChecksCommand::class)->everyMinute();
