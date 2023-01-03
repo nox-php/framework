@@ -2,11 +2,17 @@
     @if (count($storedCheckResults))
         <dl class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($storedCheckResults as $result)
+                @php
+                    $backgroundColor = $this->getBackgroundColor($result->status);
+                    $icon = $this->getIcon($result->status);
+                    $iconColor = $this->getIconColor($result->status);
+                @endphp
+
                 <div
                     class="flex items-center items-start p-6 space-x-2 rtl:space-x-reverse overflow-hidden text-opacity-0 transform bg-white rounded-xl shadow @if(config('filament.dark_mode')) dark:bg-gray-800 @endif">
-                    <div class="flex justify-center rounded-full p-2.5 {{ $result->backgroundColor }}">
-                        @if ($result->icon)
-                            @svg($result->icon, "w-5 h-5 {$result->iconColor}")
+                    <div class="flex justify-center rounded-full p-2.5 {{ $backgroundColor }}">
+                        @if ($icon)
+                            @svg($icon, "w-5 h-5 {$iconColor}")
                         @endif
                     </div>
 
