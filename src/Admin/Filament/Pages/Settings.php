@@ -20,7 +20,7 @@ class Settings extends Page
 
     protected static ?int $navigationSort = 100;
 
-    protected ?string $availableUpdateVersion = null;
+    public ?string $availableUpdateVersion = null;
 
     public function mount(): void
     {

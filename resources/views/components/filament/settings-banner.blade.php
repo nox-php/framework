@@ -1,5 +1,5 @@
 <div
-    class="pointer-events-auto invisible flex gap-3 w-full transition duration-300 shadow-lg bg-white rounded-xl p-4 border border-gray-200 dark:border-gray-700 dark:bg-gray-800"
+    class="flex items-center flex-wrap gap-3 w-full transition duration-300 shadow-lg bg-white rounded-xl p-4 border border-gray-200 dark:border-gray-700 dark:bg-gray-800"
 >
     @svg('heroicon-o-check-circle', 'h-6 w-6 text-success-400')
 
@@ -12,4 +12,8 @@
             </p>
         </div>
     </div>
+
+    <x-filament::button wire:loading.attr="disabled" wire:click.prevent="installUpdate">
+        Install
+    </x-filament::button>
 </div>
