@@ -2,8 +2,10 @@
 
 namespace Nox\Framework\Admin\Providers;
 
+use Filament\AvatarProviders\Contracts\AvatarProvider as AvatarProviderContract;
 use Filament\Facades\Filament;
 use Filament\PluginServiceProvider;
+use Nox\Framework\Admin\Filament\AvatarProvider\AvatarProvider;
 use Nox\Framework\Admin\Filament\FilamentManager;
 use Nox\Framework\Admin\Filament\Resources\ActivityResource;
 use Nox\Framework\Admin\Filament\Resources\UserResource;
@@ -22,6 +24,8 @@ class AdminServiceProvider extends PluginServiceProvider
         parent::packageRegistered();
 
         $this->app->scoped('filament', FilamentManager::class);
+
+        $this->app->singleton(AvatarProviderContract::class, AvatarProvider::class);
 
         $this->app->resolving('filament', function () {
             Filament::serving(static function () {
