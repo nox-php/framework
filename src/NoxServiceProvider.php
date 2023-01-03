@@ -53,8 +53,6 @@ class NoxServiceProvider extends AggregateServiceProvider
             $schedule = $this->app->make(Schedule::class);
 
             $schedule->job(new NoxCheckUpdateJob())->hourly();
-
-            info('scheduled');
         });
     }
 }
