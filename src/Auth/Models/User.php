@@ -153,7 +153,7 @@ class User extends Authenticatable implements FilamentUser, HasName
     public function discordName(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->username . '#' . $this->discord_discriminator
+            get: fn() => $this->{static::getUsernameColumnName()} . '#' . $this->discord_discriminator
         );
     }
 
