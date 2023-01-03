@@ -22,7 +22,7 @@ class UserFactory extends Factory
             User::getDiscordTokenColumnName() => $this->faker->text(20),
             User::getDiscordRefreshTokenColumnName() => $this->faker->text(20),
             User::getDiscordDiscriminatorColumnName() => $this->faker->randomNumber(4),
-            User::getDiscordAvatarColumnName() => $this->faker->imageUrl()
+            User::getDiscordAvatarColumnName() => $this->faker->imageUrl(),
         ];
     }
 }

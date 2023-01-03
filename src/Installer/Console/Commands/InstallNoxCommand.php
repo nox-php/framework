@@ -34,8 +34,8 @@ class InstallNoxCommand extends Command
     {
         if (
             ($this->alreadyInstalled = Nox::installed()) &&
-            !$this->option('force') &&
-            !$this->confirm('Nox has already been installed. Do you want to continue anyway?')
+            ! $this->option('force') &&
+            ! $this->confirm('Nox has already been installed. Do you want to continue anyway?')
         ) {
             return 0;
         }
@@ -52,7 +52,7 @@ class InstallNoxCommand extends Command
 
     protected function askSiteDetails(): static
     {
-        if ($this->alreadyInstalled && !$this->confirm('Do you want to configure your site details?')) {
+        if ($this->alreadyInstalled && ! $this->confirm('Do you want to configure your site details?')) {
             return $this;
         }
 
@@ -89,7 +89,7 @@ class InstallNoxCommand extends Command
 
     protected function askDatabaseDetails(bool $silent = false): static
     {
-        if ($this->alreadyInstalled && !$this->confirm('Do you want to configure your database details?')) {
+        if ($this->alreadyInstalled && ! $this->confirm('Do you want to configure your database details?')) {
             return $this;
         }
 
@@ -100,10 +100,10 @@ class InstallNoxCommand extends Command
                     'mysql',
                     'pgsql',
                     'sqlsrv',
-                    'sqlite'
+                    'sqlite',
                 ],
                 $this->databaseDetails['driver'] ?? 'mysql'
-            )
+            ),
         ];
 
         if ($this->databaseDetails['driver'] !== 'sqlite') {
@@ -130,16 +130,16 @@ class InstallNoxCommand extends Command
         } else {
             $this->databaseDetails = [
                 ...$this->databaseDetails,
-                'database' => $this->ask('What is the path of your database?')
+                'database' => $this->ask('What is the path of your database?'),
             ];
         }
 
-        if (!$this->checkDatabaseDetails()) {
+        if (! $this->checkDatabaseDetails()) {
             $this->components->error('Failed to connect to the database, please try again.');
             $this->askDatabaseDetails(true);
         }
 
-        if (!$silent) {
+        if (! $silent) {
             $this->components->info('Successfully connected to the database!');
         }
 
@@ -148,7 +148,7 @@ class InstallNoxCommand extends Command
 
     protected function askDiscordDetails(): static
     {
-        if ($this->alreadyInstalled && !$this->confirm('Do you want to configure your discord details?')) {
+        if ($this->alreadyInstalled && ! $this->confirm('Do you want to configure your discord details?')) {
             return $this;
         }
 
@@ -163,9 +163,9 @@ class InstallNoxCommand extends Command
     protected function askEmailDetails(): static
     {
         if (
-            !$this->confirm(
+            ! $this->confirm(
                 'Do you want to configure your email settings? You cannot send emails without doing so',
-                !$this->alreadyInstalled
+                ! $this->alreadyInstalled
             )
         ) {
             return $this;
@@ -200,12 +200,13 @@ class InstallNoxCommand extends Command
 
     protected function finish(): void
     {
-        if (!$this->install()) {
+        if (! $this->install()) {
             $this->components->error('Failed to save .env file');
+
             return;
         }
 
-        if (!$this->alreadyInstalled) {
+        if (! $this->alreadyInstalled) {
             $this->components->info('Generating new key');
             $this->call('key:generate', [
                 '--force' => true,
@@ -236,7 +237,7 @@ class InstallNoxCommand extends Command
 
     protected function createUser(): void
     {
-        if (!$this->confirm('Do you want to create your administrator user?', true)) {
+        if (! $this->confirm('Do you want to create your administrator user?', true)) {
             return;
         }
 
@@ -251,7 +252,7 @@ class InstallNoxCommand extends Command
         }
 
         $this->components->info(
-            'Use this link to connect via Discord: ' . $url
+            'Use this link to connect via Discord: '.$url
         );
 
         $time = now();
@@ -277,7 +278,7 @@ class InstallNoxCommand extends Command
         File::ensureDirectoryExists(base_path('themes'));
 
         $envPath = base_path('.env');
-        if (!File::exists($envPath)) {
+        if (! File::exists($envPath)) {
             File::put($envPath, '');
         }
 
@@ -299,7 +300,7 @@ class InstallNoxCommand extends Command
 
         if ($this->databaseDetails !== null) {
             $env->put([
-                'DB_CONNECTION' => $this->databaseDetails['driver']
+                'DB_CONNECTION' => $this->databaseDetails['driver'],
             ]);
 
             if ($this->databaseDetails['driver'] !== 'sqlite') {
@@ -312,7 +313,7 @@ class InstallNoxCommand extends Command
                 ]);
             } else {
                 $env->put([
-                    'DB_DATABASE' => $this->databaseDetails['database']
+                    'DB_DATABASE' => $this->databaseDetails['database'],
                 ]);
             }
 
@@ -345,7 +346,7 @@ class InstallNoxCommand extends Command
                 ]);
             } else {
                 $env->put([
-                    'MAIL_SENDMAIL_PATH' => $this->emailDetails['path']
+                    'MAIL_SENDMAIL_PATH' => $this->emailDetails['path'],
                 ]);
             }
 
@@ -361,7 +362,7 @@ class InstallNoxCommand extends Command
 
     protected function checkDatabaseDetails(): bool
     {
-        $config = config('database.connections.' . $this->databaseDetails['driver'], []);
+        $config = config('database.connections.'.$this->databaseDetails['driver'], []);
 
         $config = [
             ...$config,

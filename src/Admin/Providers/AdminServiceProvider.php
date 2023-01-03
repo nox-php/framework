@@ -4,12 +4,16 @@ namespace Nox\Framework\Admin\Providers;
 
 use Filament\Facades\Filament;
 use Filament\PluginServiceProvider;
-use Illuminate\Contracts\View\View;
 use Nox\Framework\Admin\Filament\FilamentManager;
+use Nox\Framework\Admin\Filament\Resources\ActivityResource;
 
 class AdminServiceProvider extends PluginServiceProvider
 {
     public static string $name = 'nox:admin';
+
+    protected array $resources = [
+        ActivityResource::class,
+    ];
 
     public function packageRegistered(): void
     {
@@ -30,6 +34,6 @@ class AdminServiceProvider extends PluginServiceProvider
     {
         parent::packageBooted();
 
-        $this->loadRoutesFrom(__DIR__ . '/../../../routes/admin.php');
+        $this->loadRoutesFrom(__DIR__.'/../../../routes/admin.php');
     }
 }

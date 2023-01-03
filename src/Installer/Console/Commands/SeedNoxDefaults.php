@@ -31,7 +31,7 @@ class SeedNoxDefaults extends Command
         $superAdmin = BouncerFacade::role()
             ->firstOrCreate([
                 'name' => 'superadmin',
-                'title' => 'Super Administrator'
+                'title' => 'Super Administrator',
             ]);
 
         BouncerFacade::allow($superAdmin)->everything();
@@ -42,7 +42,7 @@ class SeedNoxDefaults extends Command
         $admin = BouncerFacade::role()
             ->firstOrCreate([
                 'name' => 'admin',
-                'title' => 'Administrator'
+                'title' => 'Administrator',
             ]);
 
         BouncerFacade::allow($admin)->to('view_admin');
@@ -66,7 +66,7 @@ class SeedNoxDefaults extends Command
         BouncerFacade::role()
             ->firstOrCreate([
                 'name' => 'user',
-                'title' => 'User'
+                'title' => 'User',
             ]);
     }
 }

@@ -5,7 +5,7 @@ use Nox\Framework\Updater\Http\Controllers\NoxUpdaterController;
 
 Route::middleware([
     ...config('filament.middleware.base'),
-    ...config('filament.middleware.auth')
+    ...config('filament.middleware.auth'),
 ])
     ->prefix(config('filament.path'))
     ->name('nox.updater')

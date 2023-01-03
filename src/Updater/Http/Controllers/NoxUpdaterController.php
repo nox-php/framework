@@ -16,7 +16,7 @@ class NoxUpdaterController extends Controller
 
         $user = Filament::auth()->user();
 
-        abort_if($user === null || !$user->can('view_admin'), 401);
+        abort_if($user === null || ! $user->can('view_admin'), 401);
 
         NoxUpdateJob::dispatch($user, $version);
 

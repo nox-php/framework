@@ -12,7 +12,7 @@ class Composer
 
     public function __construct()
     {
-        putenv('COMPOSER_HOME=' . __DIR__ . '/vendor/bin/composer');
+        putenv('COMPOSER_HOME='.__DIR__.'/vendor/bin/composer');
     }
 
     public function run(string $command, array $extraParameters = []): int
@@ -36,7 +36,7 @@ class Composer
     public function require(string $package): int
     {
         return $this->run('require', [
-            'packages' => [$package]
+            'packages' => [$package],
         ]);
     }
 
@@ -46,7 +46,7 @@ class Composer
             'packages' => [$package],
             '-w' => true,
             '-o' => true,
-            '--no-scripts' => true
+            '--no-scripts' => true,
         ]);
     }
 

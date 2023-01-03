@@ -12,12 +12,12 @@ it('can install on sqlite database', function () {
 
     config()->set('database.connections.test', [
         ...config('database.connections.sqlite'),
-        'database' => $database
+        'database' => $database,
     ]);
 
     $this->loadLaravelMigrations('test');
 
-    Event::listen(MigrationsEnded::class, static function() {
+    Event::listen(MigrationsEnded::class, static function () {
         User::factory()->connection('test')->create();
     });
 
@@ -27,14 +27,14 @@ it('can install on sqlite database', function () {
         ->expectsChoice('What is this environment?', 'Testing', [
             'Production',
             'Testing',
-            'Local'
+            'Local',
         ])
         ->expectsConfirmation('Do you want to enable debug mode? This should never be enabled in production', 'yes')
         ->expectsChoice('What database driver do you use?', 'sqlite', [
             'mysql',
             'pgsql',
             'sqlsrv',
-            'sqlite'
+            'sqlite',
         ])
         ->expectsQuestion('What is the path of your database?', database_path('database.sqlite'))
         ->expectsOutputToContain('Successfully connected to the database!')
@@ -43,7 +43,7 @@ it('can install on sqlite database', function () {
         ->expectsConfirmation('Do you want to configure your email settings? You cannot send emails without doing so', 'yes')
         ->expectsChoice('What mail driver do you use?', 'sendmail', [
             'smtp',
-            'sendmail'
+            'sendmail',
         ])
         ->expectsQuestion('What is the command for sendmail?', '/usr/sbin/sendmail -bs -i')
         ->expectsOutputToContain('Generating new key')

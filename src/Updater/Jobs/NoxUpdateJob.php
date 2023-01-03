@@ -36,30 +36,30 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
         $currentVersion = InstalledVersions::getVersion('nox-php/framework');
 
         rescue(function () use ($composer, $currentVersion) {
-            $status = $composer->update('nox-php/framework:' . $this->version);
+            $status = $composer->update('nox-php/framework:'.$this->version);
 
             if ($status !== 0) {
                 Notification::make()
                     ->danger()
                     ->title('Nox has unsuccessfully updated')
-                    ->body('Nox ' . $this->version . ' has failed to install, reverting back to ' . $currentVersion)
+                    ->body('Nox '.$this->version.' has failed to install, reverting back to '.$currentVersion)
                     ->actions([
                         Action::make('update-nox-retry')
                             ->button()
                             ->label('Retry')
-                            ->url(URL::signedRoute('nox.updater', ['version' => $this->version]))
+                            ->url(URL::signedRoute('nox.updater', ['version' => $this->version])),
                     ])
                     ->sendToDatabase($this->user);
             } else {
                 Notification::make()
                     ->success()
                     ->title('Nox has successfully updated')
-                    ->body('Nox ' . $this->version . ' has been successfully installed')
+                    ->body('Nox '.$this->version.' has been successfully installed')
                     ->sendToDatabase($this->user);
 
                 Artisan::call('vendor:publish', [
                     '--tag' => 'laravel-assets',
-                    '--force' => true
+                    '--force' => true,
                 ]);
 
                 Artisan::call('package:discover');
@@ -74,17 +74,17 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
             activity()
                 ->by($this->user)
                 ->event('nox.update')
-                ->log((string)$e);
+                ->log((string) $e);
 
             Notification::make()
                 ->danger()
                 ->title('Nox has unsuccessfully updated')
-                ->body('Nox ' . $this->version . ' has failed to install, reverting back to ' . $currentVersion)
+                ->body('Nox '.$this->version.' has failed to install, reverting back to '.$currentVersion)
                 ->actions([
                     Action::make('update-nox-retry')
                         ->button()
                         ->label('Retry')
-                        ->url(URL::signedRoute('nox.updater', ['version' => $this->version]))
+                        ->url(URL::signedRoute('nox.updater', ['version' => $this->version])),
                 ])
                 ->sendToDatabase($this->user);
         });
