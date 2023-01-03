@@ -51,7 +51,7 @@ class ActivityResource extends Resource
                         'default' => 2,
                         'sm' => 1,
                     ]),
-                Forms\Components\TextInput::make('description')
+                Forms\Components\Textarea::make('description')
                     ->label('Description')
                     ->columnSpan(2),
                 Forms\Components\KeyValue::make('properties.attributes')
@@ -78,7 +78,8 @@ class ActivityResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Description')
-                    ->searchable(),
+                    ->searchable()
+                    ->limit(),
                 Tables\Columns\TextColumn::make('subject.name')
                     ->label('Subject')
                     ->hidden(function (Component $livewire) {
@@ -87,7 +88,7 @@ class ActivityResource extends Resource
                             : $livewire instanceof ActivitiesRelationManager;
                     })
                     ->getStateUsing(function (Activity $record) {
-                        if (! $record->subject || ! ($record->subject instanceof IsActivitySubject)) {
+                        if (!$record->subject || !($record->subject instanceof IsActivitySubject)) {
                             return new HtmlString('&mdash;');
                         }
 
@@ -96,17 +97,17 @@ class ActivityResource extends Resource
                         return $subject->getActivitySubjectDescription($record);
                     })
                     ->url(function (Activity $record) {
-                        if (! $record->subject || ! $record->subject instanceof IsActivitySubject) {
+                        if (!$record->subject || !$record->subject instanceof IsActivitySubject) {
                             return;
                         }
 
                         $resource = Filament::getModelResource($record->subject::class);
 
-                        if (! $resource) {
+                        if (!$resource) {
                             return;
                         }
 
-                        if (! $resource::hasPage('edit')) {
+                        if (!$resource::hasPage('edit')) {
                             return;
                         }
 
