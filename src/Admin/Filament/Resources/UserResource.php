@@ -112,6 +112,7 @@ class UserResource extends Resource
                     'nox.user.resource.table.columns',
                     [
                         Tables\Columns\ImageColumn::make('discord_avatar')
+                            ->label('Avatar')
                             ->circular()
                             ->getStateUsing(static function (User $record) {
                                 return app(AvatarProvider::class)->get($record);

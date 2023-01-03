@@ -153,7 +153,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         );
     }
 
-    public function discord_id(): Attribute
+    public function discordId(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->attributes[static::getDiscordIdColumnName()],
@@ -161,14 +161,14 @@ class User extends Authenticatable implements FilamentUser, HasName
         );
     }
 
-    public function discord_name(): Attribute
+    public function discordName(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->username . '#' . $this->discord_discriminator
         );
     }
 
-    public function discord_token(): Attribute
+    public function discordToken(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->attributes[static::getDiscordTokenColumnName()],
@@ -176,7 +176,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         );
     }
 
-    public function discord_refresh_token(): Attribute
+    public function discordRefreshToken(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->attributes[static::getDiscordRefreshTokenColumnName()],
@@ -184,7 +184,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         );
     }
 
-    public function discord_discriminator(): Attribute
+    public function discordDiscriminator(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->attributes[static::getDiscordDiscriminatorColumnName()],
@@ -192,7 +192,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         );
     }
 
-    public function discord_avatar(): Attribute
+    public function discordAvatar(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->attributes[static::getDiscordAvatarColumnName()],
@@ -200,7 +200,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         );
     }
 
-    public function created_at(): Attribute
+    public function createdAt(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->attributes[static::getCreatedAtColumnName()],
@@ -208,7 +208,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         );
     }
 
-    public function updated_at(): Attribute
+    public function updatedAt(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->attributes[static::getUpdatedAtColumnName()],
