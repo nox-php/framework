@@ -77,7 +77,7 @@ class UserResource extends Resource
                                         BouncerFacade::refreshFor($record);
 
                                         if (
-                                            Filament::auth()->id() === $record->id &&
+                                            Filament::auth()->id() === $record->getKey() &&
                                             $get('is_super_admin') &&
                                             !$record->can('*')
                                         ) {
@@ -94,10 +94,10 @@ class UserResource extends Resource
                                     ->content(static fn(?User $record): string => $record->discord_name),
                                 Forms\Components\Placeholder::make(User::getCreatedAtColumnName())
                                     ->label('Created at')
-                                    ->content(static fn(?User $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                                    ->content(static fn(?User $record): string => $record?->{User::getCreatedAtColumnName()}?->diffForHumans() ?? '-'),
                                 Forms\Components\Placeholder::make(User::getUpdatedAtColumnName())
                                     ->label('Updated at')
-                                    ->content(static fn(?User $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                                    ->content(static fn(?User $record): string => $record?->{User::getUpdatedAtColumnName()}?->diffForHumans() ?? '-'),
                             ])
                     ])->build()
                 )
@@ -111,7 +111,7 @@ class UserResource extends Resource
                 transformer(
                     'nox.user.resource.table.columns',
                     [
-                        Tables\Columns\ImageColumn::make('discord_avatar')
+                        Tables\Columns\ImageColumn::make('avatar')
                             ->label('Avatar')
                             ->circular()
                             ->getStateUsing(static function (User $record) {
@@ -123,10 +123,10 @@ class UserResource extends Resource
                             ->label('Email address'),
                         Tables\Columns\BadgeColumn::make('discord_name')
                             ->label('Discord name'),
-                        Tables\Columns\TextColumn::make('created_at')
+                        Tables\Columns\TextColumn::make(User::getCreatedAtColumnName())
                             ->label('Created at')
                             ->date(),
-                        Tables\Columns\TextColumn::make('updated_at')
+                        Tables\Columns\TextColumn::make(User::getUpdatedAtColumnName())
                             ->label('Updated at')
                             ->date()
                     ]
@@ -178,8 +178,8 @@ class UserResource extends Resource
         return transformer(
             'nox.users.resource.search.details',
             [
-                'Email address' => $record->email,
-                'Created at' => $record->created_at?->diffForHumans() ?? '-'
+                'Email address' => $record->{User::getEmailColumnName()},
+                'Created at' => $record->{User::getCreatedAtColumnName()}?->diffForHumans() ?? '-'
             ],
             [
                 'user' => $record

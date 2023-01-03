@@ -78,17 +78,30 @@ class User extends Authenticatable implements FilamentUser, HasName
 
     public function getFillable(): array
     {
-        return [
-            static::getUsernameColumnName(),
-            static::getEmailColumnName(),
-            static::getRememberTokenColumnName(),
-            static::getEmailVerifiedAtColumnName(),
-            static::getDiscordIdColumnName(),
-            static::getDiscordTokenColumnName(),
-            static::getDiscordRefreshTokenColumnName(),
-            static::getDiscordDiscriminatorColumnName(),
-            static::getDiscordAvatarColumnName(),
-        ];
+        return transformer(
+            'nox.users.fillable',
+            [
+                static::getUsernameColumnName(),
+                static::getEmailColumnName(),
+                static::getRememberTokenColumnName(),
+                static::getEmailVerifiedAtColumnName(),
+                static::getDiscordIdColumnName(),
+                static::getDiscordTokenColumnName(),
+                static::getDiscordRefreshTokenColumnName(),
+                static::getDiscordDiscriminatorColumnName(),
+                static::getDiscordAvatarColumnName(),
+            ]
+        );
+    }
+
+    public function getCasts()
+    {
+        return transformer(
+            'nox.users.casts',
+            [
+                static::getDiscordDiscriminatorColumnName() => 'integer'
+            ]
+        );
     }
 
     public function getAuthIdentifierName(): string
@@ -137,82 +150,10 @@ class User extends Authenticatable implements FilamentUser, HasName
         return static::getUpdatedAtColumnName();
     }
 
-    public function username(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->attributes[static::getUsernameColumnName()],
-            set: fn($value) => $this->attributes[static::getUsernameColumnName()] = $value
-        );
-    }
-
-    public function email(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->attributes[static::getEmailColumnName()],
-            set: fn($value) => $this->attributes[static::getEmailColumnName()] = $value
-        );
-    }
-
-    public function discordId(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->attributes[static::getDiscordIdColumnName()],
-            set: fn($value) => $this->attributes[static::getDiscordIdColumnName()] = $value
-        );
-    }
-
     public function discordName(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->username . '#' . $this->discord_discriminator
-        );
-    }
-
-    public function discordToken(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->attributes[static::getDiscordTokenColumnName()],
-            set: fn($value) => $this->attributes[static::getDiscordTokenColumnName()] = $value
-        );
-    }
-
-    public function discordRefreshToken(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->attributes[static::getDiscordRefreshTokenColumnName()],
-            set: fn($value) => $this->attributes[static::getDiscordRefreshTokenColumnName()] = $value
-        );
-    }
-
-    public function discordDiscriminator(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->attributes[static::getDiscordDiscriminatorColumnName()],
-            set: fn($value) => $this->attributes[static::getDiscordDiscriminatorColumnName()] = $value
-        );
-    }
-
-    public function discordAvatar(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->attributes[static::getDiscordAvatarColumnName()],
-            set: fn($value) => $this->attributes[static::getDiscordAvatarColumnName()] = $value
-        );
-    }
-
-    public function createdAt(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->attributes[static::getCreatedAtColumnName()],
-            set: fn($value) => $this->attributes[static::getCreatedAtColumnName()] = $value
-        );
-    }
-
-    public function updatedAt(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->attributes[static::getUpdatedAtColumnName()],
-            set: fn($value) => $this->attributes[static::getUpdatedAtColumnName()] = $value
         );
     }
 
