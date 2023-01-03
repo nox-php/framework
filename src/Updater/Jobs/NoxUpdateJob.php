@@ -70,7 +70,10 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                             ->button()
                             ->label('View log')
                             ->color('secondary')
-                            ->url(ActivityResource::getUrl('view', ['record' => $log->id]), true)
+                            ->url(ActivityResource::getUrl('view', ['record' => $log?->id]), true)
+                            ->hidden(static function () use ($log) {
+                                return $log === null;
+                            })
                     ])
                     ->toDatabase()
             );
@@ -106,7 +109,10 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                         ->button()
                         ->label('View log')
                         ->color('secondary')
-                        ->url(ActivityResource::getUrl('view', ['record' => $log->id]), true)
+                        ->url(ActivityResource::getUrl('view', ['record' => $log?->id]), true)
+                        ->hidden(static function () use ($log) {
+                            return $log === null;
+                        })
                 ])
                 ->toDatabase()
         );
@@ -114,7 +120,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
 
     protected function handleError(Exception $e, string $currentVersion): void
     {
-        activity()
+        $log = activity()
             ->by($this->user)
             ->event('nox.update')
             ->log((string)$e);
@@ -128,6 +134,14 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                     ->button()
                     ->label('Retry')
                     ->url(URL::signedRoute('nox.updater', ['version' => $this->version])),
+                Action::make('view-log')
+                    ->button()
+                    ->label('View log')
+                    ->color('secondary')
+                    ->url(ActivityResource::getUrl('view', ['record' => $log?->id]), true)
+                    ->hidden(static function () use ($log) {
+                        return $log === null;
+                    })
             ])
             ->sendToDatabase($this->user);
     }
