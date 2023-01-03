@@ -59,8 +59,8 @@ class NoxServiceProvider extends AggregateServiceProvider
 
     protected function addMacros(): void
     {
-        $this->app->resolving('files', static function () {
-            File::macro('search', static function (string $path, string $name): array {
+        $this->app->resolving('files', function () {
+            File::macro('search', function (string $path, string $name): array {
                 if (!File::exists($path)) {
                     return [];
                 }
