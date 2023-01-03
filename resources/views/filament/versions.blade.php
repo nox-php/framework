@@ -4,7 +4,7 @@
 ])
      x-data
      x-show="$store.sidebar.isOpen">
-    <ul class="flex flex-wrap items-center gap-x-4 gap-y-2">
+    <ul class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
         <li class="flex-shrink-0">Nox {{ $versions['nox'] }}</li>
         <li class="flex-shrink-0">PHP v{{ $versions['php'] }}</li>
     </ul>
