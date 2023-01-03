@@ -30,7 +30,7 @@ class AdminServiceProvider extends PluginServiceProvider
         $this->app->resolving('filament', function () {
             Filament::serving(static function () {
                 if (config('nox.admin.register_theme')) {
-//                    Filament::registerTheme(mix('css/nox.css', 'nox'));
+                    Filament::registerTheme(mix('css/nox.css', 'nox'));
                 }
             });
         });

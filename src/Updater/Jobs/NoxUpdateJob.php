@@ -13,9 +13,11 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\URL;
 use Nox\Framework\Admin\Filament\Resources\ActivityResource;
 use Nox\Framework\Auth\Models\User;
+use Nox\Framework\NoxServiceProvider;
 use Nox\Framework\Support\Composer;
 
 class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
@@ -81,7 +83,18 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
             '--force' => true,
         ]);
 
+        Artisan::call('vendor:publish', [
+            '--provider' => NoxServiceProvider::class,
+            '--tag' => 'assets',
+            '--force' => true
+        ]);
+
         Artisan::call('package:discover');
+
+        $path = base_path('vendor/nox-php/framework/update.php');
+        if (File::exists($path)) {
+            require_once $path;
+        }
 
         $this->user->notifyNow(
             Notification::make()
