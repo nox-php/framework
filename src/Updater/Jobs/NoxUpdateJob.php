@@ -54,45 +54,53 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
             ->log($composer->getOutput()?->fetch() ?? '-');
 
         if ($status !== 0) {
+            $this->user->notifyNow(
+                Notification::make()
+                    ->danger()
+                    ->title('Nox has unsuccessfully updated')
+                    ->body('Nox ' . $this->version . ' has failed to install, reverting back to ' . $currentVersion)
+                    ->actions([
+                        Action::make('update-nox-retry')
+                            ->button()
+                            ->label('Retry')
+                            ->url(URL::signedRoute('nox.updater', ['version' => $this->version])),
+                        Action::make('view-log')
+                            ->button()
+                            ->label('View log')
+                            ->color('secondary')
+                            ->url(ActivityResource::getUrl('view', ['record' => $log->id]))
+                    ])
+                    ->toDatabase()
+            );
+
+            return;
+        }
+
+        Artisan::call('vendor:publish', [
+            '--tag' => 'laravel-assets',
+            '--force' => true,
+        ]);
+
+        Artisan::call('package:discover');
+
+        info('notifying');
+
+        $this->user->notifyNow(
             Notification::make()
-                ->danger()
-                ->title('Nox has unsuccessfully updated')
-                ->body('Nox ' . $this->version . ' has failed to install, reverting back to ' . $currentVersion)
+                ->success()
+                ->title('Nox has successfully updated')
+                ->body('Nox ' . $this->version . ' has been successfully installed')
                 ->actions([
-                    Action::make('update-nox-retry')
-                        ->button()
-                        ->label('Retry')
-                        ->url(URL::signedRoute('nox.updater', ['version' => $this->version])),
                     Action::make('view-log')
                         ->button()
                         ->label('View log')
                         ->color('secondary')
                         ->url(ActivityResource::getUrl('view', ['record' => $log->id]))
                 ])
-                ->sendToDatabase($this->user);
+                ->toDatabase()
+        );
 
-            return;
-        }
-
-        Notification::make()
-            ->success()
-            ->title('Nox has successfully updated')
-            ->body('Nox ' . $this->version . ' has been successfully installed')
-            ->actions([
-                Action::make('view-log')
-                    ->button()
-                    ->label('View log')
-                    ->color('secondary')
-                    ->url(ActivityResource::getUrl('view', ['record' => $log->id]))
-            ])
-            ->sendToDatabase($this->user);
-
-//        Artisan::call('vendor:publish', [
-//            '--tag' => 'laravel-assets',
-//            '--force' => true,
-//        ]);
-//
-//        Artisan::call('package:discover');
+        info('notified');
     }
 
     protected function handleError(Exception $e, string $currentVersion): void
