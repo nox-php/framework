@@ -33,7 +33,7 @@ class ActivityResource extends Resource
                         'default' => 2,
                         'sm' => 1,
                     ]),
-                Forms\Components\TextInput::make()
+                Forms\Components\TextInput::make('causer_id')
                     ->label('Causer id')
                     ->columnSpan([
                         'default' => 2,
