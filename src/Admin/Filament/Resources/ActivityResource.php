@@ -54,18 +54,32 @@ class ActivityResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->label('Description')
                     ->columnSpan(2),
-                Forms\Components\KeyValue::make('properties.attributes')
-                    ->label('Attributes')
-                    ->columnSpan([
-                        'default' => 2,
-                        'sm' => 1,
-                    ]),
+                Forms\Components\KeyValue::make('properties')
+                    ->label('Properties')
+                    ->afterStateHydrated(static function (Forms\Components\KeyValue $component, ?array $state) {
+                        $component->state(
+                            collect($state ?? [])
+                                ->except(['old', 'attributes'])
+                                ->all()
+                        );
+                    })
+                    ->columnSpan(2),
                 Forms\Components\KeyValue::make('properties.old')
-                    ->label('Old')
+                    ->label('Before')
+                    ->helperText('Old model attributes')
                     ->columnSpan([
                         'default' => 2,
                         'sm' => 1,
-                    ]),
+                    ])
+                    ->hidden(static fn($record): bool => $record->subject_id === null),
+                Forms\Components\KeyValue::make('properties.attributes')
+                    ->label('After')
+                    ->helperText('New model attributes')
+                    ->columnSpan([
+                        'default' => 2,
+                        'sm' => 1,
+                    ])
+                    ->hidden(static fn($record): bool => $record->subject_id === null)
             ]);
     }
 
