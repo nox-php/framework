@@ -16,7 +16,7 @@ use Nox\Framework\Admin\Filament\Pages\Settings;
 use Nox\Framework\Admin\Filament\Resources\ActivityResource;
 use Nox\Framework\Admin\Filament\Resources\ModuleResource;
 use Nox\Framework\Admin\Filament\Resources\UserResource;
-use Nox\Framework\Admin\Http\Livewire\LanguageSwitcher;
+use Nox\Framework\Admin\Http\Livewire\LocaleSwitcher;
 use Nox\Framework\Localisation\Http\Middleware\SwitchLocale;
 use Nox\Framework\Nox;
 use Spatie\Health\Checks\Checks\CacheCheck;
@@ -76,25 +76,15 @@ class AdminServiceProvider extends PluginServiceProvider
                     )
                 );
 
-                Livewire::component('nox::language-switcher', LanguageSwitcher::class);
+                Livewire::component('nox::locale-switcher', LocaleSwitcher::class);
                 Filament::registerRenderHook(
                     'global-search.end',
-                    static function() {
-                        if(!empty(Nox::enabledLocales())) {
-                            return Blade::render("@livewire('nox::language-switcher')");
+                    static function () {
+                        if (!empty(Nox::enabledLocales())) {
+                            return Blade::render("@livewire('nox::locale-switcher')");
                         }
                     }
                 );
-
-                if (
-                    !in_array(
-                        $key = SwitchLocale::class,
-                        $filamentMiddlewares = config('filament.middleware.base')
-                    )
-                ) {
-                    $filamentMiddlewares[] = $key;
-                    config()->set('filament.middleware.base', $filamentMiddlewares);
-                }
             });
         });
     }

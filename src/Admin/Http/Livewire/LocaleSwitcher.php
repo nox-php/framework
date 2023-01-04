@@ -5,11 +5,11 @@ namespace Nox\Framework\Admin\Http\Livewire;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class LanguageSwitcher extends Component
+class LocaleSwitcher extends Component
 {
     public function render(): View
     {
-        return view('nox::livewire.language-switcher', [
+        return view('nox::livewire.locale-switcher', [
             'locales' => collect(config('localisation', []))
                 ->filter(static fn(array $locale): bool => $locale['enabled'] ?? false)
                 ->all()

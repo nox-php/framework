@@ -47,7 +47,8 @@ class NoxServiceProvider extends AggregateServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../config/nox.php' => config_path('nox.php'),
-            ]);
+                __DIR__ . '/../config/localisation.php' => config_path('localisation.php.php'),
+            ], 'config');
 
             $this->publishes([
                 __DIR__ . '/../dist' => public_path('nox'),
