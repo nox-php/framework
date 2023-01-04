@@ -17,7 +17,7 @@ return [
         ],
     ],
 
-    'enabled' => [
+    'enable' => [
         'success' => [
             'title' => ':name',
             'body' => 'Successfully enabled module',
@@ -28,7 +28,7 @@ return [
         ],
     ],
 
-    'disabled' => [
+    'disable' => [
         'success' => [
             'title' => ':name',
             'body' => 'Successfully disabled module',

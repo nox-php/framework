@@ -12,23 +12,23 @@ enum ModuleStatus: string
 
     case PublishFailed = 'nox::module.publish.failed.body';
 
-    case EnabledSuccess = 'nox::module.enabled.success.body';
+    case EnabledSuccess = 'nox::module.enable.success.body';
 
-    case DisabledSuccess = 'nox::module.disabled.success.body';
+    case DisabledSuccess = 'nox::module.disable.success.body';
 
-    case InstallSuccess = 'nox::module.installed.success.body';
+    case InstallSuccess = 'nox::module.install.success.body';
 
-    case InstallFilesNotFound = 'nox::module.installed.failed.files_not_found';
+    case InstallFilesNotFound = 'nox::module.install.failed.files_not_found';
 
-    case InstallManifestNotFound = 'nox::module.installed.failed.manifest_not_found';
+    case InstallManifestNotFound = 'nox::module.install.failed.manifest_not_found';
 
-    case InstallManifestLoadFailed = 'nox::module.installed.failed.manifest_load_failed';
+    case InstallManifestLoadFailed = 'nox::module.install.failed.manifest_load_failed';
 
-    case InstallInvalidManifest = 'nox::module.installed.failed.invalid_manifest';
+    case InstallInvalidManifest = 'nox::module.install.failed.invalid_manifest';
 
-    case InstallAlreadyInstalled = 'nox::module.installed.failed.already_installed';
+    case InstallAlreadyInstalled = 'nox::module.install.failed.already_installed';
 
-    case InstallExtractFailed = 'nox::module.installed.failed.extract_failed';
+    case InstallExtractFailed = 'nox::module.install.failed.extract_failed';
 
     case DeleteSuccess = 'nox::module.delete.success.body';
 

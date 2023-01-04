@@ -58,7 +58,7 @@ class ListModules extends ListRecords
         ) {
             Notification::make()
                 ->success()
-                ->title(__('nox::module.enabled.success.title', [$record->name]))
+                ->title(__('nox::module.enable.success.title', [$record->name]))
                 ->body(__($status->value))
                 ->send();
 
@@ -67,7 +67,7 @@ class ListModules extends ListRecords
 
         Notification::make()
             ->success()
-            ->title(__('nox::module.enabled.failed.title', ['name' => $record->name]))
+            ->title(__('nox::module.enable.failed.title', ['name' => $record->name]))
             ->body(__($status->value))
             ->send();
     }
@@ -83,13 +83,13 @@ class ListModules extends ListRecords
             ) {
                 Notification::make()
                     ->success()
-                    ->title(__('nox::module.enabled.success.title', [$record->name]))
+                    ->title(__('nox::module.enable.success.title', [$record->name]))
                     ->body(__($status->value))
                     ->send();
             } else {
                 Notification::make()
                     ->success()
-                    ->title(__('nox::module.enabled.failed.title', ['name' => $record->name]))
+                    ->title(__('nox::module.enable.failed.title', ['name' => $record->name]))
                     ->body(__($status->value))
                     ->send();
             }
@@ -108,7 +108,7 @@ class ListModules extends ListRecords
         ) {
             Notification::make()
                 ->success()
-                ->title(__('nox::module.disabled.success.title', ['name' => $record->name]))
+                ->title(__('nox::module.disable.success.title', ['name' => $record->name]))
                 ->body(__($status->value))
                 ->send();
 
@@ -117,7 +117,7 @@ class ListModules extends ListRecords
 
         Notification::make()
             ->success()
-            ->title(__('nox::module.disabled.failed.title', ['name' => $record->name]))
+            ->title(__('nox::module.disable.failed.title', ['name' => $record->name]))
             ->body(__($status->value))
             ->send();
     }
@@ -133,13 +133,13 @@ class ListModules extends ListRecords
             ) {
                 Notification::make()
                     ->success()
-                    ->title(__('nox::module.disabled.success.title', ['name' => $record->name]))
+                    ->title(__('nox::module.disable.success.title', ['name' => $record->name]))
                     ->body(__($status->value))
                     ->send();
             } else {
                 Notification::make()
                     ->success()
-                    ->title(__('nox::module.disabled.failed.title', ['name' => $record->name]))
+                    ->title(__('nox::module.disable.failed.title', ['name' => $record->name]))
                     ->body(__($status->value))
                     ->send();
             }
