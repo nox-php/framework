@@ -30,6 +30,8 @@ class Health extends Page
 
     public function mount(): void
     {
+        Artisan::call(RunHealthChecksCommand::class);
+
         $this->backgroundColors = [
             Status::ok()->value => 'bg-success-100',
             Status::warning()->value => 'bg-warning-100',
