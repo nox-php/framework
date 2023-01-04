@@ -18,6 +18,7 @@ use Nox\Framework\Admin\Filament\Resources\ModuleResource;
 use Nox\Framework\Admin\Filament\Resources\UserResource;
 use Nox\Framework\Admin\Http\Livewire\LanguageSwitcher;
 use Nox\Framework\Localisation\Http\Middleware\SwitchLocale;
+use Nox\Framework\Nox;
 use Spatie\Health\Checks\Checks\CacheCheck;
 use Spatie\Health\Checks\Checks\DebugModeCheck;
 use Spatie\Health\Checks\Checks\EnvironmentCheck;
@@ -78,7 +79,11 @@ class AdminServiceProvider extends PluginServiceProvider
                 Livewire::component('nox::language-switcher', LanguageSwitcher::class);
                 Filament::registerRenderHook(
                     'global-search.end',
-                    static fn(): string => Blade::render("@livewire('nox::language-swticher')")
+                    static function() {
+                        if(!empty(Nox::enabledLocales())) {
+                            return Blade::render("@livewire('nox::language-switcher')");
+                        }
+                    }
                 );
 
                 if (
