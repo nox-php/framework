@@ -11,7 +11,7 @@ class ThemeServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->alias(ThemeRepositoryContract::class, 'settings');
+        $this->app->alias(ThemeRepositoryContract::class, 'themes');
         $this->app->singleton(ThemeRepositoryContract::class, ThemeRepository::class);
     }
 
