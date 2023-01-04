@@ -67,4 +67,9 @@ class ModuleInstaller
 
         return $name;
     }
+
+    public function setPath(string $path): void
+    {
+        $this->path = $path;
+    }
 }

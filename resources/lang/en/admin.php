@@ -8,6 +8,48 @@ return [
     ],
 
     'resources' => [
+        'theme' => [
+            'navigation_label' => 'Themes',
+            'label' => 'Theme',
+
+            'actions' => [
+                'install' => 'Install themes',
+                'enable' => 'Enable',
+                'disable' => 'Disable'
+            ],
+
+            'form' => [
+                'inputs' => [
+                    'name' => 'Name',
+                    'version' => 'Version',
+                    'path' => 'Path',
+                    'description' => 'Description',
+                    'parent' => 'Parent theme'
+                ]
+            ],
+
+            'table' => [
+                'columns' => [
+                    'name' => 'Name',
+                    'description' => 'Description',
+                    'version' => 'Version',
+                    'status' => [
+                        'label' => 'Status',
+
+                        'enum' => [
+                            'enabled' => 'Enabled',
+                            'disabled' => 'Disabled'
+                        ]
+                    ]
+                ],
+
+                'actions' => [
+                    'enable' => 'Enable',
+                    'disable' => 'Disable'
+                ]
+            ]
+        ],
+
         'module' => [
             'navigation_label' => 'Modules',
             'label' => 'Module',

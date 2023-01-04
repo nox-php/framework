@@ -22,6 +22,7 @@ class ModuleRepository implements ModuleRepositoryContract
         protected ModuleInstaller $installer
     ) {
         $this->directory = base_path('/modules');
+        $this->installer->setPath($this->directory);
     }
 
     public function all(): array

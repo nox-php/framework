@@ -49,4 +49,12 @@ return [
             'key' => 'nox.modules.all',
         ],
     ],
+
+    'themes' => [
+        'cache' => [
+            'enabled' => true,
+
+            'key' => 'nox.themes.all',
+        ],
+    ],
 ];
