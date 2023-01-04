@@ -5,6 +5,7 @@ namespace Nox\Framework\Extend\Repository;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Nox\Framework\Extend\Contracts\ModuleRepository as ModuleRepositoryContract;
+use Nox\Framework\Extend\Enums\ModuleStatus;
 use Nox\Framework\Extend\Exceptions\ModuleNotFoundException;
 use Nox\Framework\Extend\Installer\ModuleInstaller;
 use Nox\Framework\Extend\Loader\ModuleLoader;
@@ -65,14 +66,14 @@ class ModuleRepository implements ModuleRepositoryContract
         throw ModuleNotFoundException::module($name);
     }
 
-    public function enable(string|Module $module): bool
+    public function enable(string|Module $module): ModuleStatus
     {
         if (!$module = $this->getModule($module)) {
-            return false;
+            return ModuleStatus::NotFound;
         }
 
         if (!$this->bootModule($module)) {
-            return false;
+            return ModuleStatus::BootFailed;
         }
 
         $module->setEnabled(true);
@@ -81,13 +82,13 @@ class ModuleRepository implements ModuleRepositoryContract
 
         $this->updateCache();
 
-        return true;
+        return ModuleStatus::EnabledSuccess;
     }
 
-    public function disable(string|Module $module): bool
+    public function disable(string|Module $module): ModuleStatus
     {
         if (!$module = $this->getModule($module)) {
-            return false;
+            return ModuleStatus::NotFound;
         }
 
         $module->setEnabled(false);
@@ -96,7 +97,7 @@ class ModuleRepository implements ModuleRepositoryContract
 
         $this->updateCache();
 
-        return true;
+        return ModuleStatus::DisabledSuccess;
     }
 
     public function boot(): void
@@ -106,39 +107,46 @@ class ModuleRepository implements ModuleRepositoryContract
         }
     }
 
-    public function install(string $path): bool
+    public function install(string $path, ?string &$name = null): ModuleStatus
     {
-        if (!$name = $this->installer->install($path)) {
-            return false;
+        if (!$name = $this->installer->install($path, $status)) {
+            return $status;
         }
 
         $this->clear();
 
         if (!$module = $this->find($name)) {
-            return false;
+            return ModuleStatus::NotFound;
         }
 
-        return $this->bootModule($module) &&
-            $this->installer->publish($module->getProviders());
+        if (!$this->bootModule($module)) {
+            return ModuleStatus::BootFailed;
+        }
+
+        if (!$this->installer->publish($module->getProviders())) {
+            return ModuleStatus::PublishFailed;
+        }
+
+        return ModuleStatus::InstallSuccess;
     }
 
-    public function delete(string|Module $module): bool
+    public function delete(string|Module $module): ModuleStatus
     {
         if (!$module = $this->getModule($module)) {
-            return false;
+            return ModuleStatus::NotFound;
         }
 
         $path = $module->getPath();
 
         if (File::exists($path) && !File::deleteDirectory($path)) {
-            return false;
+            return ModuleStatus::DeleteFailed;
         }
 
         settings()->forget('nox.modules.' . $module->getName());
 
         $this->clear();
 
-        return true;
+        return ModuleStatus::DeleteSuccess;
     }
 
     protected function bootModule(Module $module): bool
@@ -151,13 +159,17 @@ class ModuleRepository implements ModuleRepositoryContract
         }, false);
     }
 
-    public function publish(string|Module $module, bool $migrate = true): bool
+    public function publish(string|Module $module, bool $migrate = true): ModuleStatus
     {
         if (!$module = $this->getModule($module)) {
-            return false;
+            return ModuleStatus::NotFound;
         }
 
-        return $this->installer->publish($module->getProviders(), $migrate);
+        if ($this->installer->publish($module->getProviders(), $migrate)) {
+            return ModuleStatus::PublishFailed;
+        }
+
+        return ModuleStatus::PublishSuccess;
     }
 
     protected function loadFiles(array $files): void

@@ -2,6 +2,7 @@
 
 namespace Nox\Framework\Extend\Installer;
 
+use Nox\Framework\Extend\Enums\ModuleStatus;
 use Nox\Framework\Extend\Facades\Modules;
 use Nox\Framework\Extend\Loader\ModuleLoader;
 use Nox\Framework\Installer\Traits\InstallsComponents;
@@ -20,12 +21,8 @@ class ModuleInstaller
         $this->path = $path ?? base_path('/modules');
     }
 
-    public function install(string $path): ?string
+    public function install(string $path, ?ModuleStatus &$status = null): ?string
     {
-        if (empty($this->paths)) {
-            return null;
-        }
-
         if (!$zip = $this->getArchive($path)) {
             return null;
         }

@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 use Illuminate\Support\Collection;
 use Nox\Framework\Admin\Filament\Resources\ModuleResource;
 use Nox\Framework\Extend\Contracts\ModuleRepository;
+use Nox\Framework\Extend\Enums\ModuleStatus;
 use Nox\Framework\Extend\Models\Module;
 
 class ListModules extends ListRecords
@@ -29,15 +30,20 @@ class ListModules extends ListRecords
         foreach ($data['modules'] as $path) {
             $file = $storage->path($path);
 
-            if ($modules->install($file)) {
+            if (
+                ($status = $modules->install($file, $name)) &&
+                $status === ModuleStatus::InstallSuccess
+            ) {
                 Notification::make()
                     ->success()
-                    ->title('Module successfully installed')
+                    ->title(__('nox::modules.install.success.title', ['name' => $name]))
+                    ->body(__($status->value))
                     ->send();
             } else {
                 Notification::make()
                     ->danger()
-                    ->title('Module unsuccessfully installed')
+                    ->title(__('nox::modules.install.failed.title'))
+                    ->body(__($status->value))
                     ->send();
             }
         }
@@ -48,11 +54,14 @@ class ListModules extends ListRecords
         Module $record
     )
     {
-        if ($modules->enable($record->name)) {
+        if (
+            ($status = $modules->enable($record->name)) &&
+            $status === ModuleStatus::EnabledSuccess
+        ) {
             Notification::make()
                 ->success()
-                ->title($record->name)
-                ->body('Successfully enabled module')
+                ->title(__('nox::module.enabled.success.title', [$record->name]))
+                ->body(__($status->value))
                 ->send();
 
             return redirect(ModuleResource::getUrl());
@@ -60,8 +69,8 @@ class ListModules extends ListRecords
 
         Notification::make()
             ->success()
-            ->title($record->name)
-            ->body('Failed to enable module')
+            ->title(__('nox::module.enabled.failed.title', ['name' => $record->name]))
+            ->body(__($status->value))
             ->send();
     }
 
@@ -71,17 +80,20 @@ class ListModules extends ListRecords
     )
     {
         foreach ($records as $record) {
-            if ($modules->enable($record->name)) {
+            if (
+                ($status = $modules->enable($record->name)) &&
+                $status === ModuleStatus::EnabledSuccess
+            ) {
                 Notification::make()
                     ->success()
-                    ->title($record->name)
-                    ->body('Successfully enabled module')
+                    ->title(__('nox::module.enabled.success.title', [$record->name]))
+                    ->body(__($status->value))
                     ->send();
             } else {
                 Notification::make()
                     ->success()
-                    ->title($record->name)
-                    ->body('Failed to enable module')
+                    ->title(__('nox::module.enabled.failed.title', ['name' => $record->name]))
+                    ->body(__($status->value))
                     ->send();
             }
         }
@@ -94,11 +106,14 @@ class ListModules extends ListRecords
         Module $record
     )
     {
-        if ($modules->disable($record->name)) {
+        if (
+            ($status = $modules->disable($record->name)) &&
+            $status === ModuleStatus::DisabledSuccess
+        ) {
             Notification::make()
                 ->success()
-                ->title($record->name)
-                ->body('Successfully disabled module')
+                ->title(__('nox::module.disabled.success.title', ['name' => $record->name]))
+                ->body(__($status->value))
                 ->send();
 
             return redirect(ModuleResource::getUrl());
@@ -106,8 +121,8 @@ class ListModules extends ListRecords
 
         Notification::make()
             ->success()
-            ->title($record->name)
-            ->body('Failed to disable module')
+            ->title(__('nox::module.disabled.failed.title', ['name' => $record->name]))
+            ->body(__($status->value))
             ->send();
     }
 
@@ -117,17 +132,20 @@ class ListModules extends ListRecords
     )
     {
         foreach ($records as $record) {
-            if ($modules->disable($record->name)) {
+            if (
+                ($status = $modules->disable($record->name)) &&
+                $status === ModuleStatus::DisabledSuccess
+            ) {
                 Notification::make()
                     ->success()
-                    ->title($record->name)
-                    ->body('Successfully disabled module')
+                    ->title(__('nox::module.disabled.success.title', ['name' => $record->name]))
+                    ->body(__($status->value))
                     ->send();
             } else {
                 Notification::make()
                     ->success()
-                    ->title($record->name)
-                    ->body('Failed to disable module')
+                    ->title(__('nox::module.disabled.failed.title', ['name' => $record->name]))
+                    ->body(__($status->value))
                     ->send();
             }
         }
@@ -140,11 +158,14 @@ class ListModules extends ListRecords
         Module $record
     )
     {
-        if ($modules->delete($record->name)) {
+        if (
+            ($status = $modules->delete($record->name)) &&
+            $status === ModuleStatus::DeleteSuccess
+        ) {
             Notification::make()
                 ->success()
-                ->title($record->name)
-                ->body('Successfully deleted module')
+                ->title(__('nox::module.delete.success.title', ['name' => $record->name]))
+                ->body(__($status->value))
                 ->send();
 
             return redirect(ModuleResource::getUrl());
@@ -152,8 +173,8 @@ class ListModules extends ListRecords
 
         Notification::make()
             ->success()
-            ->title($record->name)
-            ->body('Failed to delete module')
+            ->title(__('nox::module.delete.failed.title', ['name' => $record->name]))
+            ->body(__($status->value))
             ->send();
     }
 
@@ -163,17 +184,20 @@ class ListModules extends ListRecords
     )
     {
         foreach ($records as $record) {
-            if ($modules->delete($record->name)) {
+            if (
+                ($status = $modules->delete($record->name)) &&
+                $status === ModuleStatus::DeleteSuccess
+            ) {
                 Notification::make()
                     ->success()
-                    ->title($record->name)
-                    ->body('Successfully deleted module')
+                    ->title(__('nox::module.delete.success.title', ['name' => $record->name]))
+                    ->body(__($status->value))
                     ->send();
             } else {
                 Notification::make()
                     ->success()
-                    ->title($record->name)
-                    ->body('Failed to delete module')
+                    ->title(__('nox::module.delete.failed.title', ['name' => $record->name]))
+                    ->body(__($status->value))
                     ->send();
             }
         }

@@ -80,7 +80,7 @@ class AdminServiceProvider extends PluginServiceProvider
                 Filament::registerRenderHook(
                     'global-search.end',
                     static function () {
-                        if (!empty(Nox::enabledLocales())) {
+                        if (count(Nox::enabledLocales()) > 1) {
                             return Blade::render("@livewire('nox::locale-switcher')");
                         }
                     }
