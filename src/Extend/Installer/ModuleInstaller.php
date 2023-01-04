@@ -24,30 +24,38 @@ class ModuleInstaller
     public function install(string $path, ?ModuleStatus &$status = null): ?string
     {
         if (!$zip = $this->getArchive($path)) {
+            $status = ModuleStatus::InstallFileNotFound;
             return null;
         }
 
         if (!$index = $this->findManifestIndex($zip)) {
+            $status = ModuleStatus::InstallManifestNotFound;
             return null;
         }
 
         if (!$manifest = $this->getManifest($zip, $index)) {
+            $status = ModuleStatus::InstallManifestLoadFailed;
             return null;
         }
 
         if (!$this->loader->validate($manifest)) {
+            $status = ModuleStatus::InstallInvalidManifest;
             return null;
         }
 
         $name = $manifest['name'];
 
         if (Modules::find($name) !== null) {
+            $status = ModuleStatus::InstallAlreadyInstalled;
             return null;
         }
 
         if (!$this->extract($zip, $name, $this->path)) {
+            $status = ModuleStatus::InstallExtractFailed;
             return null;
         }
+
+        $status = ModuleStatus::InstallSuccess;
 
         return $name;
     }
