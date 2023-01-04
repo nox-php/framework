@@ -22,7 +22,7 @@ class ViewModule extends ViewRecord
         ) {
             Notification::make()
                 ->success()
-                ->title(__('nox::module.enable.success.title', [$this->record->name]))
+                ->title(__('nox::module.enable.success.title', ['name' => $this->record->name]))
                 ->body(__($status->value))
                 ->send();
 

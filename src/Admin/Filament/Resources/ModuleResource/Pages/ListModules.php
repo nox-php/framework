@@ -60,7 +60,7 @@ class ListModules extends ListRecords
         ) {
             Notification::make()
                 ->success()
-                ->title(__('nox::module.enable.success.title', [$record->name]))
+                ->title(__('nox::module.enable.success.title', ['name' => $record->name]))
                 ->body(__($status->value))
                 ->send();
 
@@ -86,7 +86,7 @@ class ListModules extends ListRecords
             ) {
                 Notification::make()
                     ->success()
-                    ->title(__('nox::module.enable.success.title', [$record->name]))
+                    ->title(__('nox::module.enable.success.title', ['name' => $record->name]))
                     ->body(__($status->value))
                     ->send();
             } else {
