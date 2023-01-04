@@ -9,7 +9,7 @@
 <li>
     @if($to === null)
         <button
-            {{$attribute->class($classes)}}
+            {{$attributes->class($classes)}}
         >
             {{ $slot }}
         </button>
