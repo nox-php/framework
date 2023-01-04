@@ -14,6 +14,6 @@
     </div>
 
     <x-filament::button wire:loading.attr="disabled" wire:click.prevent="installUpdate">
-        Install
+        {{ __('nox::admin.pages.settings.actions.install') }}
     </x-filament::button>
 </div>

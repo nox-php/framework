@@ -41,6 +41,8 @@ class ModuleInstaller
             return null;
         }
 
+        $manifest['path'] = $path;
+
         if (! $this->loader->validate($manifest)) {
             $status = ModuleStatus::InstallInvalidManifest;
 

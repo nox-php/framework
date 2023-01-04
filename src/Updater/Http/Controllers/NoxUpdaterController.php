@@ -22,8 +22,8 @@ class NoxUpdaterController extends Controller
 
         Notification::make()
             ->success()
-            ->title('Nox is updating in the background')
-            ->body('You will be notified once it has finished')
+            ->title(__('nox::admin.notifications.nox_update.updating.title', ['version' => $version]))
+            ->body(__('nox::admin.notifications.nox_update.updating.body'))
             ->send();
 
         return redirect()->back();

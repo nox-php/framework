@@ -57,9 +57,9 @@ class AdminServiceProvider extends PluginServiceProvider
                 }
 
                 Filament::registerNavigationGroups([
-                    'Appearance' => 1,
-                    'Extend' => 50,
-                    'System' => 100,
+                    __('nox::admin.groups.appearance') => 1,
+                    __('nox::admin.groups.extend') => 50,
+                    __('nox::admin.groups.system') => 100,
                 ]);
 
                 Filament::registerRenderHook(

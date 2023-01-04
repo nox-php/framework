@@ -35,7 +35,7 @@ class NoxCheckUpdateJob implements ShouldQueue
             return;
         }
 
-        if (! $version = $this->getLatestVersion()) {
+        if (!$version = $this->getLatestVersion()) {
             info('Failed to get latest version of nox-php/framework from packagist.');
 
             return;
@@ -57,12 +57,20 @@ class NoxCheckUpdateJob implements ShouldQueue
 
         $notification = Notification::make()
             ->warning()
-            ->title('A new version of Nox is available')
-            ->body('Nox '.$version.' is ready to be installed')
+            ->title(__('nox::admin.notifications.nox_update.install.title'))
+            ->body(
+                __(
+                    'nox::admin.notifications.nox_update.install.body',
+                    [
+                        'new_version' => $version,
+                        'old_version' => $installedVersion
+                    ]
+                )
+            )
             ->actions([
                 Action::make('update-nox')
                     ->button()
-                    ->label('Install')
+                    ->label(__('nox::admin.notifications.nox_update.install.actions.install'))
                     ->url(URL::signedRoute('nox.updater', ['version' => $version])),
             ]);
 
@@ -74,7 +82,7 @@ class NoxCheckUpdateJob implements ShouldQueue
     protected function getLatestVersion(): ?string
     {
         try {
-            $response = Http::get(static::$baseUrl.'nox-php/framework.json');
+            $response = Http::get(static::$baseUrl . 'nox-php/framework.json');
 
             $data = json_decode($response->body(), true, 512, JSON_THROW_ON_ERROR);
 

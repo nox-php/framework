@@ -27,11 +27,24 @@ class Settings extends Page
 
     protected static ?string $slug = 'system/settings';
 
-    protected static ?string $navigationGroup = 'System';
-
     protected static ?int $navigationSort = 100;
 
     public ?string $availableUpdateVersion = null;
+
+    protected static function getNavigationLabel(): string
+    {
+        return __('nox::admin.pages.settings.label');
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return __('nox::admin.groups.system');
+    }
+
+    protected function getTitle(): string
+    {
+        return __('nox::admin.pages.settings.label');
+    }
 
     public function mount(): void
     {
@@ -96,8 +109,8 @@ class Settings extends Page
         if (! $this->testDatabaseConnection($databaseConfig)) {
             Notification::make()
                 ->danger()
-                ->title('Failed to update settings')
-                ->body('Could not connect to the database')
+                ->title(__('nox::admin.notifications.settings.failed.database.title'))
+                ->body(__('nox::admin.notifications.settings.failed.database.body'))
                 ->send();
 
             return;
@@ -156,13 +169,13 @@ class Settings extends Page
         if ($env->save()) {
             Notification::make()
                 ->success()
-                ->title('Successfully updated settings')
+                ->title(__('nox::admin.notifications.settings.success.title'))
                 ->send();
         } else {
             Notification::make()
                 ->success()
-                ->title('Failed to update settings')
-                ->body('Unable to write config file')
+                ->title(__('nox::admin.notifications.settings.failed.config.title'))
+                ->body(__('nox::admin.notifications.settings.failed.config.body'))
                 ->send();
         }
     }
@@ -206,8 +219,8 @@ class Settings extends Page
 
         Notification::make()
             ->success()
-            ->title('Nox is updating in the background')
-            ->body('You will be notified once it has finished')
+            ->title(__('nox::admin.notifications.nox_update.updating.title', ['version' => $this->availableUpdateVersion]))
+            ->body(__('nox::admin.notifications.nox_update.updating.body'))
             ->send();
     }
 
@@ -217,8 +230,8 @@ class Settings extends Page
 
         Notification::make()
             ->success()
-            ->title('Checking for Nox updates in the background')
-            ->body('You will be notified if an update is available')
+            ->title(__('nox::admin.notifications.settings.check_updates.title'))
+            ->body(__('nox::admin.notifications.settings.check_updates.body'))
             ->send();
     }
 
@@ -226,7 +239,7 @@ class Settings extends Page
     {
         return [
             Action::make('check-nox-update')
-                ->label('Check for updates')
+                ->label(__('nox::admin.pages.settings.actions.check_for_updates'))
                 ->button()
                 ->action('checkUpdate'),
         ];
@@ -238,71 +251,72 @@ class Settings extends Page
             Tabs::make('Settings')
                 ->disableLabel()
                 ->tabs([
-                    Tabs\Tab::make('Site')
+                    Tabs\Tab::make(__('nox::admin.pages.settings.form.tabs.site'))
                         ->schema([
-                            Fieldset::make('Global')
+                            Fieldset::make(__('nox::admin.pages.settings.form.fieldsets.global'))
                                 ->schema([
                                     TextInput::make('site_name')
-                                        ->label('Site name')
+                                        ->label(__('nox::admin.pages.settings.form.inputs.site_name.label'))
                                         ->required()
-                                        ->hint('Updating this will sign everyone out')
+                                        ->hint(__('nox::admin.pages.settings.form.inputs.site_name.hint'))
                                         ->maxLength(255),
                                     TextInput::make('site_url')
+                                        ->label(__('nox::admin.pages.settings.form.inputs.site_url.label'))
                                         ->required()
-                                        ->hint('Updating this will sign everyone out')
+                                        ->hint(__('nox::admin.pages.settings.form.inputs.site_name.hint'))
                                         ->maxLength(255),
                                 ]),
-                            Fieldset::make('Debugging')
+                            Fieldset::make(__('nox::admin.pages.settings.form.fieldsets.debugging'))
                                 ->schema([
                                     Select::make('site_environment')
-                                        ->label('Environment')
+                                        ->label(__('nox::admin.pages.settings.form.inputs.environment.label'))
                                         ->required()
                                         ->options([
-                                            'production' => 'Production',
-                                            'testing' => 'Testing',
-                                            'local' => 'Local',
+                                            'production' => __('nox::admin.pages.settings.form.inputs.environment.options.production'),
+                                            'testing' => __('nox::admin.pages.settings.form.inputs.environment.options.testing'),
+                                            'local' => __('nox::admin.pages.settings.form.inputs.environment.options.local'),
                                         ]),
                                     Toggle::make('site_debug')
-                                        ->label('Enable debug mode')
-                                        ->helperText('This should never be enabled in production'),
+                                        ->label(__('nox::admin.pages.settings.form.inputs.site_debug.label'))
+                                        ->helperText(__('nox::admin.pages.settings.form.inputs.site_debug.helper')),
                                 ]),
                         ]),
-                    Tabs\Tab::make('Database')
+                    Tabs\Tab::make(__('nox::admin.pages.settings.form.tabs.database'))
                         ->schema([
                             Grid::make()
                                 ->schema([
                                     Select::make('database_driver')
-                                        ->label('Driver')
+                                        ->label(__('nox::admin.pages.settings.form.inputs.database_driver.label'))
                                         ->reactive()
                                         ->required()
                                         ->options([
-                                            'mysql' => 'mysql',
-                                            'pgsql' => 'pgsql',
-                                            'sqlsrv' => 'sqlsrv',
-                                            'sqlite' => 'sqlite',
+                                            'mysql' => __('nox::admin.pages.settings.form.inputs.database_driver.options.mysql'),
+                                            'pgsql' => __('nox::admin.pages.settings.form.inputs.database_driver.options.pgsql'),
+                                            'sqlsrv' => __('nox::admin.pages.settings.form.inputs.database_driver.options.sqlsrv'),
+                                            'sqlite' => __('nox::admin.pages.settings.form.inputs.database_driver.options.sqlite'),
                                         ]),
                                     TextInput::make('database_host')
-                                        ->label('Host')
+                                        ->label(__('nox::admin.pages.settings.form.inputs.database_host'))
                                         ->required(static fn (Closure $get): bool => $get('database_driver') !== 'sqlite')
                                         ->hidden(static fn (Closure $get): bool => $get('database_driver') === 'sqlite'),
                                     TextInput::make('database_port')
-                                        ->label('Port')
+                                        ->label(__('nox::admin.pages.settings.form.inputs.database_port'))
                                         ->integer()
                                         ->minValue(1)
                                         ->required(static fn (Closure $get): bool => $get('database_driver') !== 'sqlite')
                                         ->hidden(static fn (Closure $get): bool => $get('database_driver') === 'sqlite'),
                                     TextInput::make('database_database')
-                                        ->label('Database')
+                                        ->label(__('nox::admin.pages.settings.form.inputs.database_database'))
                                         ->required(),
                                     TextInput::make('database_username')
-                                        ->label('Username')
+                                        ->label(__('nox::admin.pages.settings.form.inputs.database_username'))
                                         ->required(static fn (Closure $get): bool => $get('database_driver') !== 'sqlite')
                                         ->hidden(static fn (Closure $get): bool => $get('database_driver') === 'sqlite'),
                                     Hidden::make('database_password_empty')
                                         ->default(false)
                                         ->reactive(),
                                     TextInput::make('database_password')
-                                        ->label('Password')
+                                        ->label(__('nox::admin.pages.settings.form.inputs.database_password'))
                                         ->password()
                                         ->dehydrated(fn (Closure $get, $state) => filled($state) || $get('database_password_empty'))
                                         ->disabled(static fn (Closure $get) => $get('database_password_empty') === true)
@@ -325,55 +339,55 @@ class Settings extends Page
                                         }),
                                 ]),
                         ]),
-                    Tabs\Tab::make('Discord')
+                    Tabs\Tab::make(__('nox::admin.pages.settings.form.tabs.discord'))
                         ->schema([
                             Grid::make()
                                 ->schema([
                                     TextInput::make('discord_client_id')
-                                        ->label('Client ID')
+                                        ->label(__('nox::admin.pages.settings.form.inputs.discord_client_id'))
                                         ->required(),
                                     TextInput::make('discord_client_secret')
-                                        ->label('Client secret')
+                                        ->label(__('nox::admin.pages.settings.form.inputs.discord_client_secret'))
                                         ->required(static fn (): bool => config('nox.auth.discord.client_secret') === null)
                                         ->password()
                                         ->dehydrated(fn ($state) => filled($state)),
                                 ]),
                         ]),
-                    Tabs\Tab::make('Mail')
+                    Tabs\Tab::make(__('nox::admin.pages.settings.form.tabs.mail'))
                         ->schema([
                             Grid::make()
                                 ->schema([
-                                    Fieldset::make('Credentials')
+                                    Fieldset::make(__('nox::admin.pages.settings.form.fieldsets.credentials'))
                                         ->schema([
                                             Select::make('mail_transport')
-                                                ->label('Driver')
+                                                ->label(__('nox::admin.pages.settings.form.inputs.mail_transport'))
                                                 ->reactive()
                                                 ->required()
                                                 ->options([
-                                                    'smtp' => 'smtp',
-                                                    'sendmail' => 'sendmail',
+                                                    'smtp' => __('nox::admin.pages.settings.form.inputs.mail_transport.options.smtp'),
+                                                    'sendmail' => __('nox::admin.pages.settings.form.inputs.mail_transport.options.sendmail'),
                                                 ]),
-                                            TextInput::make('path')
-                                                ->label('Path')
+                                            TextInput::make('mail_path')
+                                                ->label(__('nox::admin.pages.settings.form.inputs.mail_path'))
                                                 ->default('/usr/sbin/sendmail -bs -i')
                                                 ->required(static fn (Closure $get): bool => $get('mail_transport') === 'sendmail')
                                                 ->hidden(static fn (Closure $get): bool => $get('mail_transport') !== 'sendmail'),
                                             TextInput::make('mail_host')
-                                                ->label('Host')
+                                                ->label(__('nox::admin.pages.settings.form.inputs.mail_host'))
                                                 ->hidden(static fn (Closure $get): bool => $get('mail_transport') === 'sendmail'),
                                             TextInput::make('mail_port')
-                                                ->label('Port')
+                                                ->label(__('nox::admin.pages.settings.form.inputs.mail_port'))
                                                 ->integer()
                                                 ->minValue(1)
                                                 ->hidden(static fn (Closure $get): bool => $get('mail_transport') === 'sendmail'),
                                             TextInput::make('mail_username')
-                                                ->label('Username')
+                                                ->label(__('nox::admin.pages.settings.form.inputs.mail_username'))
                                                 ->hidden(static fn (Closure $get): bool => $get('mail_transport') === 'sendmail'),
                                             Hidden::make('mail_password_empty')
                                                 ->default(false)
                                                 ->reactive(),
                                             TextInput::make('mail_password')
-                                                ->label('Password')
+                                                ->label(__('nox::admin.pages.settings.form.inputs.mail_password'))
                                                 ->password()
                                                 ->dehydrated(fn (Closure $get, $state) => filled($state) || $get('mail_password_empty'))
                                                 ->disabled(static fn (Closure $get) => $get('mail_password_empty') === true)
@@ -394,16 +408,16 @@ class Settings extends Page
                                                         });
                                                 }),
                                             TextInput::make('mail_encryption')
-                                                ->label('Encryption')
+                                                ->label(__('nox::admin.pages.settings.form.inputs.mail_encryption'))
                                                 ->hidden(static fn (Closure $get): bool => $get('mail_transport') === 'sendmail')
                                                 ->default('tls'),
                                         ]),
-                                    Fieldset::make('Signature')
+                                    Fieldset::make(__('nox::admin.pages.settings.form.fieldsets.signature'))
                                         ->schema([
                                             TextInput::make('mail_from_address')
-                                                ->label('Sender address'),
+                                                ->label(__('nox::admin.pages.settings.form.inputs.mail_from_address')),
                                             TextInput::make('mail_from_name')
-                                                ->label('Sender name'),
+                                                ->label(__('nox::admin.pages.settings.form.inputs.mail_from_name')),
                                         ]),
                                 ]),
                         ]),

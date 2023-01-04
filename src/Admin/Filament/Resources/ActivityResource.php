@@ -22,24 +22,37 @@ class ActivityResource extends Resource
 
     protected static ?string $slug = 'system/activities';
 
-    protected static ?string $navigationGroup = 'System';
-
     protected static ?string $navigationIcon = 'heroicon-o-table';
 
     protected static ?int $navigationSort = 50;
+
+    protected static function getNavigationLabel(): string
+    {
+        return __('nox::admin.resources.activity.navigation_label');
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return __('nox::admin.resources.system');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('nox::admin.resources.activity.label');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('causer_type')
-                    ->label('Causer type')
+                    ->label(__('nox::admin.resources.activity.form.inputs.causer_type'))
                     ->columnSpan([
                         'default' => 2,
                         'sm' => 1,
                     ]),
                 Forms\Components\TextInput::make('causer_id')
-                    ->label('Causer id')
+                    ->label(__('nox::admin.resources.activity.form.inputs.causer_id'))
                     ->columnSpan([
                         'default' => 2,
                         'sm' => 1,
@@ -65,24 +78,24 @@ class ActivityResource extends Resource
                         }
                     }),
                 Forms\Components\TextInput::make('subject_type')
-                    ->label('Subject type')
+                    ->label(__('nox::admin.resources.activity.form.inputs.subject_type'))
                     ->columnSpan([
                         'default' => 2,
                         'sm' => 1,
                     ])
                     ->hidden(static fn ($record): bool => $record->subject_id === null),
                 Forms\Components\TextInput::make('subject_id')
-                    ->label('Subject id')
+                    ->label(__('nox::admin.resources.activity.form.inputs.subject_id'))
                     ->columnSpan([
                         'default' => 2,
                         'sm' => 1,
                     ])
                     ->hidden(static fn ($record): bool => $record->subject_id === null),
                 Forms\Components\Textarea::make('description')
-                    ->label('Description')
+                    ->label(__('nox::admin.resources.activity.form.inputs.description'))
                     ->columnSpan(2),
                 Forms\Components\KeyValue::make('properties_except')
-                    ->label('Properties')
+                    ->label(__('nox::admin.resources.activity.form.inputs.properties'))
                     ->afterStateHydrated(static function (Forms\Components\KeyValue $component, $record) {
                         $component->state(
                             collect($record->properties?->all() ?? [])
@@ -92,8 +105,8 @@ class ActivityResource extends Resource
                     })
                     ->columnSpan(2),
                 Forms\Components\KeyValue::make('properties_old')
-                    ->label('Before')
-                    ->helperText('Old model attributes')
+                    ->label(__('nox::admin.resources.activity.form.inputs.before.label'))
+                    ->helperText(__('nox::admin.resources.activity.form.inputs.before.helper'))
                     ->columnSpan([
                         'default' => 2,
                         'sm' => 1,
@@ -109,8 +122,8 @@ class ActivityResource extends Resource
                     })
                     ->hidden(static fn ($record): bool => $record->subject_id === null),
                 Forms\Components\KeyValue::make('properties_attributes')
-                    ->label('After')
-                    ->helperText('New model attributes')
+                    ->label(__('nox::admin.resources.activity.form.inputs.label'))
+                    ->helperText(__('nox::admin.resources.activity.form.inputs.helper'))
                     ->columnSpan([
                         'default' => 2,
                         'sm' => 1,
@@ -134,11 +147,11 @@ class ActivityResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('description')
-                    ->label('Description')
+                    ->label(__('nox::admin.resources.activity.table.columns.description'))
                     ->searchable()
                     ->limit(),
                 Tables\Columns\TextColumn::make('subject.name')
-                    ->label('Subject')
+                    ->label(__('nox::admin.resources.activity.table.columns.subject'))
                     ->hidden(function (Component $livewire) {
                         return method_exists($livewire, 'hideSubjectColumn')
                             ? call_user_func([$livewire, 'hideSubjectColumn'])
@@ -171,7 +184,7 @@ class ActivityResource extends Resource
                         return $resource::getUrl('edit', ['record' => $record->subject]) ?? null;
                     }, shouldOpenInNewTab: true),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Logged at')
+                    ->label(__('nox::admin.resources.activity.table.columns.created_at'))
                     ->dateTime()
                     ->sortable(),
             ]);

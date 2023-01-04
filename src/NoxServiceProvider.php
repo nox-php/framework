@@ -42,7 +42,7 @@ class NoxServiceProvider extends AggregateServiceProvider
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'nox');
-        $this->loadTranslationsFrom(__DIR__.'/../lang', 'nox');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'nox');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([

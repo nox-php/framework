@@ -22,11 +22,24 @@ class UserResource extends Resource
 
     protected static ?string $slug = 'system/users';
 
-    protected static ?string $navigationGroup = 'System';
-
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?int $navigationSort = 1;
+
+    protected static function getNavigationLabel(): string
+    {
+        return __('nox::admin.resources.user.navigation_label');
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return __('nox::admin.resources.system');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('nox::admin.resources.user.label');
+    }
 
     public static function form(Form $form): Form
     {
@@ -48,18 +61,18 @@ class UserResource extends Resource
                             ])
                             ->schema([
                                 Forms\Components\TextInput::make(User::getUsernameColumnName())
-                                    ->label('Username')
+                                    ->label(__('nox::admin.resources.user.form.inputs.username'))
                                     ->required()
                                     ->maxLength(255),
                                 Forms\Components\TextInput::make(User::getEmailColumnName())
-                                    ->label('Email address')
+                                    ->label(__('nox::admin.resources.user.form.inputs.email'))
                                     ->required()
                                     ->email()
                                     ->maxLength(255)
-                                    ->unique(ignorable: static fn (?User $record): ?User => $record),
+                                    ->unique(ignorable: static fn(?User $record): ?User => $record),
                                 Forms\Components\Hidden::make('is_super_admin'),
                                 Forms\Components\Select::make('roles')
-                                    ->label('Roles')
+                                    ->label(__('nox::admin.resources.user.form.inputs.roles'))
                                     ->multiple()
                                     ->required()
                                     ->afterStateHydrated(static function (?User $record, Closure $set) {
@@ -81,7 +94,7 @@ class UserResource extends Resource
                                         if (
                                             Filament::auth()->id() === $record->getKey() &&
                                             $get('is_super_admin') &&
-                                            ! $record->can('*')
+                                            !$record->can('*')
                                         ) {
                                             BouncerFacade::assign('superadmin')->to($record);
                                             BouncerFacade::refreshFor($record);
@@ -92,14 +105,14 @@ class UserResource extends Resource
                             ->columnSpan(1)
                             ->schema([
                                 Forms\Components\Placeholder::make('discord_name')
-                                    ->label('Discord name')
-                                    ->content(static fn (?User $record): string => $record->discord_name),
+                                    ->label(__('nox::admin.resources.user.form.inputs.discord_name'))
+                                    ->content(static fn(?User $record): string => $record->discord_name),
                                 Forms\Components\Placeholder::make(User::getCreatedAtColumnName())
-                                    ->label('Created at')
-                                    ->content(static fn (?User $record): string => $record?->{User::getCreatedAtColumnName()}?->diffForHumans() ?? '-'),
+                                    ->label(__('nox::admin.resources.user.form.inputs.created_at'))
+                                    ->content(static fn(?User $record): string => $record?->{User::getCreatedAtColumnName()}?->diffForHumans() ?? '-'),
                                 Forms\Components\Placeholder::make(User::getUpdatedAtColumnName())
-                                    ->label('Updated at')
-                                    ->content(static fn (?User $record): string => $record?->{User::getUpdatedAtColumnName()}?->diffForHumans() ?? '-'),
+                                    ->label(__('nox::admin.resources.user.form.inputs.updated_at'))
+                                    ->content(static fn(?User $record): string => $record?->{User::getUpdatedAtColumnName()}?->diffForHumans() ?? '-'),
                             ]),
                     ])->build()
                 )
@@ -114,23 +127,33 @@ class UserResource extends Resource
                     'nox.user.resource.table.columns',
                     [
                         Tables\Columns\ImageColumn::make('avatar')
-                            ->label('Avatar')
+                            ->label(__('nox::admin.resources.user.table.columns.avatar'))
                             ->circular()
                             ->getStateUsing(static function (User $record) {
                                 return app(AvatarProvider::class)->get($record);
                             }),
                         Tables\Columns\TextColumn::make(User::getUsernameColumnName())
-                            ->label('Username'),
+                            ->label(__('nox::admin.resources.user.table.columns.username'))
+                            ->sortable()
+                            ->searchable(),
                         Tables\Columns\TextColumn::make(User::getEmailColumnName())
-                            ->label('Email address'),
+                            ->label(__('nox::admin.resources.user.table.columns.email'))
+                            ->sortable()
+                            ->searchable(),
                         Tables\Columns\BadgeColumn::make('discord_name')
-                            ->label('Discord name'),
+                            ->label(__('nox::admin.resources.user.table.columns.discord_name'))
+                            ->sortable()
+                            ->searchable(),
                         Tables\Columns\TextColumn::make(User::getCreatedAtColumnName())
-                            ->label('Created at')
-                            ->date(),
+                            ->label(__('nox::admin.resources.user.table.columns.created_at'))
+                            ->date()
+                            ->sortable()
+                            ->searchable(),
                         Tables\Columns\TextColumn::make(User::getUpdatedAtColumnName())
-                            ->label('Updated at')
-                            ->date(),
+                            ->label(__('nox::admin.resources.user.table.columns.updated_at'))
+                            ->date()
+                            ->sortable()
+                            ->searchable(),
                     ]
                 )
             );

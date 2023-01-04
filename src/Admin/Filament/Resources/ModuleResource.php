@@ -16,24 +16,39 @@ class ModuleResource extends Resource
 
     protected static ?string $slug = 'extend/modules';
 
-    protected static ?string $navigationGroup = 'Extend';
-
     protected static ?string $navigationIcon = 'heroicon-o-puzzle';
 
     protected static ?int $navigationSort = 1;
+
+    protected static function getNavigationLabel(): string
+    {
+        return __('nox::admin.resources.module.navigation_label');
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return __('nox::admin.resources.extend');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('nox::admin.resources.module.label');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label('Name'),
+                    ->label(__('nox::admin.resources.module.form.inputs.name')),
                 Forms\Components\TextInput::make('version')
-                    ->label('Version')
+                    ->label(__('nox::admin.resources.module.form.inputs.version'))
                     ->formatStateUsing(static fn (string $state): string => 'v'.$state),
                 Forms\Components\TextInput::make('path')
+                    ->label(__('nox::admin.resources.module.form.inputs.path'))
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('description')
+                    ->label(__('nox::admin.resources.module.form.inputs.description'))
                     ->columnSpanFull(),
             ]);
     }
@@ -43,23 +58,23 @@ class ModuleResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Name')
+                    ->label(__('nox::admin.resources.module.table.columns.name'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
-                    ->label('Description')
+                    ->label(__('nox::admin.resources.module.table.columns.description'))
                     ->sortable()
                     ->searchable()
                     ->limit(),
                 Tables\Columns\BadgeColumn::make('version')
-                    ->label('Version')
+                    ->label(__('nox::admin.resources.module.table.columns.version'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\BadgeColumn::make('enabled')
-                    ->label('Status')
+                    ->label(__('nox::admin.resources.module.table.columns.status.label'))
                     ->enum([
-                        true => 'Enabled',
-                        false => 'Disabled',
+                        true => __('nox::admin.resources.module.table.columns.status.enum.enabled'),
+                        false => __('nox::admin.resources.module.table.columns.status.enum.disabled'),
                     ])
                     ->icons([
                         'heroicon-o-check' => true,
@@ -72,12 +87,12 @@ class ModuleResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('enable-module')
-                    ->label('Enable')
+                    ->label(__('nox::admin.resources.module.table.actions.enable'))
                     ->requiresConfirmation()
                     ->action('enableModule')
                     ->hidden(static fn (Module $record): bool => $record->enabled),
                 Tables\Actions\Action::make('disable-module')
-                    ->label('Disable')
+                    ->label(__('nox::admin.resources.module.table.actions.disable'))
                     ->color('danger')
                     ->requiresConfirmation()
                     ->action('disableModule')
@@ -90,12 +105,12 @@ class ModuleResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkAction::make('bulk-enable-modules')
-                    ->label('Enable selected')
+                    ->label(__('nox::admin.resources.module.table.bulk_actions.enable'))
                     ->icon('heroicon-o-check')
                     ->requiresConfirmation()
                     ->action('bulkEnableModules'),
                 Tables\Actions\BulkAction::make('bulk-disable-modules')
-                    ->label('Disable selected')
+                    ->label(__('nox::admin.resources.module.table.bulk_actions.disable'))
                     ->icon('heroicon-o-x')
                     ->color('danger')
                     ->requiresConfirmation()

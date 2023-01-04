@@ -66,4 +66,9 @@ return [
             'title' => 'Failed to delete module',
         ],
     ],
+
+    'resource' => [
+        'label' => 'Modules',
+        'group' => 'Extend',
+    ],
 ];

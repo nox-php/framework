@@ -4,6 +4,7 @@ namespace Nox\Framework\Admin\Filament\Pages;
 
 use Carbon\Carbon;
 use Filament\Pages\Actions\Action;
+use Filament\Pages\Dashboard;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Health\Commands\RunHealthChecksCommand;
@@ -16,8 +17,6 @@ class Health extends Page
 
     protected static ?string $slug = 'system/health';
 
-    protected static ?string $navigationGroup = 'System';
-
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
     protected static ?int $navigationSort = 75;
@@ -27,6 +26,21 @@ class Health extends Page
     public array $icons = [];
 
     public array $iconColors = [];
+
+    protected static function getNavigationLabel(): string
+    {
+        return __('nox::admin.pages.health.label');
+    }
+
+    protected static function getNavigationGroup(): ?string
+    {
+        return __('nox::admin.groups.system');
+    }
+
+    protected function getTitle(): string
+    {
+        return __('nox::admin.pages.health.label');
+    }
 
     public function mount(): void
     {
@@ -66,7 +80,7 @@ class Health extends Page
             'nox.health.actions',
             [
                 Action::make('refresh-health')
-                    ->label('Refresh')
+                    ->label(__('nox::admin.pages.health.actions.refresh'))
                     ->action('refresh'),
             ]
         );

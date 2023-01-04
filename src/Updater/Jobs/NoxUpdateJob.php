@@ -20,6 +20,7 @@ use Nox\Framework\Admin\Filament\Resources\ActivityResource;
 use Nox\Framework\Auth\Models\User;
 use Nox\Framework\NoxServiceProvider;
 use Nox\Framework\Support\Composer;
+use Spatie\Activitylog\Models\Activity;
 
 class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
 {
@@ -42,13 +43,18 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
         rescue(function () use ($composer, $currentVersion) {
             $this->update($composer, $currentVersion);
         }, function (Exception $e) use ($currentVersion) {
-            $this->handleError($e, $currentVersion);
+            $log = activity()
+                ->by($this->user)
+                ->event('nox.update')
+                ->log((string)$e);
+
+            $this->handleError($log, $currentVersion);
         });
     }
 
     protected function update(Composer $composer, string $currentVersion): void
     {
-        $status = $composer->update('nox-php/framework:'.$this->version);
+        $status = $composer->update('nox-php/framework:' . $this->version);
 
         $log = activity()
             ->by($this->user)
@@ -57,28 +63,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
             ->log($composer->getOutput()?->fetch() ?? '-');
 
         if ($status !== 0) {
-            $this->user->notifyNow(
-                Notification::make()
-                    ->danger()
-                    ->title('Nox has unsuccessfully updated')
-                    ->body('Nox '.$this->version.' has failed to install, reverting back to '.$currentVersion)
-                    ->actions([
-                        Action::make('update-nox-retry')
-                            ->button()
-                            ->label('Retry')
-                            ->url(URL::signedRoute('nox.updater', ['version' => $this->version])),
-                        Action::make('view-log')
-                            ->button()
-                            ->label('View log')
-                            ->color('secondary')
-                            ->url(ActivityResource::getUrl('view', ['record' => $log?->id]), true)
-                            ->hidden(static function () use ($log) {
-                                return $log === null;
-                            }),
-                    ])
-                    ->toDatabase()
-            );
-
+            $this->handleError($log, $currentVersion);
             return;
         }
 
@@ -105,12 +90,20 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
         $this->user->notifyNow(
             Notification::make()
                 ->success()
-                ->title('Nox has successfully updated')
-                ->body('Nox '.$this->version.' has been successfully installed')
+                ->title(__('nox::admin.notifications.nox_update.success.title'))
+                ->body(
+                    __(
+                        'nox::admin.notifications.nox_update.success.body',
+                        [
+                            'old_version' => $currentVersion,
+                            'new_version' => $this->version
+                        ]
+                    )
+                )
                 ->actions([
                     Action::make('view-log')
                         ->button()
-                        ->label('View log')
+                        ->label(__('nox::admin.notifications.nox_update.success.actions.view_log'))
                         ->color('secondary')
                         ->url(ActivityResource::getUrl('view', ['record' => $log?->id]), true)
                         ->hidden(static function () use ($log) {
@@ -121,31 +114,36 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
         );
     }
 
-    protected function handleError(Exception $e, string $currentVersion): void
+    protected function handleError(?Activity $log, string $currentVersion): void
     {
-        $log = activity()
-            ->by($this->user)
-            ->event('nox.update')
-            ->log((string) $e);
-
-        Notification::make()
-            ->danger()
-            ->title('Nox has unsuccessfully updated')
-            ->body('Nox '.$this->version.' has failed to install, reverting back to '.$currentVersion)
-            ->actions([
-                Action::make('update-nox-retry')
-                    ->button()
-                    ->label('Retry')
-                    ->url(URL::signedRoute('nox.updater', ['version' => $this->version])),
-                Action::make('view-log')
-                    ->button()
-                    ->label('View log')
-                    ->color('secondary')
-                    ->url(ActivityResource::getUrl('view', ['record' => $log?->id]), true)
-                    ->hidden(static function () use ($log) {
-                        return $log === null;
-                    }),
-            ])
-            ->sendToDatabase($this->user);
+        $this->user->notifyNow(
+            Notification::make()
+                ->danger()
+                ->title(__('nox::admin.notifications.nox_update.failed.title'))
+                ->body(
+                    __(
+                        'nox::admin.notifications.nox_update.failed.body',
+                        [
+                            'new_version' => $this->version,
+                            'old_version' => $currentVersion
+                        ]
+                    )
+                )
+                ->actions([
+                    Action::make('update-nox-retry')
+                        ->button()
+                        ->label(__('nox::admin.notifications.nox_update.failed.actions.retry'))
+                        ->url(URL::signedRoute('nox.updater', ['version' => $this->version])),
+                    Action::make('view-log')
+                        ->button()
+                        ->label(__('nox::admin.notifications.nox_update.failed.actions.view_log'))
+                        ->color('secondary')
+                        ->url(ActivityResource::getUrl('view', ['record' => $log?->id]), true)
+                        ->hidden(static function () use ($log) {
+                            return $log === null;
+                        }),
+                ])
+                ->toDatabase()
+        );
     }
 }

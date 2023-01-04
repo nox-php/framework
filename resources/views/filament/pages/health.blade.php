@@ -35,7 +35,7 @@
         @if ($lastRanAt)
             <div
                 class="{{ $lastRanAt->diffInMinutes() > 5 ? 'text-red-400' : 'text-gray-500' }} text-md text-center font-medium">
-                Last updated {{ $lastRanAt->diffForHumans() }}
+                {{ __('nox::admin.pages.health.last_updated') }} {{ $lastRanAt->diffForHumans() }}
             </div>
         @endif
     </div>
