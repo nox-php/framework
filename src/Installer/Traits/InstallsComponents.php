@@ -77,9 +77,9 @@ trait InstallsComponents
         });
     }
 
-    protected function findManifestIndex(ZipArchive $zip): ?int
+    protected function findManifestIndex(ZipArchive $zip, string $manifestName): ?int
     {
-        if (! ($index = $zip->locateName('composer.json', ZipArchive::FL_NODIR))) {
+        if (! ($index = $zip->locateName($manifestName, ZipArchive::FL_NODIR))) {
             return null;
         }
 
