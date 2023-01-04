@@ -22,5 +22,9 @@ interface ModuleRepository
 
     public function boot(): void;
 
-    public function install(string $path, bool $migrate = true): bool;
+    public function install(string $path): bool;
+
+    public function delete(string|Module $module): bool;
+
+    public function publish(string|Module $module, bool $migrate = true): bool;
 }

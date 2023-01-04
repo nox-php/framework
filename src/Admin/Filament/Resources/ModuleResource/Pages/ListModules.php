@@ -7,8 +7,10 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Notifications\Notification;
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\Collection;
 use Nox\Framework\Admin\Filament\Resources\ModuleResource;
 use Nox\Framework\Extend\Contracts\ModuleRepository;
+use Nox\Framework\Extend\Models\Module;
 
 class ListModules extends ListRecords
 {
@@ -39,6 +41,144 @@ class ListModules extends ListRecords
                     ->send();
             }
         }
+    }
+
+    public function enableModule(
+        ModuleRepository $modules,
+        Module $record
+    )
+    {
+        if ($modules->enable($record->name)) {
+            Notification::make()
+                ->success()
+                ->title($record->name)
+                ->body('Successfully enabled module')
+                ->send();
+
+            return redirect(ModuleResource::getUrl());
+        }
+
+        Notification::make()
+            ->success()
+            ->title($record->name)
+            ->body('Failed to enable module')
+            ->send();
+    }
+
+    public function bulkEnableModules(
+        ModuleRepository $modules,
+        Collection $records
+    )
+    {
+        foreach ($records as $record) {
+            if ($modules->enable($record->name)) {
+                Notification::make()
+                    ->success()
+                    ->title($record->name)
+                    ->body('Successfully enabled module')
+                    ->send();
+            } else {
+                Notification::make()
+                    ->success()
+                    ->title($record->name)
+                    ->body('Failed to enable module')
+                    ->send();
+            }
+        }
+
+        return redirect(ModuleResource::getUrl());
+    }
+
+    public function disableModule(
+        ModuleRepository $modules,
+        Module $record
+    )
+    {
+        if ($modules->disable($record->name)) {
+            Notification::make()
+                ->success()
+                ->title($record->name)
+                ->body('Successfully disabled module')
+                ->send();
+
+            return redirect(ModuleResource::getUrl());
+        }
+
+        Notification::make()
+            ->success()
+            ->title($record->name)
+            ->body('Failed to disable module')
+            ->send();
+    }
+
+    public function bulkDisableModules(
+        ModuleRepository $modules,
+        Collection $records
+    )
+    {
+        foreach ($records as $record) {
+            if ($modules->disable($record->name)) {
+                Notification::make()
+                    ->success()
+                    ->title($record->name)
+                    ->body('Successfully disabled module')
+                    ->send();
+            } else {
+                Notification::make()
+                    ->success()
+                    ->title($record->name)
+                    ->body('Failed to disable module')
+                    ->send();
+            }
+        }
+
+        return redirect(ModuleResource::getUrl());
+    }
+
+    public function deleteModule(
+        ModuleRepository $modules,
+        Module $record
+    )
+    {
+        if ($modules->delete($record->name)) {
+            Notification::make()
+                ->success()
+                ->title($record->name)
+                ->body('Successfully deleted module')
+                ->send();
+
+            return redirect(ModuleResource::getUrl());
+        }
+
+        Notification::make()
+            ->success()
+            ->title($record->name)
+            ->body('Failed to delete module')
+            ->send();
+    }
+
+    public function bulkDeleteModules(
+        ModuleRepository $modules,
+        Collection $records
+    )
+    {
+        foreach ($records as $record) {
+            if ($modules->delete($record->name)) {
+                Notification::make()
+                    ->success()
+                    ->title($record->name)
+                    ->body('Successfully deleted module')
+                    ->send();
+            } else {
+                Notification::make()
+                    ->success()
+                    ->title($record->name)
+                    ->body('Failed to delete module')
+                    ->send();
+            }
+        }
+
+        return redirect(ModuleResource::getUrl());
     }
 
     protected function getActions(): array

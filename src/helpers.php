@@ -3,6 +3,17 @@
 use Nox\Framework\Support\FormBuilder;
 use Nox\Framework\Transformer\Transformer;
 
+if (!function_exists('settings')) {
+    function settings(?string $key = null, $default = null)
+    {
+        if ($key === null) {
+            return app('settings');
+        }
+
+        return settings()->get($key, $default);
+    }
+}
+
 if (!function_exists('transformer')) {
     function transformer(?string $key = null, $value = null, array $parameters = [])
     {

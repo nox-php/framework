@@ -77,6 +77,8 @@ class ModuleRepository implements ModuleRepositoryContract
 
         $module->setEnabled(true);
 
+        settings()->put('nox.modules.' . $module->getName(), true);
+
         $this->updateCache();
 
         return true;
@@ -90,6 +92,8 @@ class ModuleRepository implements ModuleRepositoryContract
 
         $module->setEnabled(false);
 
+        settings()->put('nox.modules.' . $module->getName(), false);
+
         $this->updateCache();
 
         return true;
@@ -102,7 +106,7 @@ class ModuleRepository implements ModuleRepositoryContract
         }
     }
 
-    public function install(string $path, bool $migrate = true): bool
+    public function install(string $path): bool
     {
         if (!$name = $this->installer->install($path)) {
             return false;
@@ -115,7 +119,26 @@ class ModuleRepository implements ModuleRepositoryContract
         }
 
         return $this->bootModule($module) &&
-            $this->installer->publish($module->getProviders(), $migrate);
+            $this->installer->publish($module->getProviders());
+    }
+
+    public function delete(string|Module $module): bool
+    {
+        if (!$module = $this->getModule($module)) {
+            return false;
+        }
+
+        $path = $module->getPath();
+
+        if (File::exists($path) && !File::deleteDirectory($path)) {
+            return false;
+        }
+
+        settings()->forget('nox.modules.' . $module->getName());
+
+        $this->clear();
+
+        return true;
     }
 
     protected function bootModule(Module $module): bool
@@ -126,6 +149,15 @@ class ModuleRepository implements ModuleRepositoryContract
 
             return true;
         }, false);
+    }
+
+    public function publish(string|Module $module, bool $migrate = true): bool
+    {
+        if (!$module = $this->getModule($module)) {
+            return false;
+        }
+
+        return $this->installer->publish($module->getProviders(), $migrate);
     }
 
     protected function loadFiles(array $files): void
@@ -177,6 +209,10 @@ class ModuleRepository implements ModuleRepositoryContract
             if ($module = $this->loader->fromPath($manifest)) {
                 $this->modules[$module->getName()] = $module;
             }
+        }
+
+        foreach (settings('nox.modules', []) as $name => $enabled) {
+            $this->find($name)?->setEnabled($enabled);
         }
 
         $this->updateCache();

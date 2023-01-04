@@ -59,11 +59,13 @@ class ViewModule extends ViewRecord
         return [
             Action::make('enable-module')
                 ->label('Enable')
+                ->requiresConfirmation()
                 ->action('enableModule')
                 ->hidden(fn(): bool => $this->record->enabled),
             Action::make('disable-module')
                 ->label('Disable')
                 ->action('disableModule')
+                ->requiresConfirmation()
                 ->color('danger')
                 ->hidden(fn(): bool => !$this->record->enabled)
         ];
