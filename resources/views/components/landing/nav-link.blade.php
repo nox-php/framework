@@ -3,7 +3,7 @@
 ])
 
 @php
-    $classes = 'font-medium text-sm text-white transition-colors hover:text-primary-600 dark:hover:text-primary-500';
+    $classes = 'font-medium text-white transition-colors hover:text-primary-600 dark:hover:text-primary-500';
 @endphp
 
 <li>

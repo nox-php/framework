@@ -1,6 +1,10 @@
-@php use Filament\Facades\Filament;use Illuminate\Support\Facades\Route; @endphp
+@php
+    use Filament\Facades\Filament;
+    use Illuminate\Support\Facades\Route;
+@endphp
+
 <x-filament::layouts.base :title="$title">
-    <div class="h-screen w-full flex items-center justify-between">
+    <div class="h-screen w-full flex flex-col items-center justify-between">
         <div class="flex items-center justify-end">
             <ul class="flex items-center gap-4">
                 @guest
@@ -18,6 +22,8 @@
 
                     @if(Route::has('filament.auth.logout'))
                         <form method="POST" action="{{ route('filament.auth.logout') }}">
+                            @csrf
+
                             <x-nox::landing.nav-link type="submit">
                                 Logout
                             </x-nox::landing.nav-link>
