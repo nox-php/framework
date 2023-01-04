@@ -5,8 +5,8 @@
 
 <x-filament::layouts.base :title="$title">
     <div class="h-screen w-full flex flex-col items-center justify-between">
-        <div class="flex items-center justify-end">
-            <ul class="flex items-center gap-4">
+        <div class="w-full py-4 px-6 flex items-center justify-center sm:justify-end">
+            <ul class="flex items-center flex-wrap gap-4">
                 @guest
                     @if(Route::has('auth.discord.redirect'))
                         <x-nox::landing.nav-link :to="route('auth.discord.redirect')">
@@ -39,8 +39,8 @@
             </h1>
         </div>
 
-        <div class="flex items-center justify-end">
-            <ul class="flex items-center gap-4">
+        <div class="w-full py-4 px-6 flex items-center justify-center sm:justify-end">
+            <ul class="flex items-center flex-wrap gap-4">
                 <x-nox::landing.nav-link to="https://github.com/nox-php/framework">
                     Documentation
                 </x-nox::landing.nav-link>
