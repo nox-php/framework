@@ -20,8 +20,7 @@ class ModuleRepository implements ModuleRepositoryContract
     public function __construct(
         protected ModuleLoader $loader,
         protected ModuleInstaller $installer
-    )
-    {
+    ) {
         $this->directory = base_path('/modules');
     }
 
@@ -31,7 +30,7 @@ class ModuleRepository implements ModuleRepositoryContract
             return $this->modules;
         }
 
-        if (!$this->loadCache()) {
+        if (! $this->loadCache()) {
             $this->load();
         }
 
@@ -41,14 +40,14 @@ class ModuleRepository implements ModuleRepositoryContract
     public function enabled(): array
     {
         return collect($this->all())
-            ->filter(static fn(Module $module): bool => $module->isEnabled())
+            ->filter(static fn (Module $module): bool => $module->isEnabled())
             ->all();
     }
 
     public function disabled(): array
     {
         return collect($this->all())
-            ->filter(static fn(Module $module): bool => $module->isDisabled())
+            ->filter(static fn (Module $module): bool => $module->isDisabled())
             ->all();
     }
 
@@ -68,17 +67,17 @@ class ModuleRepository implements ModuleRepositoryContract
 
     public function enable(string|Module $module): ModuleStatus
     {
-        if (!$module = $this->getModule($module)) {
+        if (! $module = $this->getModule($module)) {
             return ModuleStatus::NotFound;
         }
 
-        if (!$this->bootModule($module)) {
+        if (! $this->bootModule($module)) {
             return ModuleStatus::BootFailed;
         }
 
         $module->setEnabled(true);
 
-        settings()->set('nox.modules.' . $module->getName(), true);
+        settings()->set('nox.modules.'.$module->getName(), true);
 
         $this->updateCache();
 
@@ -87,13 +86,13 @@ class ModuleRepository implements ModuleRepositoryContract
 
     public function disable(string|Module $module): ModuleStatus
     {
-        if (!$module = $this->getModule($module)) {
+        if (! $module = $this->getModule($module)) {
             return ModuleStatus::NotFound;
         }
 
         $module->setEnabled(false);
 
-        settings()->set('nox.modules.' . $module->getName(), false);
+        settings()->set('nox.modules.'.$module->getName(), false);
 
         $this->updateCache();
 
@@ -109,21 +108,21 @@ class ModuleRepository implements ModuleRepositoryContract
 
     public function install(string $path, ?string &$name = null): ModuleStatus
     {
-        if (!$name = $this->installer->install($path, $status)) {
+        if (! $name = $this->installer->install($path, $status)) {
             return $status;
         }
 
         $this->clear();
 
-        if (!$module = $this->find($name)) {
+        if (! $module = $this->find($name)) {
             return ModuleStatus::NotFound;
         }
 
-        if (!$this->bootModule($module)) {
+        if (! $this->bootModule($module)) {
             return ModuleStatus::BootFailed;
         }
 
-        if (!$this->installer->publish($module->getProviders())) {
+        if (! $this->installer->publish($module->getProviders())) {
             return ModuleStatus::PublishFailed;
         }
 
@@ -132,17 +131,17 @@ class ModuleRepository implements ModuleRepositoryContract
 
     public function delete(string|Module $module): ModuleStatus
     {
-        if (!$module = $this->getModule($module)) {
+        if (! $module = $this->getModule($module)) {
             return ModuleStatus::NotFound;
         }
 
         $path = $module->getPath();
 
-        if (File::exists($path) && !File::deleteDirectory($path)) {
+        if (File::exists($path) && ! File::deleteDirectory($path)) {
             return ModuleStatus::DeleteFailed;
         }
 
-        settings()->forget('nox.modules.' . $module->getName());
+        settings()->forget('nox.modules.'.$module->getName());
 
         $this->clear();
 
@@ -161,7 +160,7 @@ class ModuleRepository implements ModuleRepositoryContract
 
     public function publish(string|Module $module, bool $migrate = true): ModuleStatus
     {
-        if (!$module = $this->getModule($module)) {
+        if (! $module = $this->getModule($module)) {
             return ModuleStatus::NotFound;
         }
 
@@ -190,13 +189,13 @@ class ModuleRepository implements ModuleRepositoryContract
 
     protected function loadCache(): bool
     {
-        if (!$this->isCacheEnabled()) {
+        if (! $this->isCacheEnabled()) {
             return false;
         }
 
         $key = $this->getCacheKey();
 
-        if ((!$cache = Cache::get($key)) || !is_array($cache)) {
+        if ((! $cache = Cache::get($key)) || ! is_array($cache)) {
             return false;
         }
 
@@ -232,7 +231,7 @@ class ModuleRepository implements ModuleRepositoryContract
 
     protected function isCacheEnabled(): bool
     {
-        return (bool)config('nox.modules.cache.enabled');
+        return (bool) config('nox.modules.cache.enabled');
     }
 
     protected function getCacheKey(): string
@@ -249,7 +248,7 @@ class ModuleRepository implements ModuleRepositoryContract
 
     protected function clearCache(): void
     {
-        if (!$this->isCacheEnabled()) {
+        if (! $this->isCacheEnabled()) {
             return;
         }
 
@@ -260,7 +259,7 @@ class ModuleRepository implements ModuleRepositoryContract
 
     protected function updateCache(): void
     {
-        if (!$this->isCacheEnabled()) {
+        if (! $this->isCacheEnabled()) {
             return;
         }
 

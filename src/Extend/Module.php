@@ -17,8 +17,7 @@ class Module implements Arrayable
         protected array $providers,
         protected int $priority,
         protected bool $enabled
-    )
-    {
+    ) {
     }
 
     public function getName(): string
@@ -42,7 +41,7 @@ class Module implements Arrayable
             return $this->path;
         }
 
-        return $this->path . '/' . ltrim($path, '/');
+        return $this->path.'/'.ltrim($path, '/');
     }
 
     public function getFiles(): array
@@ -72,7 +71,7 @@ class Module implements Arrayable
 
     public function isDisabled(): bool
     {
-        return !$this->enabled;
+        return ! $this->enabled;
     }
 
     public function toArray(): array
@@ -85,7 +84,7 @@ class Module implements Arrayable
             'files' => $this->files,
             'providers' => $this->providers,
             'priority' => $this->priority,
-            'enabled' => $this->enabled
+            'enabled' => $this->enabled,
         ];
     }
 }

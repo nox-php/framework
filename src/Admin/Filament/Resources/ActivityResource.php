@@ -54,7 +54,7 @@ class ActivityResource extends Resource
                         $url = null;
                         if ($resource::hasPage('view')) {
                             $url = $resource::getUrl('view', ['record' => $state]);
-                        } else if ($resource::hasPage('edit')) {
+                        } elseif ($resource::hasPage('edit')) {
                             $url = $resource::getUrl('edit', ['record' => $state]);
                         }
 
@@ -70,14 +70,14 @@ class ActivityResource extends Resource
                         'default' => 2,
                         'sm' => 1,
                     ])
-                    ->hidden(static fn($record): bool => $record->subject_id === null),
+                    ->hidden(static fn ($record): bool => $record->subject_id === null),
                 Forms\Components\TextInput::make('subject_id')
                     ->label('Subject id')
                     ->columnSpan([
                         'default' => 2,
                         'sm' => 1,
                     ])
-                    ->hidden(static fn($record): bool => $record->subject_id === null),
+                    ->hidden(static fn ($record): bool => $record->subject_id === null),
                 Forms\Components\Textarea::make('description')
                     ->label('Description')
                     ->columnSpan(2),
@@ -107,7 +107,7 @@ class ActivityResource extends Resource
                             $record->properties['old'] ?? []
                         );
                     })
-                    ->hidden(static fn($record): bool => $record->subject_id === null),
+                    ->hidden(static fn ($record): bool => $record->subject_id === null),
                 Forms\Components\KeyValue::make('properties_attributes')
                     ->label('After')
                     ->helperText('New model attributes')
@@ -124,7 +124,7 @@ class ActivityResource extends Resource
                             $record->properties['attributes'] ?? []
                         );
                     })
-                    ->hidden(static fn($record): bool => $record->subject_id === null)
+                    ->hidden(static fn ($record): bool => $record->subject_id === null),
             ]);
     }
 
@@ -145,7 +145,7 @@ class ActivityResource extends Resource
                             : $livewire instanceof ActivitiesRelationManager;
                     })
                     ->getStateUsing(function (Activity $record) {
-                        if (!$record->subject || !($record->subject instanceof IsActivitySubject)) {
+                        if (! $record->subject || ! ($record->subject instanceof IsActivitySubject)) {
                             return new HtmlString('&mdash;');
                         }
 
@@ -154,17 +154,17 @@ class ActivityResource extends Resource
                         return $subject->getActivitySubjectDescription($record);
                     })
                     ->url(function (Activity $record) {
-                        if (!$record->subject || !$record->subject instanceof IsActivitySubject) {
+                        if (! $record->subject || ! $record->subject instanceof IsActivitySubject) {
                             return;
                         }
 
                         $resource = Filament::getModelResource($record->subject::class);
 
-                        if (!$resource) {
+                        if (! $resource) {
                             return;
                         }
 
-                        if (!$resource::hasPage('edit')) {
+                        if (! $resource::hasPage('edit')) {
                             return;
                         }
 

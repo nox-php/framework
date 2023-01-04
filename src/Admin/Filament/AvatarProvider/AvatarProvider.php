@@ -9,7 +9,7 @@ class AvatarProvider extends UiAvatarsProvider
 {
     public function get(Model $user): string
     {
-        if (!empty($user->discord_avatar)) {
+        if (! empty($user->discord_avatar)) {
             return $user->discord_avatar;
         }
 

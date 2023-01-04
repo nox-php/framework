@@ -18,7 +18,7 @@ enum ModuleStatus: string
 
     case InstallSuccess = 'nox::module.installed.success.body';
 
-    case InstallFileNotFound = 'nox::module.installed.failed.file_not_found';
+    case InstallFilesNotFound = 'nox::module.installed.failed.files_not_found';
 
     case InstallManifestNotFound = 'nox::module.installed.failed.manifest_not_found';
 

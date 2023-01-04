@@ -4,157 +4,157 @@ return [
     'ar' => [
         'name' => 'Arabic',
         'native' => 'العربية',
-        'enabled' => false
+        'enabled' => false,
     ],
     'en' => [
         'name' => 'English',
         'native' => 'English',
-        'enabled' => true
+        'enabled' => true,
     ],
     'ace' => [
         'name' => 'Achinese',
         'native' => 'Aceh',
-        'enabled' => false
+        'enabled' => false,
     ],
     'af' => [
         'name' => 'Afrikaans',
         'native' => 'Afrikaans',
-        'enabled' => false
+        'enabled' => false,
     ],
     'agq' => [
         'name' => 'Aghem',
         'native' => 'Aghem',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ak' => [
         'name' => 'Akan',
         'native' => 'Akan',
-        'enabled' => false
+        'enabled' => false,
     ],
     'an' => [
         'name' => 'Aragonese',
         'native' => 'aragonés',
-        'enabled' => false
+        'enabled' => false,
     ],
     'cch' => [
         'name' => 'Atsam',
         'native' => 'Atsam',
-        'enabled' => false
+        'enabled' => false,
     ],
     'gn' => [
         'name' => 'Guaraní',
         'native' => 'Avañe’ẽ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ae' => [
         'name' => 'Avestan',
         'native' => 'avesta',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ay' => [
         'name' => 'Aymara',
         'native' => 'aymar aru',
-        'enabled' => false
+        'enabled' => false,
     ],
     'az' => [
         'name' => 'Azerbaijani (Latin)',
         'native' => 'azərbaycanca',
-        'enabled' => false
+        'enabled' => false,
     ],
     'id' => [
         'name' => 'Indonesian',
         'native' => 'Bahasa Indonesia',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ms' => [
         'name' => 'Malay',
         'native' => 'Bahasa Melayu',
-        'enabled' => false
+        'enabled' => false,
     ],
     'bm' => [
         'name' => 'Bambara',
         'native' => 'bamanakan',
-        'enabled' => false
+        'enabled' => false,
     ],
     'jv' => [
         'name' => 'Javanese (Latin)',
         'native' => 'Basa Jawa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'su' => [
         'name' => 'Sundanese',
         'native' => 'Basa Sunda',
-        'enabled' => false
+        'enabled' => false,
     ],
     'bh' => [
         'name' => 'Bihari',
         'native' => 'Bihari',
-        'enabled' => false
+        'enabled' => false,
     ],
     'bi' => [
         'name' => 'Bislama',
         'native' => 'Bislama',
-        'enabled' => false
+        'enabled' => false,
     ],
     'nb' => [
         'name' => 'Norwegian Bokmål',
         'native' => 'Bokmål',
-        'enabled' => false
+        'enabled' => false,
     ],
     'bs' => [
         'name' => 'Bosnian',
         'native' => 'bosanski',
-        'enabled' => false
+        'enabled' => false,
     ],
     'br' => [
         'name' => 'Breton',
         'native' => 'brezhoneg',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ca' => [
         'name' => 'Catalan',
         'native' => 'català',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ch' => [
         'name' => 'Chamorro',
         'native' => 'Chamoru',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ny' => [
         'name' => 'Chewa',
         'native' => 'chiCheŵa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kde' => [
         'name' => 'Makonde',
         'native' => 'Chimakonde',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sn' => [
         'name' => 'Shona',
         'native' => 'chiShona',
-        'enabled' => false
+        'enabled' => false,
     ],
     'co' => [
         'name' => 'Corsican',
         'native' => 'corsu',
-        'enabled' => false
+        'enabled' => false,
     ],
     'cy' => [
         'name' => 'Welsh',
         'native' => 'Cymraeg',
-        'enabled' => false
+        'enabled' => false,
     ],
     'da' => [
         'name' => 'Danish',
         'native' => 'dansk',
-        'enabled' => false
+        'enabled' => false,
     ],
     'se' => [
         'name' => 'Northern Sami',
         'native' => 'davvisámegiella',
-        'enabled' => false
+        'enabled' => false,
     ],
     'de' => [
         'name' => 'German',
@@ -163,37 +163,37 @@ return [
     'luo' => [
         'name' => 'Luo',
         'native' => 'Dholuo',
-        'enabled' => false
+        'enabled' => false,
     ],
     'nv' => [
         'name' => 'Navajo',
         'native' => 'Diné bizaad',
-        'enabled' => false
+        'enabled' => false,
     ],
     'dua' => [
         'name' => 'Duala',
         'native' => 'duálá',
-        'enabled' => false
+        'enabled' => false,
     ],
     'et' => [
         'name' => 'Estonian',
         'native' => 'eesti',
-        'enabled' => false
+        'enabled' => false,
     ],
     'na' => [
         'name' => 'Nauru',
         'native' => 'Ekakairũ Naoero',
-        'enabled' => false
+        'enabled' => false,
     ],
     'guz' => [
         'name' => 'Ekegusii',
         'native' => 'Ekegusii',
-        'enabled' => false
+        'enabled' => false,
     ],
     'en-AU' => [
         'name' => 'Australian English',
         'native' => 'Australian English',
-        'enabled' => false
+        'enabled' => false,
     ],
     'en-GB' => [
         'name' => 'British English',
@@ -202,1251 +202,1251 @@ return [
     'en-CA' => [
         'name' => 'Canadian English',
         'native' => 'Canadian English',
-        'enabled' => false
+        'enabled' => false,
     ],
     'en-US' => [
         'name' => 'U.S. English',
         'native' => 'U.S. English',
-        'enabled' => false
+        'enabled' => false,
     ],
     'es' => [
         'name' => 'Spanish',
         'native' => 'español',
-        'enabled' => false
+        'enabled' => false,
     ],
     'eo' => [
         'name' => 'Esperanto',
         'native' => 'esperanto',
-        'enabled' => false
+        'enabled' => false,
     ],
     'eu' => [
         'name' => 'Basque',
         'native' => 'euskara',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ewo' => [
         'name' => 'Ewondo',
         'native' => 'ewondo',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ee' => [
         'name' => 'Ewe',
         'native' => 'eʋegbe',
-        'enabled' => false
+        'enabled' => false,
     ],
     'fil' => [
         'name' => 'Filipino',
         'native' => 'Filipino',
-        'enabled' => false
+        'enabled' => false,
     ],
     'fr' => [
         'name' => 'French',
         'native' => 'français',
-        'enabled' => false
+        'enabled' => false,
     ],
     'fr-CA' => [
         'name' => 'Canadian French',
         'native' => 'français canadien',
-        'enabled' => false
+        'enabled' => false,
     ],
     'fy' => [
         'name' => 'Western Frisian',
         'native' => 'frysk',
-        'enabled' => false
+        'enabled' => false,
     ],
     'fur' => [
         'name' => 'Friulian',
         'native' => 'furlan',
-        'enabled' => false
+        'enabled' => false,
     ],
     'fo' => [
         'name' => 'Faroese',
         'native' => 'føroyskt',
-        'enabled' => false
+        'enabled' => false,
     ],
     'gaa' => [
         'name' => 'Ga',
         'native' => 'Ga',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ga' => [
         'name' => 'Irish',
         'native' => 'Gaeilge',
-        'enabled' => false
+        'enabled' => false,
     ],
     'gv' => [
         'name' => 'Manx',
         'native' => 'Gaelg',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sm' => [
         'name' => 'Samoan',
         'native' => 'Gagana fa’a Sāmoa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'gl' => [
         'name' => 'Galician',
         'native' => 'galego',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ki' => [
         'name' => 'Kikuyu',
         'native' => 'Gikuyu',
-        'enabled' => false
+        'enabled' => false,
     ],
     'gd' => [
         'name' => 'Scottish Gaelic',
         'native' => 'Gàidhlig',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ha' => [
         'name' => 'Hausa',
         'native' => 'Hausa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'bez' => [
         'name' => 'Bena',
         'native' => 'Hibena',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ho' => [
         'name' => 'Hiri Motu',
         'native' => 'Hiri Motu',
-        'enabled' => false
+        'enabled' => false,
     ],
     'hr' => [
         'name' => 'Croatian',
         'native' => 'hrvatski',
-        'enabled' => false
+        'enabled' => false,
     ],
     'bem' => [
         'name' => 'Bemba',
         'native' => 'Ichibemba',
-        'enabled' => false
+        'enabled' => false,
     ],
     'io' => [
         'name' => 'Ido',
         'native' => 'Ido',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ig' => [
         'name' => 'Igbo',
         'native' => 'Igbo',
-        'enabled' => false
+        'enabled' => false,
     ],
     'rn' => [
         'name' => 'Rundi',
         'native' => 'Ikirundi',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ia' => [
         'name' => 'Interlingua',
         'native' => 'interlingua',
-        'enabled' => false
+        'enabled' => false,
     ],
     'iu-Latn' => [
         'name' => 'Inuktitut (Latin)',
         'native' => 'Inuktitut',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sbp' => [
         'name' => 'Sileibi',
         'native' => 'Ishisangu',
-        'enabled' => false
+        'enabled' => false,
     ],
     'nd' => [
         'name' => 'North Ndebele',
         'native' => 'isiNdebele',
-        'enabled' => false
+        'enabled' => false,
     ],
     'nr' => [
         'name' => 'South Ndebele',
         'native' => 'isiNdebele',
-        'enabled' => false
+        'enabled' => false,
     ],
     'xh' => [
         'name' => 'Xhosa',
         'native' => 'isiXhosa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'zu' => [
         'name' => 'Zulu',
         'native' => 'isiZulu',
-        'enabled' => false
+        'enabled' => false,
     ],
     'it' => [
         'name' => 'Italian',
         'native' => 'italiano',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ik' => [
         'name' => 'Inupiaq',
         'native' => 'Iñupiaq',
-        'enabled' => false
+        'enabled' => false,
     ],
     'dyo' => [
         'name' => 'Jola-Fonyi',
         'native' => 'joola',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kea' => [
         'name' => 'Kabuverdianu',
         'native' => 'kabuverdianu',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kaj' => [
         'name' => 'Jju',
         'native' => 'Kaje',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mh' => [
         'name' => 'Marshallese',
         'native' => 'Kajin M̧ajeļ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kl' => [
         'name' => 'Kalaallisut',
         'native' => 'kalaallisut',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kln' => [
         'name' => 'Kalenjin',
         'native' => 'Kalenjin',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kr' => [
         'name' => 'Kanuri',
         'native' => 'Kanuri',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kcg' => [
         'name' => 'Tyap',
         'native' => 'Katab',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kw' => [
         'name' => 'Cornish',
         'native' => 'kernewek',
-        'enabled' => false
+        'enabled' => false,
     ],
     'naq' => [
         'name' => 'Nama',
         'native' => 'Khoekhoegowab',
-        'enabled' => false
+        'enabled' => false,
     ],
     'rof' => [
         'name' => 'Rombo',
         'native' => 'Kihorombo',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kam' => [
         'name' => 'Kamba',
         'native' => 'Kikamba',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kg' => [
         'name' => 'Kongo',
         'native' => 'Kikongo',
-        'enabled' => false
+        'enabled' => false,
     ],
     'jmc' => [
         'name' => 'Machame',
         'native' => 'Kimachame',
-        'enabled' => false
+        'enabled' => false,
     ],
     'rw' => [
         'name' => 'Kinyarwanda',
         'native' => 'Kinyarwanda',
-        'enabled' => false
+        'enabled' => false,
     ],
     'asa' => [
         'name' => 'Kipare',
         'native' => 'Kipare',
-        'enabled' => false
+        'enabled' => false,
     ],
     'rwk' => [
         'name' => 'Rwa',
         'native' => 'Kiruwa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'saq' => [
         'name' => 'Samburu',
         'native' => 'Kisampur',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ksb' => [
         'name' => 'Shambala',
         'native' => 'Kishambaa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'swc' => [
         'name' => 'Congo Swahili',
         'native' => 'Kiswahili ya Kongo',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sw' => [
         'name' => 'Swahili',
         'native' => 'Kiswahili',
-        'enabled' => false
+        'enabled' => false,
     ],
     'dav' => [
         'name' => 'Dawida',
         'native' => 'Kitaita',
-        'enabled' => false
+        'enabled' => false,
     ],
     'teo' => [
         'name' => 'Teso',
         'native' => 'Kiteso',
-        'enabled' => false
+        'enabled' => false,
     ],
     'khq' => [
         'name' => 'Koyra Chiini',
         'native' => 'Koyra ciini',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ses' => [
         'name' => 'Songhay',
         'native' => 'Koyraboro senni',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mfe' => [
         'name' => 'Morisyen',
         'native' => 'kreol morisien',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ht' => [
         'name' => 'Haitian',
         'native' => 'Kreyòl ayisyen',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kj' => [
         'name' => 'Kuanyama',
         'native' => 'Kwanyama',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ksh' => [
         'name' => 'Kölsch',
         'native' => 'Kölsch',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ebu' => [
         'name' => 'Kiembu',
         'native' => 'Kĩembu',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mer' => [
         'name' => 'Kimîîru',
         'native' => 'Kĩmĩrũ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'lag' => [
         'name' => 'Langi',
         'native' => 'Kɨlaangi',
-        'enabled' => false
+        'enabled' => false,
     ],
     'lah' => [
         'name' => 'Lahnda',
         'native' => 'Lahnda',
-        'enabled' => false
+        'enabled' => false,
     ],
     'la' => [
         'name' => 'Latin',
         'native' => 'latine',
-        'enabled' => false
+        'enabled' => false,
     ],
     'lv' => [
         'name' => 'Latvian',
         'native' => 'latviešu',
-        'enabled' => false
+        'enabled' => false,
     ],
     'to' => [
         'name' => 'Tongan',
         'native' => 'lea fakatonga',
-        'enabled' => false
+        'enabled' => false,
     ],
     'lt' => [
         'name' => 'Lithuanian',
         'native' => 'lietuvių',
-        'enabled' => false
+        'enabled' => false,
     ],
     'li' => [
         'name' => 'Limburgish',
         'native' => 'Limburgs',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ln' => [
         'name' => 'Lingala',
         'native' => 'lingála',
-        'enabled' => false
+        'enabled' => false,
     ],
     'lg' => [
         'name' => 'Ganda',
         'native' => 'Luganda',
-        'enabled' => false
+        'enabled' => false,
     ],
     'luy' => [
         'name' => 'Oluluyia',
         'native' => 'Luluhia',
-        'enabled' => false
+        'enabled' => false,
     ],
     'lb' => [
         'name' => 'Luxembourgish',
         'native' => 'Lëtzebuergesch',
-        'enabled' => false
+        'enabled' => false,
     ],
     'hu' => [
         'name' => 'Hungarian',
         'native' => 'magyar',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mgh' => [
         'name' => 'Makhuwa-Meetto',
         'native' => 'Makua',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mg' => [
         'name' => 'Malagasy',
         'native' => 'Malagasy',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mt' => [
         'name' => 'Maltese',
         'native' => 'Malti',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mtr' => [
         'name' => 'Mewari',
         'native' => 'Mewari',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mua' => [
         'name' => 'Mundang',
         'native' => 'Mundang',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mi' => [
         'name' => 'Māori',
         'native' => 'Māori',
-        'enabled' => false
+        'enabled' => false,
     ],
     'nl' => [
         'name' => 'Dutch',
         'native' => 'Nederlands',
-        'enabled' => false
+        'enabled' => false,
     ],
     'nmg' => [
         'name' => 'Kwasio',
         'native' => 'ngumba',
-        'enabled' => false
+        'enabled' => false,
     ],
     'yav' => [
         'name' => 'Yangben',
         'native' => 'nuasue',
-        'enabled' => false
+        'enabled' => false,
     ],
     'nn' => [
         'name' => 'Norwegian Nynorsk',
         'native' => 'nynorsk',
-        'enabled' => false
+        'enabled' => false,
     ],
     'oc' => [
         'name' => 'Occitan',
         'native' => 'occitan',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ang' => [
         'name' => 'Old English',
         'native' => 'Old English',
-        'enabled' => false
+        'enabled' => false,
     ],
     'xog' => [
         'name' => 'Soga',
         'native' => 'Olusoga',
-        'enabled' => false
+        'enabled' => false,
     ],
     'om' => [
         'name' => 'Oromo',
         'native' => 'Oromoo',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ng' => [
         'name' => 'Ndonga',
         'native' => 'OshiNdonga',
-        'enabled' => false
+        'enabled' => false,
     ],
     'hz' => [
         'name' => 'Herero',
         'native' => 'Otjiherero',
-        'enabled' => false
+        'enabled' => false,
     ],
     'uz-Latn' => [
         'name' => 'Uzbek (Latin)',
         'native' => 'oʼzbekcha',
-        'enabled' => false
+        'enabled' => false,
     ],
     'nds' => [
         'name' => 'Low German',
         'native' => 'Plattdüütsch',
-        'enabled' => false
+        'enabled' => false,
     ],
     'pl' => [
         'name' => 'Polish',
         'native' => 'polski',
-        'enabled' => false
+        'enabled' => false,
     ],
     'pt' => [
         'name' => 'Portuguese',
         'native' => 'português',
-        'enabled' => false
+        'enabled' => false,
     ],
     'pt-BR' => [
         'name' => 'Brazilian Portuguese',
         'native' => 'português do Brasil',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ff' => [
         'name' => 'Fulah',
         'native' => 'Pulaar',
-        'enabled' => false
+        'enabled' => false,
     ],
     'pi' => [
         'name' => 'Pahari-Potwari',
         'native' => 'Pāli',
-        'enabled' => false
+        'enabled' => false,
     ],
     'aa' => [
         'name' => 'Afar',
         'native' => 'Qafar',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ty' => [
         'name' => 'Tahitian',
         'native' => 'Reo Māohi',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ksf' => [
         'name' => 'Bafia',
         'native' => 'rikpa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ro' => [
         'name' => 'Romanian',
         'native' => 'română',
-        'enabled' => false
+        'enabled' => false,
     ],
     'cgg' => [
         'name' => 'Chiga',
         'native' => 'Rukiga',
-        'enabled' => false
+        'enabled' => false,
     ],
     'rm' => [
         'name' => 'Romansh',
         'native' => 'rumantsch',
-        'enabled' => false
+        'enabled' => false,
     ],
     'qu' => [
         'name' => 'Quechua',
         'native' => 'Runa Simi',
-        'enabled' => false
+        'enabled' => false,
     ],
     'nyn' => [
         'name' => 'Nyankole',
         'native' => 'Runyankore',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ssy' => [
         'name' => 'Saho',
         'native' => 'Saho',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sc' => [
         'name' => 'Sardinian',
         'native' => 'sardu',
-        'enabled' => false
+        'enabled' => false,
     ],
     'de-CH' => [
         'name' => 'Swiss High German',
         'native' => 'Schweizer Hochdeutsch',
-        'enabled' => false
+        'enabled' => false,
     ],
     'gsw' => [
         'name' => 'Swiss German',
         'native' => 'Schwiizertüütsch',
-        'enabled' => false
+        'enabled' => false,
     ],
     'trv' => [
         'name' => 'Taroko',
         'native' => 'Seediq',
-        'enabled' => false
+        'enabled' => false,
     ],
     'seh' => [
         'name' => 'Sena',
         'native' => 'sena',
-        'enabled' => false
+        'enabled' => false,
     ],
     'nso' => [
         'name' => 'Northern Sotho',
         'native' => 'Sesotho sa Leboa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'st' => [
         'name' => 'Southern Sotho',
         'native' => 'Sesotho',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tn' => [
         'name' => 'Tswana',
         'native' => 'Setswana',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sq' => [
         'name' => 'Albanian',
         'native' => 'shqip',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sid' => [
         'name' => 'Sidamo',
         'native' => 'Sidaamu Afo',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ss' => [
         'name' => 'Swati',
         'native' => 'Siswati',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sk' => [
         'name' => 'Slovak',
         'native' => 'slovenčina',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sl' => [
         'name' => 'Slovene',
         'native' => 'slovenščina',
-        'enabled' => false
+        'enabled' => false,
     ],
     'so' => [
         'name' => 'Somali',
         'native' => 'Soomaali',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sr-Latn' => [
         'name' => 'Serbian (Latin)',
         'native' => 'Srpski',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sh' => [
         'name' => 'Serbo-Croatian',
         'native' => 'srpskohrvatski',
-        'enabled' => false
+        'enabled' => false,
     ],
     'fi' => [
         'name' => 'Finnish',
         'native' => 'suomi',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sv' => [
         'name' => 'Swedish',
         'native' => 'svenska',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sg' => [
         'name' => 'Sango',
         'native' => 'Sängö',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tl' => [
         'name' => 'Tagalog',
         'native' => 'Tagalog',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tzm-Latn' => [
         'name' => 'Central Atlas Tamazight (Latin)',
         'native' => 'Tamazight',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kab' => [
         'name' => 'Kabyle',
         'native' => 'Taqbaylit',
-        'enabled' => false
+        'enabled' => false,
     ],
     'twq' => [
         'name' => 'Tasawaq',
         'native' => 'Tasawaq senni',
-        'enabled' => false
+        'enabled' => false,
     ],
     'shi' => [
         'name' => 'Tachelhit (Latin)',
         'native' => 'Tashelhit',
-        'enabled' => false
+        'enabled' => false,
     ],
     'nus' => [
         'name' => 'Nuer',
         'native' => 'Thok Nath',
-        'enabled' => false
+        'enabled' => false,
     ],
     'vi' => [
         'name' => 'Vietnamese',
         'native' => 'Tiếng Việt',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tg-Latn' => [
         'name' => 'Tajik (Latin)',
         'native' => 'tojikī',
-        'enabled' => false
+        'enabled' => false,
     ],
     'lu' => [
         'name' => 'Luba-Katanga',
         'native' => 'Tshiluba',
-        'enabled' => false
+        'enabled' => false,
     ],
     've' => [
         'name' => 'Venda',
         'native' => 'Tshivenḓa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tw' => [
         'name' => 'Twi',
         'native' => 'Twi',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tr' => [
         'name' => 'Turkish',
         'native' => 'Türkçe',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ale' => [
         'name' => 'Aleut',
         'native' => 'Unangax tunuu',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ca-valencia' => [
         'name' => 'Valencian',
         'native' => 'valencià',
-        'enabled' => false
+        'enabled' => false,
     ],
     'vai-Latn' => [
         'name' => 'Vai (Latin)',
         'native' => 'Viyamíĩ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'vo' => [
         'name' => 'Volapük',
         'native' => 'Volapük',
-        'enabled' => false
+        'enabled' => false,
     ],
     'fj' => [
         'name' => 'Fijian',
         'native' => 'vosa Vakaviti',
-        'enabled' => false
+        'enabled' => false,
     ],
     'wa' => [
         'name' => 'Walloon',
         'native' => 'Walon',
-        'enabled' => false
+        'enabled' => false,
     ],
     'wae' => [
         'name' => 'Walser',
         'native' => 'Walser',
-        'enabled' => false
+        'enabled' => false,
     ],
     'wen' => [
         'name' => 'Sorbian',
         'native' => 'Wendic',
-        'enabled' => false
+        'enabled' => false,
     ],
     'wo' => [
         'name' => 'Wolof',
         'native' => 'Wolof',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ts' => [
         'name' => 'Tsonga',
         'native' => 'Xitsonga',
-        'enabled' => false
+        'enabled' => false,
     ],
     'dje' => [
         'name' => 'Zarma',
         'native' => 'Zarmaciine',
-        'enabled' => false
+        'enabled' => false,
     ],
     'yo' => [
         'name' => 'Yoruba',
         'native' => 'Èdè Yorùbá',
-        'enabled' => false
+        'enabled' => false,
     ],
     'de-AT' => [
         'name' => 'Austrian German',
         'native' => 'Österreichisches Deutsch',
-        'enabled' => false
+        'enabled' => false,
     ],
     'is' => [
         'name' => 'Icelandic',
         'native' => 'íslenska',
-        'enabled' => false
+        'enabled' => false,
     ],
     'cs' => [
         'name' => 'Czech',
         'native' => 'čeština',
-        'enabled' => false
+        'enabled' => false,
     ],
     'bas' => [
         'name' => 'Basa',
         'native' => 'Ɓàsàa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mas' => [
         'name' => 'Masai',
         'native' => 'ɔl-Maa',
-        'enabled' => false
+        'enabled' => false,
     ],
     'haw' => [
         'name' => 'Hawaiian',
         'native' => 'ʻŌlelo Hawaiʻi',
-        'enabled' => false
+        'enabled' => false,
     ],
     'el' => [
         'name' => 'Greek',
         'native' => 'Ελληνικά',
-        'enabled' => false
+        'enabled' => false,
     ],
     'uz' => [
         'name' => 'Uzbek (Cyrillic)',
         'native' => 'Ўзбек',
-        'enabled' => false
+        'enabled' => false,
     ],
     'az-Cyrl' => [
         'name' => 'Azerbaijani (Cyrillic)',
         'native' => 'Азәрбајҹан',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ab' => [
         'name' => 'Abkhazian',
         'native' => 'Аҧсуа',
-        'enabled' => false
+        'enabled' => false,
     ],
     'os' => [
         'name' => 'Ossetic',
         'native' => 'Ирон',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ky' => [
         'name' => 'Kyrgyz',
         'native' => 'Кыргыз',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sr' => [
         'name' => 'Serbian (Cyrillic)',
         'native' => 'Српски',
-        'enabled' => false
+        'enabled' => false,
     ],
     'av' => [
         'name' => 'Avaric',
         'native' => 'авар мацӀ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ady' => [
         'name' => 'Adyghe',
         'native' => 'адыгэбзэ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ba' => [
         'name' => 'Bashkir',
         'native' => 'башҡорт теле',
-        'enabled' => false
+        'enabled' => false,
     ],
     'be' => [
         'name' => 'Belarusian',
         'native' => 'беларуская',
-        'enabled' => false
+        'enabled' => false,
     ],
     'bg' => [
         'name' => 'Bulgarian',
         'native' => 'български',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kv' => [
         'name' => 'Komi',
         'native' => 'коми кыв',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mk' => [
         'name' => 'Macedonian',
         'native' => 'македонски',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mn' => [
         'name' => 'Mongolian (Cyrillic)',
         'native' => 'монгол',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ce' => [
         'name' => 'Chechen',
         'native' => 'нохчийн мотт',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ru' => [
         'name' => 'Russian',
         'native' => 'русский',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sah' => [
         'name' => 'Yakut',
         'native' => 'саха тыла',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tt' => [
         'name' => 'Tatar',
         'native' => 'татар теле',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tg' => [
         'name' => 'Tajik (Cyrillic)',
         'native' => 'тоҷикӣ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tk' => [
         'name' => 'Turkmen',
         'native' => 'түркменче',
-        'enabled' => false
+        'enabled' => false,
     ],
     'uk' => [
         'name' => 'Ukrainian',
         'native' => 'українська',
-        'enabled' => false
+        'enabled' => false,
     ],
     'cv' => [
         'name' => 'Chuvash',
         'native' => 'чӑваш чӗлхи',
-        'enabled' => false
+        'enabled' => false,
     ],
     'cu' => [
         'name' => 'Church Slavic',
         'native' => 'ѩзыкъ словѣньскъ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kk' => [
         'name' => 'Kazakh',
         'native' => 'қазақ тілі',
-        'enabled' => false
+        'enabled' => false,
     ],
     'hy' => [
         'name' => 'Armenian',
         'native' => 'Հայերեն',
-        'enabled' => false
+        'enabled' => false,
     ],
     'yi' => [
         'name' => 'Yiddish',
         'native' => 'ייִדיש',
-        'enabled' => false
+        'enabled' => false,
     ],
     'he' => [
         'name' => 'Hebrew',
         'native' => 'עברית',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ug' => [
         'name' => 'Uyghur',
         'native' => 'ئۇيغۇرچە',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ur' => [
         'name' => 'Urdu',
         'native' => 'اردو',
-        'enabled' => false
+        'enabled' => false,
     ],
     'uz-Arab' => [
         'name' => 'Uzbek (Arabic)',
         'native' => 'اۉزبېک',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tg-Arab' => [
         'name' => 'Tajik (Arabic)',
         'native' => 'تاجیکی',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sd' => [
         'name' => 'Sindhi',
         'native' => 'سنڌي',
-        'enabled' => false
+        'enabled' => false,
     ],
     'fa' => [
         'name' => 'Persian',
         'native' => 'فارسی',
-        'enabled' => false
+        'enabled' => false,
     ],
     'pa-Arab' => [
         'name' => 'Punjabi (Arabic)',
         'native' => 'پنجاب',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ps' => [
         'name' => 'Pashto',
         'native' => 'پښتو',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ks' => [
         'name' => 'Kashmiri (Arabic)',
         'native' => 'کأشُر',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ku' => [
         'name' => 'Kurdish',
         'native' => 'کوردی',
-        'enabled' => false
+        'enabled' => false,
     ],
     'dv' => [
         'name' => 'Divehi',
         'native' => 'ދިވެހިބަސް',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ks-Deva' => [
         'name' => 'Kashmiri (Devaganari)',
         'native' => 'कॉशुर',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kok' => [
         'name' => 'Konkani',
         'native' => 'कोंकणी',
-        'enabled' => false
+        'enabled' => false,
     ],
     'doi' => [
         'name' => 'Dogri',
         'native' => 'डोगरी',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ne' => [
         'name' => 'Nepali',
         'native' => 'नेपाली',
-        'enabled' => false
+        'enabled' => false,
     ],
     'pra' => [
         'name' => 'Prakrit',
         'native' => 'प्राकृत',
-        'enabled' => false
+        'enabled' => false,
     ],
     'brx' => [
         'name' => 'Bodo',
         'native' => 'बड़ो',
-        'enabled' => false
+        'enabled' => false,
     ],
     'bra' => [
         'name' => 'Braj',
         'native' => 'ब्रज भाषा',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mr' => [
         'name' => 'Marathi',
         'native' => 'मराठी',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mai' => [
         'name' => 'Maithili',
         'native' => 'मैथिली',
-        'enabled' => false
+        'enabled' => false,
     ],
     'raj' => [
         'name' => 'Rajasthani',
         'native' => 'राजस्थानी',
-        'enabled' => false
+        'enabled' => false,
     ],
     'sa' => [
         'name' => 'Sanskrit',
         'native' => 'संस्कृतम्',
-        'enabled' => false
+        'enabled' => false,
     ],
     'hi' => [
         'name' => 'Hindi',
         'native' => 'हिन्दी',
-        'enabled' => false
+        'enabled' => false,
     ],
     'as' => [
         'name' => 'Assamese',
         'native' => 'অসমীয়া',
-        'enabled' => false
+        'enabled' => false,
     ],
     'bn' => [
         'name' => 'Bengali',
         'native' => 'বাংলা',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mni' => [
         'name' => 'Manipuri',
         'native' => 'মৈতৈ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'pa' => [
         'name' => 'Punjabi (Gurmukhi)',
         'native' => 'ਪੰਜਾਬੀ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'gu' => [
         'name' => 'Gujarati',
         'native' => 'ગુજરાતી',
-        'enabled' => false
+        'enabled' => false,
     ],
     'or' => [
         'name' => 'Oriya',
         'native' => 'ଓଡ଼ିଆ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ta' => [
         'name' => 'Tamil',
         'native' => 'தமிழ்',
-        'enabled' => false
+        'enabled' => false,
     ],
     'te' => [
         'name' => 'Telugu',
         'native' => 'తెలుగు',
-        'enabled' => false
+        'enabled' => false,
     ],
     'kn' => [
         'name' => 'Kannada',
         'native' => 'ಕನ್ನಡ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ml' => [
         'name' => 'Malayalam',
         'native' => 'മലയാളം',
-        'enabled' => false
+        'enabled' => false,
     ],
     'si' => [
         'name' => 'Sinhala',
         'native' => 'සිංහල',
-        'enabled' => false
+        'enabled' => false,
     ],
     'th' => [
         'name' => 'Thai',
         'native' => 'ไทย',
-        'enabled' => false
+        'enabled' => false,
     ],
     'lo' => [
         'name' => 'Lao',
         'native' => 'ລາວ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'bo' => [
         'name' => 'Tibetan',
         'native' => 'པོད་སྐད་',
-        'enabled' => false
+        'enabled' => false,
     ],
     'dz' => [
         'name' => 'Dzongkha',
         'native' => 'རྫོང་ཁ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'my' => [
         'name' => 'Burmese',
         'native' => 'မြန်မာဘာသာ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ka' => [
         'name' => 'Georgian',
         'native' => 'ქართული',
-        'enabled' => false
+        'enabled' => false,
     ],
     'byn' => [
         'name' => 'Blin',
         'native' => 'ብሊን',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tig' => [
         'name' => 'Tigre',
         'native' => 'ትግረ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ti' => [
         'name' => 'Tigrinya',
         'native' => 'ትግርኛ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'am' => [
         'name' => 'Amharic',
         'native' => 'አማርኛ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'wal' => [
         'name' => 'Wolaytta',
         'native' => 'ወላይታቱ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'chr' => [
         'name' => 'Cherokee',
         'native' => 'ᏣᎳᎩ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'iu' => [
         'name' => 'Inuktitut (Canadian Aboriginal Syllabics)',
         'native' => 'ᐃᓄᒃᑎᑐᑦ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'oj' => [
         'name' => 'Ojibwa',
         'native' => 'ᐊᓂᔑᓈᐯᒧᐎᓐ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'cr' => [
         'name' => 'Cree',
         'native' => 'ᓀᐦᐃᔭᐍᐏᐣ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'km' => [
         'name' => 'Khmer',
         'native' => 'ភាសាខ្មែរ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'mn-Mong' => [
         'name' => 'Mongolian (Mongolian)',
         'native' => 'ᠮᠣᠨᠭᠭᠣᠯ ᠬᠡᠯᠡ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'shi-Tfng' => [
         'name' => 'Tachelhit (Tifinagh)',
         'native' => 'ⵜⴰⵎⴰⵣⵉⵖⵜ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'tzm' => [
         'name' => 'Central Atlas Tamazight (Tifinagh)',
         'native' => 'ⵜⴰⵎⴰⵣⵉⵖⵜ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'yue' => [
         'name' => 'Yue',
         'native' => '廣州話',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ja' => [
         'name' => 'Japanese',
         'native' => '日本語',
-        'enabled' => false
+        'enabled' => false,
     ],
     'zh' => [
         'name' => 'Chinese (Simplified)',
         'native' => '简体中文',
-        'enabled' => false
+        'enabled' => false,
     ],
     'zh-Hant' => [
         'name' => 'Chinese (Traditional)',
         'native' => '繁體中文',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ii' => [
         'name' => 'Sichuan Yi',
         'native' => 'ꆈꌠꉙ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'vai' => [
         'name' => 'Vai (Vai)',
         'native' => 'ꕙꔤ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'jv-Java' => [
         'name' => 'Javanese (Javanese)',
         'native' => 'ꦧꦱꦗꦮ',
-        'enabled' => false
+        'enabled' => false,
     ],
     'ko' => [
         'name' => 'Korean',
         'native' => '한국어',
-        'enabled' => false
+        'enabled' => false,
     ],
 ];

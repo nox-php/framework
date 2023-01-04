@@ -2,7 +2,6 @@
 
 namespace Nox\Framework\Auth\Models;
 
-use DateTimeInterface;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -99,7 +98,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         return transformer(
             'nox.users.casts',
             [
-                static::getDiscordDiscriminatorColumnName() => 'integer'
+                static::getDiscordDiscriminatorColumnName() => 'integer',
             ]
         );
     }
@@ -153,7 +152,7 @@ class User extends Authenticatable implements FilamentUser, HasName
     public function discordName(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->{static::getUsernameColumnName()} . '#' . $this->discord_discriminator
+            get: fn () => $this->{static::getUsernameColumnName()}.'#'.$this->discord_discriminator
         );
     }
 

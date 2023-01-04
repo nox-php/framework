@@ -14,8 +14,7 @@ class ViewModule extends ViewRecord
 
     public function enableModule(
         ModuleRepository $modules
-    )
-    {
+    ) {
         if ($modules->enable($this->record->name)) {
             Notification::make()
                 ->success()
@@ -35,8 +34,7 @@ class ViewModule extends ViewRecord
 
     public function disableModule(
         ModuleRepository $modules
-    )
-    {
+    ) {
         if ($modules->disable($this->record->name)) {
             Notification::make()
                 ->success()
@@ -61,13 +59,13 @@ class ViewModule extends ViewRecord
                 ->label('Enable')
                 ->requiresConfirmation()
                 ->action('enableModule')
-                ->hidden(fn(): bool => $this->record->enabled),
+                ->hidden(fn (): bool => $this->record->enabled),
             Action::make('disable-module')
                 ->label('Disable')
                 ->action('disableModule')
                 ->requiresConfirmation()
                 ->color('danger')
-                ->hidden(fn(): bool => !$this->record->enabled)
+                ->hidden(fn (): bool => ! $this->record->enabled),
         ];
     }
 }

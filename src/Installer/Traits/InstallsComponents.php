@@ -28,11 +28,11 @@ trait InstallsComponents
                 'app' => app(),
             ]);
 
-            if (!method_exists($provider, 'publishAssets')) {
+            if (! method_exists($provider, 'publishAssets')) {
                 continue;
             }
 
-            $tags = (array)(app()->call([$providerInstance, 'publishAssets']) ?? []);
+            $tags = (array) (app()->call([$providerInstance, 'publishAssets']) ?? []);
 
             foreach ($tags as $tag => $force) {
                 $tag = is_string($tag) ? $tag : $force;
@@ -51,8 +51,7 @@ trait InstallsComponents
         ZipArchive $zip,
         string $name,
         string $path
-    ): bool
-    {
+    ): bool {
         return rescue(function () use ($zip, $name, $path) {
             $directory = $this->createDirectory($name, $path);
 
@@ -64,7 +63,7 @@ trait InstallsComponents
 
     protected function createDirectory(string $name, string $path): string
     {
-        $directory = $path . '/' . $name;
+        $directory = $path.'/'.$name;
 
         File::ensureDirectoryExists($directory);
 
@@ -80,7 +79,7 @@ trait InstallsComponents
 
     protected function findManifestIndex(ZipArchive $zip): ?int
     {
-        if (!($index = $zip->locateName('composer.json', ZipArchive::FL_NODIR))) {
+        if (! ($index = $zip->locateName('composer.json', ZipArchive::FL_NODIR))) {
             return null;
         }
 
@@ -89,17 +88,16 @@ trait InstallsComponents
 
     protected function getArchive(string $path): ?ZipArchive
     {
-        if (!File::exists($path)) {
+        if (! File::exists($path)) {
             return null;
         }
 
         $zip = new ZipArchive();
 
-        if (!$zip->open($path)) {
+        if (! $zip->open($path)) {
             return null;
         }
 
         return $zip;
     }
 }
-

@@ -17,7 +17,6 @@ use Nox\Framework\Admin\Filament\Resources\ActivityResource;
 use Nox\Framework\Admin\Filament\Resources\ModuleResource;
 use Nox\Framework\Admin\Filament\Resources\UserResource;
 use Nox\Framework\Admin\Http\Livewire\LocaleSwitcher;
-use Nox\Framework\Localisation\Http\Middleware\SwitchLocale;
 use Nox\Framework\Nox;
 use Spatie\Health\Checks\Checks\CacheCheck;
 use Spatie\Health\Checks\Checks\DebugModeCheck;
@@ -35,12 +34,12 @@ class AdminServiceProvider extends PluginServiceProvider
     protected array $resources = [
         ActivityResource::class,
         UserResource::class,
-        ModuleResource::class
+        ModuleResource::class,
     ];
 
     protected array $pages = [
         Settings::class,
-        HealthPage::class
+        HealthPage::class,
     ];
 
     public function packageRegistered(): void
@@ -60,18 +59,18 @@ class AdminServiceProvider extends PluginServiceProvider
                 Filament::registerNavigationGroups([
                     'Appearance' => 1,
                     'Extend' => 50,
-                    'System' => 100
+                    'System' => 100,
                 ]);
 
                 Filament::registerRenderHook(
                     'footer.end',
-                    static fn(): View => view(
+                    static fn (): View => view(
                         'nox::filament.versions',
                         [
                             'versions' => [
                                 'nox' => InstalledVersions::getPrettyVersion('nox-php/framework'),
-                                'php' => PHP_VERSION
-                            ]
+                                'php' => PHP_VERSION,
+                            ],
                         ]
                     )
                 );
@@ -93,7 +92,7 @@ class AdminServiceProvider extends PluginServiceProvider
     {
         parent::packageBooted();
 
-        $this->loadRoutesFrom(__DIR__ . '/../../../routes/admin.php');
+        $this->loadRoutesFrom(__DIR__.'/../../../routes/admin.php');
 
         Health::checks([
             DebugModeCheck::new(),
@@ -102,7 +101,7 @@ class AdminServiceProvider extends PluginServiceProvider
             CacheCheck::new(),
             ScheduleCheck::new(),
             QueueCheck::new(),
-            UsedDiskSpaceCheck::new()
+            UsedDiskSpaceCheck::new(),
         ]);
     }
 }

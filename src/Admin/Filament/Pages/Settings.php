@@ -35,20 +35,20 @@ class Settings extends Page
 
     public function mount(): void
     {
-        $databaseConfig = collect(config('database.connections.' . config('database.default'), []))
+        $databaseConfig = collect(config('database.connections.'.config('database.default'), []))
             ->only([
                 'driver',
                 'host',
                 'port',
                 'database',
-                'username'
+                'username',
             ])
-            ->mapWithKeys(static fn($value, $key): array => [
-                'database_' . $key => $value
+            ->mapWithKeys(static fn ($value, $key): array => [
+                'database_'.$key => $value,
             ])
             ->all();
 
-        $mailConfig = collect(config('mail.mailers.' . config('mail.default'), []))
+        $mailConfig = collect(config('mail.mailers.'.config('mail.default'), []))
             ->only([
                 'transport',
                 'host',
@@ -56,10 +56,10 @@ class Settings extends Page
                 'username',
                 'password',
                 'encryption',
-                'path'
+                'path',
             ])
-            ->mapWithKeys(static fn($value, $key): array => [
-                'mail_' . $key => $value
+            ->mapWithKeys(static fn ($value, $key): array => [
+                'mail_'.$key => $value,
             ])
             ->all();
 
@@ -77,7 +77,7 @@ class Settings extends Page
             ...$mailConfig,
             'mail_password_empty' => empty($databaseConfig['mail_password']),
             'mail_from_address' => config('mail.from.address'),
-            'mail_from_name' => config('mail.from.name')
+            'mail_from_name' => config('mail.from.name'),
         ];
 
         $this->form->fill($state);
@@ -88,12 +88,12 @@ class Settings extends Page
         $state = $this->form->getState();
 
         $databaseConfig = collect($state)
-            ->mapWithKeys(static fn($value, $key): array => [
-                Str::replace('database_', '', $key) => $value
+            ->mapWithKeys(static fn ($value, $key): array => [
+                Str::replace('database_', '', $key) => $value,
             ])
             ->all();
 
-        if (!$this->testDatabaseConnection($databaseConfig)) {
+        if (! $this->testDatabaseConnection($databaseConfig)) {
             Notification::make()
                 ->danger()
                 ->title('Failed to update settings')
@@ -169,11 +169,11 @@ class Settings extends Page
 
     protected function testDatabaseConnection(array $state): bool
     {
-        $config = config('database.connections.' . $state['driver'], []);
+        $config = config('database.connections.'.$state['driver'], []);
 
         $config = [
             ...$config,
-            ...$state
+            ...$state,
         ];
 
         config()->set('database.connections.settings_test', $config);
@@ -228,7 +228,7 @@ class Settings extends Page
             Action::make('check-nox-update')
                 ->label('Check for updates')
                 ->button()
-                ->action('checkUpdate')
+                ->action('checkUpdate'),
         ];
     }
 
@@ -250,7 +250,7 @@ class Settings extends Page
                                     TextInput::make('site_url')
                                         ->required()
                                         ->hint('Updating this will sign everyone out')
-                                        ->maxLength(255)
+                                        ->maxLength(255),
                                 ]),
                             Fieldset::make('Debugging')
                                 ->schema([
@@ -260,12 +260,12 @@ class Settings extends Page
                                         ->options([
                                             'production' => 'Production',
                                             'testing' => 'Testing',
-                                            'local' => 'Local'
+                                            'local' => 'Local',
                                         ]),
                                     Toggle::make('site_debug')
                                         ->label('Enable debug mode')
-                                        ->helperText('This should never be enabled in production')
-                                ])
+                                        ->helperText('This should never be enabled in production'),
+                                ]),
                         ]),
                     Tabs\Tab::make('Database')
                         ->schema([
@@ -279,35 +279,35 @@ class Settings extends Page
                                             'mysql' => 'mysql',
                                             'pgsql' => 'pgsql',
                                             'sqlsrv' => 'sqlsrv',
-                                            'sqlite' => 'sqlite'
+                                            'sqlite' => 'sqlite',
                                         ]),
                                     TextInput::make('database_host')
                                         ->label('Host')
-                                        ->required(static fn(Closure $get): bool => $get('database_driver') !== 'sqlite')
-                                        ->hidden(static fn(Closure $get): bool => $get('database_driver') === 'sqlite'),
+                                        ->required(static fn (Closure $get): bool => $get('database_driver') !== 'sqlite')
+                                        ->hidden(static fn (Closure $get): bool => $get('database_driver') === 'sqlite'),
                                     TextInput::make('database_port')
                                         ->label('Port')
                                         ->integer()
                                         ->minValue(1)
-                                        ->required(static fn(Closure $get): bool => $get('database_driver') !== 'sqlite')
-                                        ->hidden(static fn(Closure $get): bool => $get('database_driver') === 'sqlite'),
+                                        ->required(static fn (Closure $get): bool => $get('database_driver') !== 'sqlite')
+                                        ->hidden(static fn (Closure $get): bool => $get('database_driver') === 'sqlite'),
                                     TextInput::make('database_database')
                                         ->label('Database')
                                         ->required(),
                                     TextInput::make('database_username')
                                         ->label('Username')
-                                        ->required(static fn(Closure $get): bool => $get('database_driver') !== 'sqlite')
-                                        ->hidden(static fn(Closure $get): bool => $get('database_driver') === 'sqlite'),
+                                        ->required(static fn (Closure $get): bool => $get('database_driver') !== 'sqlite')
+                                        ->hidden(static fn (Closure $get): bool => $get('database_driver') === 'sqlite'),
                                     Hidden::make('database_password_empty')
                                         ->default(false)
                                         ->reactive(),
                                     TextInput::make('database_password')
                                         ->label('Password')
                                         ->password()
-                                        ->dehydrated(fn(Closure $get, $state) => filled($state) || $get('database_password_empty'))
-                                        ->disabled(static fn(Closure $get) => $get('database_password_empty') === true)
-                                        ->required(static fn(Closure $get): bool => $get('database_driver') !== 'sqlite' && $get('database_password_empty') === false)
-                                        ->hidden(static fn(Closure $get): bool => $get('database_driver') === 'sqlite')
+                                        ->dehydrated(fn (Closure $get, $state) => filled($state) || $get('database_password_empty'))
+                                        ->disabled(static fn (Closure $get) => $get('database_password_empty') === true)
+                                        ->required(static fn (Closure $get): bool => $get('database_driver') !== 'sqlite' && $get('database_password_empty') === false)
+                                        ->hidden(static fn (Closure $get): bool => $get('database_driver') === 'sqlite')
                                         ->suffixAction(static function (Closure $get, Closure $set) {
                                             if ($get('database_password_empty') === true) {
                                                 return \Filament\Forms\Components\Actions\Action::make('empty-database-password')
@@ -323,7 +323,7 @@ class Settings extends Page
                                                     $set('database_password_empty', true);
                                                 });
                                         }),
-                                ])
+                                ]),
                         ]),
                     Tabs\Tab::make('Discord')
                         ->schema([
@@ -334,10 +334,10 @@ class Settings extends Page
                                         ->required(),
                                     TextInput::make('discord_client_secret')
                                         ->label('Client secret')
-                                        ->required(static fn(): bool => config('nox.auth.discord.client_secret') === null)
+                                        ->required(static fn (): bool => config('nox.auth.discord.client_secret') === null)
                                         ->password()
-                                        ->dehydrated(fn($state) => filled($state))
-                                ])
+                                        ->dehydrated(fn ($state) => filled($state)),
+                                ]),
                         ]),
                     Tabs\Tab::make('Mail')
                         ->schema([
@@ -351,33 +351,33 @@ class Settings extends Page
                                                 ->required()
                                                 ->options([
                                                     'smtp' => 'smtp',
-                                                    'sendmail' => 'sendmail'
+                                                    'sendmail' => 'sendmail',
                                                 ]),
                                             TextInput::make('path')
                                                 ->label('Path')
                                                 ->default('/usr/sbin/sendmail -bs -i')
-                                                ->required(static fn(Closure $get): bool => $get('mail_transport') === 'sendmail')
-                                                ->hidden(static fn(Closure $get): bool => $get('mail_transport') !== 'sendmail'),
+                                                ->required(static fn (Closure $get): bool => $get('mail_transport') === 'sendmail')
+                                                ->hidden(static fn (Closure $get): bool => $get('mail_transport') !== 'sendmail'),
                                             TextInput::make('mail_host')
                                                 ->label('Host')
-                                                ->hidden(static fn(Closure $get): bool => $get('mail_transport') === 'sendmail'),
+                                                ->hidden(static fn (Closure $get): bool => $get('mail_transport') === 'sendmail'),
                                             TextInput::make('mail_port')
                                                 ->label('Port')
                                                 ->integer()
                                                 ->minValue(1)
-                                                ->hidden(static fn(Closure $get): bool => $get('mail_transport') === 'sendmail'),
+                                                ->hidden(static fn (Closure $get): bool => $get('mail_transport') === 'sendmail'),
                                             TextInput::make('mail_username')
                                                 ->label('Username')
-                                                ->hidden(static fn(Closure $get): bool => $get('mail_transport') === 'sendmail'),
+                                                ->hidden(static fn (Closure $get): bool => $get('mail_transport') === 'sendmail'),
                                             Hidden::make('mail_password_empty')
                                                 ->default(false)
                                                 ->reactive(),
                                             TextInput::make('mail_password')
                                                 ->label('Password')
                                                 ->password()
-                                                ->dehydrated(fn(Closure $get, $state) => filled($state) || $get('mail_password_empty'))
-                                                ->disabled(static fn(Closure $get) => $get('mail_password_empty') === true)
-                                                ->hidden(static fn(Closure $get): bool => $get('mail_transport') === 'sendmail')
+                                                ->dehydrated(fn (Closure $get, $state) => filled($state) || $get('mail_password_empty'))
+                                                ->disabled(static fn (Closure $get) => $get('mail_password_empty') === true)
+                                                ->hidden(static fn (Closure $get): bool => $get('mail_transport') === 'sendmail')
                                                 ->suffixAction(static function (Closure $get, Closure $set) {
                                                     if ($get('mail_password_empty') === true) {
                                                         return \Filament\Forms\Components\Actions\Action::make('empty-mail-password')
@@ -395,19 +395,19 @@ class Settings extends Page
                                                 }),
                                             TextInput::make('mail_encryption')
                                                 ->label('Encryption')
-                                                ->hidden(static fn(Closure $get): bool => $get('mail_transport') === 'sendmail')
-                                                ->default('tls')
+                                                ->hidden(static fn (Closure $get): bool => $get('mail_transport') === 'sendmail')
+                                                ->default('tls'),
                                         ]),
                                     Fieldset::make('Signature')
                                         ->schema([
                                             TextInput::make('mail_from_address')
                                                 ->label('Sender address'),
                                             TextInput::make('mail_from_name')
-                                                ->label('Sender name')
-                                        ])
-                                ])
-                        ])
-                ])
+                                                ->label('Sender name'),
+                                        ]),
+                                ]),
+                        ]),
+                ]),
         ];
     }
 

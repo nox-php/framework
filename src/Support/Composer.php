@@ -12,7 +12,7 @@ class Composer
 
     public function __construct()
     {
-        putenv('COMPOSER_HOME=' . __DIR__ . '/vendor/bin/composer');
+        putenv('COMPOSER_HOME='.__DIR__.'/vendor/bin/composer');
     }
 
     public function run(string $command, array $extraParameters = []): int

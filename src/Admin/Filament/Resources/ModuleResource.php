@@ -2,7 +2,6 @@
 
 namespace Nox\Framework\Admin\Filament\Resources;
 
-use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -31,11 +30,11 @@ class ModuleResource extends Resource
                     ->label('Name'),
                 Forms\Components\TextInput::make('version')
                     ->label('Version')
-                    ->formatStateUsing(static fn(string $state): string => 'v' . $state),
+                    ->formatStateUsing(static fn (string $state): string => 'v'.$state),
                 Forms\Components\TextInput::make('path')
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('description')
-                    ->columnSpanFull()
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -60,34 +59,34 @@ class ModuleResource extends Resource
                     ->label('Status')
                     ->enum([
                         true => 'Enabled',
-                        false => 'Disabled'
+                        false => 'Disabled',
                     ])
                     ->icons([
                         'heroicon-o-check' => true,
-                        'heroicon-o-x' => false
+                        'heroicon-o-x' => false,
                     ])
                     ->colors([
                         'success' => true,
-                        'danger' => false
-                    ])
+                        'danger' => false,
+                    ]),
             ])
             ->actions([
                 Tables\Actions\Action::make('enable-module')
                     ->label('Enable')
                     ->requiresConfirmation()
                     ->action('enableModule')
-                    ->hidden(static fn(Module $record): bool => $record->enabled),
+                    ->hidden(static fn (Module $record): bool => $record->enabled),
                 Tables\Actions\Action::make('disable-module')
                     ->label('Disable')
                     ->color('danger')
                     ->requiresConfirmation()
                     ->action('disableModule')
-                    ->hidden(static fn(Module $record): bool => !$record->enabled),
+                    ->hidden(static fn (Module $record): bool => ! $record->enabled),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make(),
                     Tables\Actions\DeleteAction::make()
-                        ->action('deleteModule')
-                ])
+                        ->action('deleteModule'),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkAction::make('bulk-enable-modules')
@@ -102,7 +101,7 @@ class ModuleResource extends Resource
                     ->requiresConfirmation()
                     ->action('bulkDisableModules'),
                 Tables\Actions\DeleteBulkAction::make()
-                    ->action('bulkDeleteModules')
+                    ->action('bulkDeleteModules'),
             ]);
     }
 

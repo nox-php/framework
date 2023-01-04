@@ -14,7 +14,7 @@ class Nox
     public static function enabledLocales(): array
     {
         return collect(config('localisation', []))
-            ->filter(static fn(array $locale): bool => $locale['enabled'] ?? false)
+            ->filter(static fn (array $locale): bool => $locale['enabled'] ?? false)
             ->all();
     }
 }

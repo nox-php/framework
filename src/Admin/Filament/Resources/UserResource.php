@@ -35,16 +35,16 @@ class UserResource extends Resource
             $form
                 ->columns([
                     'sm' => 3,
-                    'lg' => null
+                    'lg' => null,
                 ])
                 ->schema(
                     form([
                         Forms\Components\Card::make()
                             ->columns([
-                                'sm' => 2
+                                'sm' => 2,
                             ])
                             ->columnSpan([
-                                'sm' => 2
+                                'sm' => 2,
                             ])
                             ->schema([
                                 Forms\Components\TextInput::make(User::getUsernameColumnName())
@@ -56,7 +56,7 @@ class UserResource extends Resource
                                     ->required()
                                     ->email()
                                     ->maxLength(255)
-                                    ->unique(ignorable: static fn(?User $record): ?User => $record),
+                                    ->unique(ignorable: static fn (?User $record): ?User => $record),
                                 Forms\Components\Hidden::make('is_super_admin'),
                                 Forms\Components\Select::make('roles')
                                     ->label('Roles')
@@ -81,26 +81,26 @@ class UserResource extends Resource
                                         if (
                                             Filament::auth()->id() === $record->getKey() &&
                                             $get('is_super_admin') &&
-                                            !$record->can('*')
+                                            ! $record->can('*')
                                         ) {
                                             BouncerFacade::assign('superadmin')->to($record);
                                             BouncerFacade::refreshFor($record);
                                         }
-                                    })
+                                    }),
                             ]),
                         Forms\Components\Card::make()
                             ->columnSpan(1)
                             ->schema([
                                 Forms\Components\Placeholder::make('discord_name')
                                     ->label('Discord name')
-                                    ->content(static fn(?User $record): string => $record->discord_name),
+                                    ->content(static fn (?User $record): string => $record->discord_name),
                                 Forms\Components\Placeholder::make(User::getCreatedAtColumnName())
                                     ->label('Created at')
-                                    ->content(static fn(?User $record): string => $record?->{User::getCreatedAtColumnName()}?->diffForHumans() ?? '-'),
+                                    ->content(static fn (?User $record): string => $record?->{User::getCreatedAtColumnName()}?->diffForHumans() ?? '-'),
                                 Forms\Components\Placeholder::make(User::getUpdatedAtColumnName())
                                     ->label('Updated at')
-                                    ->content(static fn(?User $record): string => $record?->{User::getUpdatedAtColumnName()}?->diffForHumans() ?? '-'),
-                            ])
+                                    ->content(static fn (?User $record): string => $record?->{User::getUpdatedAtColumnName()}?->diffForHumans() ?? '-'),
+                            ]),
                     ])->build()
                 )
         );
@@ -130,7 +130,7 @@ class UserResource extends Resource
                             ->date(),
                         Tables\Columns\TextColumn::make(User::getUpdatedAtColumnName())
                             ->label('Updated at')
-                            ->date()
+                            ->date(),
                     ]
                 )
             );
@@ -160,7 +160,7 @@ class UserResource extends Resource
         return [
             User::getUsernameColumnName(),
             User::getEmailColumnName(),
-            User::getDiscordDiscriminatorColumnName()
+            User::getDiscordDiscriminatorColumnName(),
         ];
     }
 
@@ -170,7 +170,7 @@ class UserResource extends Resource
             'nox.themes.resource.title',
             $record->discord_name,
             [
-                'user' => $record
+                'user' => $record,
             ]
         );
     }
@@ -181,10 +181,10 @@ class UserResource extends Resource
             'nox.users.resource.search.details',
             [
                 'Email address' => $record->{User::getEmailColumnName()},
-                'Created at' => $record->{User::getCreatedAtColumnName()}?->diffForHumans() ?? '-'
+                'Created at' => $record->{User::getCreatedAtColumnName()}?->diffForHumans() ?? '-',
             ],
             [
-                'user' => $record
+                'user' => $record,
             ]
         );
     }

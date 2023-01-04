@@ -48,7 +48,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
 
     protected function update(Composer $composer, string $currentVersion): void
     {
-        $status = $composer->update('nox-php/framework:' . $this->version);
+        $status = $composer->update('nox-php/framework:'.$this->version);
 
         $log = activity()
             ->by($this->user)
@@ -61,7 +61,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                 Notification::make()
                     ->danger()
                     ->title('Nox has unsuccessfully updated')
-                    ->body('Nox ' . $this->version . ' has failed to install, reverting back to ' . $currentVersion)
+                    ->body('Nox '.$this->version.' has failed to install, reverting back to '.$currentVersion)
                     ->actions([
                         Action::make('update-nox-retry')
                             ->button()
@@ -74,7 +74,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                             ->url(ActivityResource::getUrl('view', ['record' => $log?->id]), true)
                             ->hidden(static function () use ($log) {
                                 return $log === null;
-                            })
+                            }),
                     ])
                     ->toDatabase()
             );
@@ -90,7 +90,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
         Artisan::call('vendor:publish', [
             '--provider' => NoxServiceProvider::class,
             '--tag' => 'assets',
-            '--force' => true
+            '--force' => true,
         ]);
 
         Artisan::call('package:discover');
@@ -106,7 +106,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
             Notification::make()
                 ->success()
                 ->title('Nox has successfully updated')
-                ->body('Nox ' . $this->version . ' has been successfully installed')
+                ->body('Nox '.$this->version.' has been successfully installed')
                 ->actions([
                     Action::make('view-log')
                         ->button()
@@ -115,7 +115,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                         ->url(ActivityResource::getUrl('view', ['record' => $log?->id]), true)
                         ->hidden(static function () use ($log) {
                             return $log === null;
-                        })
+                        }),
                 ])
                 ->toDatabase()
         );
@@ -126,12 +126,12 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
         $log = activity()
             ->by($this->user)
             ->event('nox.update')
-            ->log((string)$e);
+            ->log((string) $e);
 
         Notification::make()
             ->danger()
             ->title('Nox has unsuccessfully updated')
-            ->body('Nox ' . $this->version . ' has failed to install, reverting back to ' . $currentVersion)
+            ->body('Nox '.$this->version.' has failed to install, reverting back to '.$currentVersion)
             ->actions([
                 Action::make('update-nox-retry')
                     ->button()
@@ -144,7 +144,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                     ->url(ActivityResource::getUrl('view', ['record' => $log?->id]), true)
                     ->hidden(static function () use ($log) {
                         return $log === null;
-                    })
+                    }),
             ])
             ->sendToDatabase($this->user);
     }

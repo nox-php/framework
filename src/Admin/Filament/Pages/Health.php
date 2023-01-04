@@ -67,7 +67,7 @@ class Health extends Page
             [
                 Action::make('refresh-health')
                     ->label('Refresh')
-                    ->action('refresh')
+                    ->action('refresh'),
             ]
         );
     }

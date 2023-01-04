@@ -22,27 +22,27 @@ class Module extends Model
             'name' => 'string',
             'description' => 'string',
             'version' => 'string',
-            'enabled' => 'boolean'
+            'enabled' => 'boolean',
         ];
     }
 
     public function getCasts(): array
     {
         return [
-            'enabled' => 'boolean'
+            'enabled' => 'boolean',
         ];
     }
 
     public function getRows(): array
     {
         return collect(Modules::all())
-            ->map(static fn($module): array => [
+            ->map(static fn ($module): array => [
                 'id' => Str::replace('/', '-', $module->getName()),
                 'name' => $module->getName(),
                 'description' => $module->getDescription(),
                 'version' => $module->getVersion(),
                 'path' => $module->getPath(),
-                'enabled' => $module->isEnabled()
+                'enabled' => $module->isEnabled(),
             ])
             ->values()
             ->all();

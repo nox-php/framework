@@ -26,13 +26,13 @@ class NoxServiceProvider extends AggregateServiceProvider
         AuthServiceProvider::class,
         InstallerServiceProvider::class,
         AdminServiceProvider::class,
-        ModuleServiceProvider::class
+        ModuleServiceProvider::class,
     ];
 
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/nox.php', 'nox');
-        $this->mergeConfigFrom(__DIR__ . '/../config/localisation.php', 'localisation');
+        $this->mergeConfigFrom(__DIR__.'/../config/nox.php', 'nox');
+        $this->mergeConfigFrom(__DIR__.'/../config/localisation.php', 'localisation');
 
         $this->addMacros();
 
@@ -41,20 +41,20 @@ class NoxServiceProvider extends AggregateServiceProvider
 
     public function boot(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nox');
-        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'nox');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'nox');
+        $this->loadTranslationsFrom(__DIR__.'/../lang', 'nox');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/nox.php' => config_path('nox.php'),
-                __DIR__ . '/../config/localisation.php' => config_path('localisation.php.php'),
+                __DIR__.'/../config/nox.php' => config_path('nox.php'),
+                __DIR__.'/../config/localisation.php' => config_path('localisation.php.php'),
             ], 'config');
 
             $this->publishes([
-                __DIR__ . '/../dist' => public_path('nox'),
+                __DIR__.'/../dist' => public_path('nox'),
             ], 'assets');
 
-            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         }
 
         $this->setupScheduler();
@@ -64,15 +64,15 @@ class NoxServiceProvider extends AggregateServiceProvider
     {
         $this->app->resolving('files', function () {
             File::macro('search', function (string $path, string $name): array {
-                if (!File::exists($path)) {
+                if (! File::exists($path)) {
                     return [];
                 }
 
                 $name = Str::lower($name);
 
                 return collect(File::allFiles($path))
-                    ->filter(static fn(SplFileInfo $file): bool => Str::lower($file->getFileName()) === $name)
-                    ->map(static fn(SplFileInfo $file): string => $file->getPathname())
+                    ->filter(static fn (SplFileInfo $file): bool => Str::lower($file->getFileName()) === $name)
+                    ->map(static fn (SplFileInfo $file): string => $file->getPathname())
                     ->all();
             });
         });

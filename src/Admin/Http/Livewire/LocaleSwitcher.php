@@ -11,8 +11,8 @@ class LocaleSwitcher extends Component
     {
         return view('nox::livewire.locale-switcher', [
             'locales' => collect(config('localisation', []))
-                ->filter(static fn(array $locale): bool => $locale['enabled'] ?? false)
-                ->all()
+                ->filter(static fn (array $locale): bool => $locale['enabled'] ?? false)
+                ->all(),
         ]);
     }
 

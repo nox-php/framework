@@ -16,30 +16,33 @@ class ModuleInstaller
     public function __construct(
         protected ModuleLoader $loader,
         ?string $path = null
-    )
-    {
+    ) {
         $this->path = $path ?? base_path('/modules');
     }
 
     public function install(string $path, ?ModuleStatus &$status = null): ?string
     {
-        if (!$zip = $this->getArchive($path)) {
-            $status = ModuleStatus::InstallFileNotFound;
+        if (! $zip = $this->getArchive($path)) {
+            $status = ModuleStatus::InstallFilesNotFound;
+
             return null;
         }
 
-        if (!$index = $this->findManifestIndex($zip)) {
+        if (! $index = $this->findManifestIndex($zip)) {
             $status = ModuleStatus::InstallManifestNotFound;
+
             return null;
         }
 
-        if (!$manifest = $this->getManifest($zip, $index)) {
+        if (! $manifest = $this->getManifest($zip, $index)) {
             $status = ModuleStatus::InstallManifestLoadFailed;
+
             return null;
         }
 
-        if (!$this->loader->validate($manifest)) {
+        if (! $this->loader->validate($manifest)) {
             $status = ModuleStatus::InstallInvalidManifest;
+
             return null;
         }
 
@@ -47,11 +50,13 @@ class ModuleInstaller
 
         if (Modules::find($name) !== null) {
             $status = ModuleStatus::InstallAlreadyInstalled;
+
             return null;
         }
 
-        if (!$this->extract($zip, $name, $this->path)) {
+        if (! $this->extract($zip, $name, $this->path)) {
             $status = ModuleStatus::InstallExtractFailed;
+
             return null;
         }
 

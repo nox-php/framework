@@ -11,7 +11,7 @@ class ModuleLoader
     {
         $manifest = [
             ...$this->loadManifest($path),
-            'path' => dirname($path)
+            'path' => dirname($path),
         ];
 
         return $this->fromArray($manifest);
@@ -19,13 +19,13 @@ class ModuleLoader
 
     public function fromArray(array $manifest): ?Module
     {
-        if (!$this->validate($manifest)) {
+        if (! $this->validate($manifest)) {
             return null;
         }
 
         $files = [
             ...$manifest['files'] ?? [],
-            'vendor/autoload.php'
+            'vendor/autoload.php',
         ];
 
         return new Module(
@@ -42,15 +42,15 @@ class ModuleLoader
 
     public function validate(array $manifest): bool
     {
-        return !empty($manifest['name']) &&
-            !empty($manifest['description']) &&
-            !empty($manifest['version']) &&
-            !empty($manifest['path']);
+        return ! empty($manifest['name']) &&
+            ! empty($manifest['description']) &&
+            ! empty($manifest['version']) &&
+            ! empty($manifest['path']);
     }
 
     protected function loadManifest(string $path): array
     {
-        if (!File::exists($path)) {
+        if (! File::exists($path)) {
             return [];
         }
 
