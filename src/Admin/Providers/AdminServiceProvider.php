@@ -7,6 +7,8 @@ use Filament\AvatarProviders\Contracts\AvatarProvider as AvatarProviderContract;
 use Filament\Facades\Filament;
 use Filament\PluginServiceProvider;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Blade;
+use Livewire\Livewire;
 use Nox\Framework\Admin\Filament\AvatarProvider\AvatarProvider;
 use Nox\Framework\Admin\Filament\FilamentManager;
 use Nox\Framework\Admin\Filament\Pages\Health as HealthPage;
@@ -14,6 +16,8 @@ use Nox\Framework\Admin\Filament\Pages\Settings;
 use Nox\Framework\Admin\Filament\Resources\ActivityResource;
 use Nox\Framework\Admin\Filament\Resources\ModuleResource;
 use Nox\Framework\Admin\Filament\Resources\UserResource;
+use Nox\Framework\Admin\Http\Livewire\LanguageSwitcher;
+use Nox\Framework\Localisation\Http\Middleware\SwitchLocale;
 use Spatie\Health\Checks\Checks\CacheCheck;
 use Spatie\Health\Checks\Checks\DebugModeCheck;
 use Spatie\Health\Checks\Checks\EnvironmentCheck;
@@ -70,6 +74,22 @@ class AdminServiceProvider extends PluginServiceProvider
                         ]
                     )
                 );
+
+                Livewire::component('nox::language-switcher', LanguageSwitcher::class);
+                Filament::registerRenderHook(
+                    'global-search.end',
+                    static fn(): string => Blade::render("@livewire('nox::language-swticher')")
+                );
+
+                if (
+                    !in_array(
+                        $key = SwitchLocale::class,
+                        $filamentMiddlewares = config('filament.middleware.base')
+                    )
+                ) {
+                    $filamentMiddlewares[] = $key;
+                    config()->set('filament.middleware.base', $filamentMiddlewares);
+                }
             });
         });
     }

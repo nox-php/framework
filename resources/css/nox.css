@@ -112,6 +112,12 @@ select,
     @apply overflow-hidden;
 }
 
+.filament-dropdown-list-item-label {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .filament-global-search-result a p > span {
     @apply block;
     @apply !ml-0;
