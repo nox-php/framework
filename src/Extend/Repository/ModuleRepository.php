@@ -77,7 +77,7 @@ class ModuleRepository implements ModuleRepositoryContract
 
         $module->setEnabled(true);
 
-        settings()->put('nox.modules.' . $module->getName(), true);
+        settings()->set('nox.modules.' . $module->getName(), true);
 
         $this->updateCache();
 
@@ -92,7 +92,7 @@ class ModuleRepository implements ModuleRepositoryContract
 
         $module->setEnabled(false);
 
-        settings()->put('nox.modules.' . $module->getName(), false);
+        settings()->set('nox.modules.' . $module->getName(), false);
 
         $this->updateCache();
 
