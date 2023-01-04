@@ -269,12 +269,12 @@ class Settings extends Page
                             Fieldset::make(__('nox::admin.pages.settings.form.fieldsets.debugging'))
                                 ->schema([
                                     Select::make('site_environment')
-                                        ->label(__('nox::admin.pages.settings.form.inputs.environment.label'))
+                                        ->label(__('nox::admin.pages.settings.form.inputs.site_environment.label'))
                                         ->required()
                                         ->options([
-                                            'production' => __('nox::admin.pages.settings.form.inputs.environment.options.production'),
-                                            'testing' => __('nox::admin.pages.settings.form.inputs.environment.options.testing'),
-                                            'local' => __('nox::admin.pages.settings.form.inputs.environment.options.local'),
+                                            'production' => __('nox::admin.pages.settings.form.inputs.site_environment.options.production'),
+                                            'testing' => __('nox::admin.pages.settings.form.inputs.site_environment.options.testing'),
+                                            'local' => __('nox::admin.pages.settings.form.inputs.site_environment.options.local'),
                                         ]),
                                     Toggle::make('site_debug')
                                         ->label(__('nox::admin.pages.settings.form.inputs.site_debug.label'))
