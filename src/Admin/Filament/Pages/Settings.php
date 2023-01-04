@@ -360,7 +360,7 @@ class Settings extends Page
                                     Fieldset::make(__('nox::admin.pages.settings.form.fieldsets.credentials'))
                                         ->schema([
                                             Select::make('mail_transport')
-                                                ->label(__('nox::admin.pages.settings.form.inputs.mail_transport'))
+                                                ->label(__('nox::admin.pages.settings.form.inputs.mail_transport.label'))
                                                 ->reactive()
                                                 ->required()
                                                 ->options([

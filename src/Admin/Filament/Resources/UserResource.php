@@ -33,7 +33,7 @@ class UserResource extends Resource
 
     protected static function getNavigationGroup(): ?string
     {
-        return __('nox::admin.resources.system');
+        return __('nox::admin.groups.system');
     }
 
     public static function getModelLabel(): string

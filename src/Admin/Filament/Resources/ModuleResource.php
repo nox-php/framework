@@ -27,7 +27,7 @@ class ModuleResource extends Resource
 
     protected static function getNavigationGroup(): ?string
     {
-        return __('nox::admin.resources.extend');
+        return __('nox::admin.groups.extend');
     }
 
     public static function getModelLabel(): string
