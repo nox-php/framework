@@ -22,8 +22,7 @@ class ThemeRepository implements ThemeRepositoryContract
     public function __construct(
         protected ThemeLoader $loader,
         protected ThemeInstaller $installer
-    )
-    {
+    ) {
         $this->directory = base_path('/themes');
         $this->installer->setPath($this->directory);
     }
@@ -34,7 +33,7 @@ class ThemeRepository implements ThemeRepositoryContract
             return $this->themes;
         }
 
-        if (!$this->loadCache()) {
+        if (! $this->loadCache()) {
             $this->load();
         }
 
@@ -44,13 +43,13 @@ class ThemeRepository implements ThemeRepositoryContract
     public function enabled(): ?Theme
     {
         return $this->enabledTheme ?? ($this->enabledTheme = collect($this->all())
-            ->first(static fn(Theme $theme): bool => $theme->isEnabled()));
+            ->first(static fn (Theme $theme): bool => $theme->isEnabled()));
     }
 
     public function disabled(): array
     {
         return collect($this->all())
-            ->filter(static fn(Theme $theme): bool => $theme->isDisabled())
+            ->filter(static fn (Theme $theme): bool => $theme->isDisabled())
             ->all();
     }
 
@@ -70,11 +69,11 @@ class ThemeRepository implements ThemeRepositoryContract
 
     public function enable(Theme|string $theme): ThemeStatus
     {
-        if (!$theme = $this->getTheme($theme)) {
+        if (! $theme = $this->getTheme($theme)) {
             return ThemeStatus::NotFound;
         }
 
-        if (!$this->bootTheme($theme)) {
+        if (! $this->bootTheme($theme)) {
             return ThemeStatus::BootFailed;
         }
 
@@ -89,7 +88,7 @@ class ThemeRepository implements ThemeRepositoryContract
 
     public function disable(): ThemeStatus
     {
-        if (!($name = $this->enabled()?->getName()) || !$theme = $this->getTheme($name)) {
+        if (! ($name = $this->enabled()?->getName()) || ! $theme = $this->getTheme($name)) {
             return ThemeStatus::NotFound;
         }
 
@@ -144,7 +143,7 @@ class ThemeRepository implements ThemeRepositoryContract
             return ThemeStatus::DeleteFailed;
         }
 
-        if($this->enabled()?->getName() === $theme->getName()) {
+        if ($this->enabled()?->getName() === $theme->getName()) {
             settings()->forget('nox.themes.enabled');
         }
 
@@ -198,13 +197,13 @@ class ThemeRepository implements ThemeRepositoryContract
 
     protected function loadCache(): bool
     {
-        if (!$this->isCacheEnabled()) {
+        if (! $this->isCacheEnabled()) {
             return false;
         }
 
         $key = $this->getCacheKey();
 
-        if ((!$cache = Cache::get($key)) || !is_array($cache)) {
+        if ((! $cache = Cache::get($key)) || ! is_array($cache)) {
             return false;
         }
 
@@ -240,7 +239,7 @@ class ThemeRepository implements ThemeRepositoryContract
 
     protected function isCacheEnabled(): bool
     {
-        return (bool)config('nox.themes.cache.enabled');
+        return (bool) config('nox.themes.cache.enabled');
     }
 
     protected function getCacheKey(): string
@@ -258,7 +257,7 @@ class ThemeRepository implements ThemeRepositoryContract
 
     protected function clearCache(): void
     {
-        if (!$this->isCacheEnabled()) {
+        if (! $this->isCacheEnabled()) {
             return;
         }
 
@@ -269,7 +268,7 @@ class ThemeRepository implements ThemeRepositoryContract
 
     protected function updateCache(): void
     {
-        if (!$this->isCacheEnabled()) {
+        if (! $this->isCacheEnabled()) {
             return;
         }
 

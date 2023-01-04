@@ -15,7 +15,7 @@ class FilamentManager extends FilamentManagerBase
             $isAString = is_string($aValue);
             $isBString = is_string($bValue);
 
-            if(!$isAString && !$isBString) {
+            if (! $isAString && ! $isBString) {
                 return $aValue - $bValue;
             }
 
@@ -23,7 +23,7 @@ class FilamentManager extends FilamentManagerBase
                 return strcasecmp($a, $b);
             }
 
-            if (!$isAString && $isBString) {
+            if (! $isAString && $isBString) {
                 return -1;
             }
 
@@ -31,7 +31,7 @@ class FilamentManager extends FilamentManagerBase
         });
 
         return collect($this->navigationGroups)
-            ->map(static fn($value, $key) => is_string($key) ? $key : $value)
+            ->map(static fn ($value, $key) => is_string($key) ? $key : $value)
             ->values()
             ->all();
     }

@@ -57,7 +57,7 @@ class ThemeInstaller
             return null;
         }
 
-        if(!empty($manifest['parent']) && !Themes::find($manifest['parent'])) {
+        if (! empty($manifest['parent']) && ! Themes::find($manifest['parent'])) {
             $status = ThemeStatus::InstallParentNotFound;
 
             return null;

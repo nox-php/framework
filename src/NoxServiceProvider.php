@@ -28,7 +28,7 @@ class NoxServiceProvider extends AggregateServiceProvider
         InstallerServiceProvider::class,
         AdminServiceProvider::class,
         ModuleServiceProvider::class,
-        ThemeServiceProvider::class
+        ThemeServiceProvider::class,
     ];
 
     public function register(): void

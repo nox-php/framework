@@ -69,7 +69,7 @@ class UserResource extends Resource
                                     ->required()
                                     ->email()
                                     ->maxLength(255)
-                                    ->unique(ignorable: static fn(?User $record): ?User => $record),
+                                    ->unique(ignorable: static fn (?User $record): ?User => $record),
                                 Forms\Components\Hidden::make('is_super_admin'),
                                 Forms\Components\Select::make('roles')
                                     ->label(__('nox::admin.resources.user.form.inputs.roles'))
@@ -94,7 +94,7 @@ class UserResource extends Resource
                                         if (
                                             Filament::auth()->id() === $record->getKey() &&
                                             $get('is_super_admin') &&
-                                            !$record->can('*')
+                                            ! $record->can('*')
                                         ) {
                                             BouncerFacade::assign('superadmin')->to($record);
                                             BouncerFacade::refreshFor($record);
@@ -106,13 +106,13 @@ class UserResource extends Resource
                             ->schema([
                                 Forms\Components\Placeholder::make('discord_name')
                                     ->label(__('nox::admin.resources.user.form.inputs.discord_name'))
-                                    ->content(static fn(?User $record): string => $record->discord_name),
+                                    ->content(static fn (?User $record): string => $record->discord_name),
                                 Forms\Components\Placeholder::make(User::getCreatedAtColumnName())
                                     ->label(__('nox::admin.resources.user.form.inputs.created_at'))
-                                    ->content(static fn(?User $record): string => $record?->{User::getCreatedAtColumnName()}?->diffForHumans() ?? '-'),
+                                    ->content(static fn (?User $record): string => $record?->{User::getCreatedAtColumnName()}?->diffForHumans() ?? '-'),
                                 Forms\Components\Placeholder::make(User::getUpdatedAtColumnName())
                                     ->label(__('nox::admin.resources.user.form.inputs.updated_at'))
-                                    ->content(static fn(?User $record): string => $record?->{User::getUpdatedAtColumnName()}?->diffForHumans() ?? '-'),
+                                    ->content(static fn (?User $record): string => $record?->{User::getUpdatedAtColumnName()}?->diffForHumans() ?? '-'),
                             ]),
                     ])->build()
                 )

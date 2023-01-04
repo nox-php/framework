@@ -2,7 +2,6 @@
 
 namespace Nox\Framework\Admin\Filament\Resources;
 
-use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -44,7 +43,7 @@ class ThemeResource extends Resource
                     ->label(__('nox::admin.resources.theme.form.inputs.name')),
                 Forms\Components\TextInput::make('version')
                     ->label(__('nox::admin.resources.theme.form.inputs.version'))
-                    ->formatStateUsing(static fn(string $state): string => 'v' . $state),
+                    ->formatStateUsing(static fn (string $state): string => 'v'.$state),
                 Forms\Components\TextInput::make('path')
                     ->label(__('nox::admin.resources.theme.form.inputs.path'))
                     ->columnSpanFull(),
@@ -53,7 +52,7 @@ class ThemeResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('parent')
                     ->label(__('nox::admin.resources.theme.form.inputs.parent'))
-                    ->hidden(static fn(?string $state): bool => empty($state)),
+                    ->hidden(static fn (?string $state): bool => empty($state)),
             ]);
     }
 

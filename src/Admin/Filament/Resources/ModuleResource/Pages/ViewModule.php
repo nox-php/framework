@@ -87,15 +87,15 @@ class ViewModule extends ViewRecord
                 ->label(__('nox::admin.resources.module.actions.enable'))
                 ->requiresConfirmation()
                 ->action('enableModule')
-                ->hidden(fn(): bool => $this->record->enabled),
+                ->hidden(fn (): bool => $this->record->enabled),
             Action::make('disable-module')
                 ->label(__('nox::admin.resources.module.actions.disable'))
                 ->action('disableModule')
                 ->requiresConfirmation()
                 ->color('danger')
-                ->hidden(fn(): bool => !$this->record->enabled),
+                ->hidden(fn (): bool => ! $this->record->enabled),
             DeleteAction::make()
-                ->action('deleteModule')
+                ->action('deleteModule'),
         ];
     }
 }

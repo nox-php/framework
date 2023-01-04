@@ -21,8 +21,7 @@ class ListThemes extends ListRecords
         ThemeRepository $themes,
         ComponentContainer $form,
         array $data
-    )
-    {
+    ) {
         [$component] = $form->getComponents();
 
         $storage = $component->getDisk();
@@ -52,8 +51,7 @@ class ListThemes extends ListRecords
     public function enableTheme(
         ThemeRepository $themes,
         Theme $record
-    )
-    {
+    ) {
         if (
             ($status = $themes->enable($record->name)) &&
             $status === ThemeStatus::EnabledSuccess
@@ -77,8 +75,7 @@ class ListThemes extends ListRecords
     public function disableTheme(
         ThemeRepository $themes,
         Theme $record
-    )
-    {
+    ) {
         if (
             ($status = $themes->disable($record->name)) &&
             $status === ThemeStatus::DisabledSuccess
@@ -102,8 +99,7 @@ class ListThemes extends ListRecords
     public function deleteTheme(
         ThemeRepository $themes,
         Theme $record
-    )
-    {
+    ) {
         if (
             ($status = $themes->delete($record->name)) &&
             $status === ThemeStatus::DeleteSuccess
@@ -127,8 +123,7 @@ class ListThemes extends ListRecords
     public function bulkDeleteThemes(
         ThemeRepository $themes,
         Collection $records
-    )
-    {
+    ) {
         foreach ($records as $record) {
             if (
                 ($status = $themes->delete($record->name)) &&

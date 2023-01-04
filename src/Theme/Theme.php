@@ -17,8 +17,7 @@ class Theme implements Arrayable
         protected array $providers,
         protected ?string $parent,
         protected bool $enabled
-    )
-    {
+    ) {
     }
 
     public function getName(): string

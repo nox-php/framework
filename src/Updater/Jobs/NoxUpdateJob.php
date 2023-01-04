@@ -46,7 +46,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
             $log = activity()
                 ->by($this->user)
                 ->event('nox.update')
-                ->log((string)$e);
+                ->log((string) $e);
 
             $this->handleError($log, $currentVersion);
         });
@@ -54,7 +54,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
 
     protected function update(Composer $composer, string $currentVersion): void
     {
-        $status = $composer->update('nox-php/framework:' . $this->version);
+        $status = $composer->update('nox-php/framework:'.$this->version);
 
         $log = activity()
             ->by($this->user)
@@ -64,6 +64,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
 
         if ($status !== 0) {
             $this->handleError($log, $currentVersion);
+
             return;
         }
 
@@ -96,7 +97,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                         'nox::admin.notifications.nox_update.success.body',
                         [
                             'old_version' => $currentVersion,
-                            'new_version' => $this->version
+                            'new_version' => $this->version,
                         ]
                     )
                 )
@@ -125,7 +126,7 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
                         'nox::admin.notifications.nox_update.failed.body',
                         [
                             'new_version' => $this->version,
-                            'old_version' => $currentVersion
+                            'old_version' => $currentVersion,
                         ]
                     )
                 )

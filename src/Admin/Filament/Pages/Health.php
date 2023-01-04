@@ -4,7 +4,6 @@ namespace Nox\Framework\Admin\Filament\Pages;
 
 use Carbon\Carbon;
 use Filament\Pages\Actions\Action;
-use Filament\Pages\Dashboard;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Health\Commands\RunHealthChecksCommand;

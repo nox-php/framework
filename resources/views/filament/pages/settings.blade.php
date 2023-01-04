@@ -1,5 +1,5 @@
 <x-filament::page>
-    <div wire:poll>
+    <div>
         @if($this->availableUpdateVersion !== null)
             <x-nox::filament.settings-banner>
                 {{ __('nox::admin.pages.settings.new_update', ['version' => $this->availableUpdateVersion]) }}

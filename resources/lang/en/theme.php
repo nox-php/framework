@@ -53,7 +53,7 @@ return [
             'invalid_manifest' => 'Invalid theme manifest',
             'already_installed' => 'Theme already installed',
             'extract_failed' => 'Failed to extract theme',
-            'parent_not_found' => 'Failed to find parent theme'
+            'parent_not_found' => 'Failed to find parent theme',
         ],
     ],
 

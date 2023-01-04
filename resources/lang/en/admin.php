@@ -15,7 +15,7 @@ return [
             'actions' => [
                 'install' => 'Install themes',
                 'enable' => 'Enable',
-                'disable' => 'Disable'
+                'disable' => 'Disable',
             ],
 
             'form' => [
@@ -24,8 +24,8 @@ return [
                     'version' => 'Version',
                     'path' => 'Path',
                     'description' => 'Description',
-                    'parent' => 'Parent theme'
-                ]
+                    'parent' => 'Parent theme',
+                ],
             ],
 
             'table' => [
@@ -38,16 +38,16 @@ return [
 
                         'enum' => [
                             'enabled' => 'Enabled',
-                            'disabled' => 'Disabled'
-                        ]
-                    ]
+                            'disabled' => 'Disabled',
+                        ],
+                    ],
                 ],
 
                 'actions' => [
                     'enable' => 'Enable',
-                    'disable' => 'Disable'
-                ]
-            ]
+                    'disable' => 'Disable',
+                ],
+            ],
         ],
 
         'module' => [
@@ -57,7 +57,7 @@ return [
             'actions' => [
                 'install' => 'Install modules',
                 'enable' => 'Enable',
-                'disable' => 'Disable'
+                'disable' => 'Disable',
             ],
 
             'form' => [
@@ -65,8 +65,8 @@ return [
                     'name' => 'Name',
                     'version' => 'Version',
                     'path' => 'Path',
-                    'description' => 'Description'
-                ]
+                    'description' => 'Description',
+                ],
             ],
 
             'table' => [
@@ -79,21 +79,21 @@ return [
 
                         'enum' => [
                             'enabled' => 'Enabled',
-                            'disabled' => 'Disabled'
-                        ]
-                    ]
+                            'disabled' => 'Disabled',
+                        ],
+                    ],
                 ],
 
                 'actions' => [
                     'enable' => 'Enable',
-                    'disable' => 'Disable'
+                    'disable' => 'Disable',
                 ],
 
                 'bulk_actions' => [
                     'enable' => 'Enable selected',
-                    'disable' => 'Disable selected'
-                ]
-            ]
+                    'disable' => 'Disable selected',
+                ],
+            ],
         ],
 
         'activity' => [
@@ -110,22 +110,22 @@ return [
                     'properties' => 'Properties',
                     'before' => [
                         'label' => 'Before',
-                        'helper' => 'Old model attributes'
+                        'helper' => 'Old model attributes',
                     ],
                     'after' => [
                         'label' => 'After',
-                        'helper' => 'New model attributes'
-                    ]
-                ]
+                        'helper' => 'New model attributes',
+                    ],
+                ],
             ],
 
             'table' => [
                 'columns' => [
                     'description' => 'Description',
                     'subject' => 'Subject',
-                    'created_at' => 'Created at'
-                ]
-            ]
+                    'created_at' => 'Created at',
+                ],
+            ],
         ],
 
         'user' => [
@@ -139,8 +139,8 @@ return [
                     'roles' => 'Roles',
                     'discord_name' => 'Discord name',
                     'created_at' => 'Created at',
-                    'updated_at' => 'Updated at'
-                ]
+                    'updated_at' => 'Updated at',
+                ],
             ],
 
             'table' => [
@@ -150,9 +150,9 @@ return [
                     'email' => 'Email address',
                     'discord_name' => 'Discord name',
                     'created_at' => 'Created at',
-                    'updated_at' => 'Updated at'
-                ]
-            ]
+                    'updated_at' => 'Updated at',
+                ],
+            ],
         ],
     ],
 
@@ -163,8 +163,8 @@ return [
             'last_updated' => 'Last updated',
 
             'actions' => [
-                'refresh' => 'Refresh'
-            ]
+                'refresh' => 'Refresh',
+            ],
         ],
 
         'settings' => [
@@ -176,7 +176,7 @@ return [
                 'check_for_updates' => 'Check for updates',
                 'save' => 'Save',
                 'cancel' => 'Cancel',
-                'install' => 'Install'
+                'install' => 'Install',
             ],
 
             'form' => [
@@ -184,36 +184,36 @@ return [
                     'site' => 'Site',
                     'database' => 'Database',
                     'discord' => 'Discord',
-                    'mail' => 'Mail'
+                    'mail' => 'Mail',
                 ],
 
                 'fieldsets' => [
                     'global' => 'Global',
                     'debugging' => 'Debugging',
                     'credentials' => 'Credentials',
-                    'signature' => 'Signature'
+                    'signature' => 'Signature',
                 ],
 
                 'inputs' => [
                     'site_name' => [
                         'label' => 'Site name',
-                        'hint' => 'Updating this will sign everyone out'
+                        'hint' => 'Updating this will sign everyone out',
                     ],
                     'site_url' => [
                         'label' => 'Site URL',
-                        'hint' => 'Updating this will sign everyone out'
+                        'hint' => 'Updating this will sign everyone out',
                     ],
                     'site_environment' => [
                         'label' => 'Environment',
                         'options' => [
                             'production' => 'Production',
                             'testing' => 'Testing',
-                            'local' => 'Local'
-                        ]
+                            'local' => 'Local',
+                        ],
                     ],
                     'site_debug' => [
                         'label' => 'Enable debug mode',
-                        'helper' => 'This should never be enabled in production'
+                        'helper' => 'This should never be enabled in production',
                     ],
 
                     'database_driver' => [
@@ -222,8 +222,8 @@ return [
                             'mysql' => 'mysql',
                             'pgsql' => 'pgsql',
                             'sqlsrv' => 'sqlsrv',
-                            'sqlite' => 'sqlite'
-                        ]
+                            'sqlite' => 'sqlite',
+                        ],
                     ],
                     'database_host' => 'Host',
                     'database_port' => 'Port',
@@ -238,8 +238,8 @@ return [
                         'label' => 'Driver',
                         'options' => [
                             'smtp' => 'smtp',
-                            'sendmail' => 'sendmail'
-                        ]
+                            'sendmail' => 'sendmail',
+                        ],
                     ],
                     'mail_path' => 'Path',
                     'mail_host' => 'Host',
@@ -248,10 +248,10 @@ return [
                     'mail_password' => 'Password',
                     'mail_encryption' => 'Encryption',
                     'mail_from_address' => 'Sender address',
-                    'mail_from_name' => 'Sender name'
-                ]
-            ]
-        ]
+                    'mail_from_name' => 'Sender name',
+                ],
+            ],
+        ],
     ],
 
     'notifications' => [
@@ -261,8 +261,8 @@ return [
                 'body' => 'Nox has been updated from :old_version to :new_version',
 
                 'actions' => [
-                    'view_log' => 'View log'
-                ]
+                    'view_log' => 'View log',
+                ],
             ],
 
             'failed' => [
@@ -271,8 +271,8 @@ return [
 
                 'actions' => [
                     'retry' => 'Retry',
-                    'view_log' => 'View log'
-                ]
+                    'view_log' => 'View log',
+                ],
             ],
 
             'install' => [
@@ -280,37 +280,37 @@ return [
                 'body' => 'Nox :new_version is available, currently installed :old_version',
 
                 'actions' => [
-                    'install' => 'Install'
-                ]
+                    'install' => 'Install',
+                ],
             ],
 
             'updating' => [
                 'title' => 'Nox :version is updating in the background',
-                'body' => 'You will be notified once it has finished'
-            ]
+                'body' => 'You will be notified once it has finished',
+            ],
         ],
 
         'settings' => [
             'success' => [
-                'title' => 'Successfully updated settings'
+                'title' => 'Successfully updated settings',
             ],
 
             'failed' => [
                 'database' => [
                     'title' => 'Failed to update settings',
-                    'body' => 'Failed to connect to the database'
+                    'body' => 'Failed to connect to the database',
                 ],
 
                 'config' => [
                     'title' => 'Failed to update settings',
-                    'body' => 'Failed to update config file'
-                ]
+                    'body' => 'Failed to update config file',
+                ],
             ],
 
             'check_updates' => [
                 'title' => 'Checking for Nox updates in the background',
-                'body' => 'You will be notified if an update is available'
-            ]
-        ]
-    ]
+                'body' => 'You will be notified if an update is available',
+            ],
+        ],
+    ],
 ];

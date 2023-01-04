@@ -21,8 +21,7 @@ class ListModules extends ListRecords
         ModuleRepository $modules,
         ComponentContainer $form,
         array $data
-    )
-    {
+    ) {
         [$component] = $form->getComponents();
 
         $storage = $component->getDisk();
@@ -52,8 +51,7 @@ class ListModules extends ListRecords
     public function enableModule(
         ModuleRepository $modules,
         Module $record
-    )
-    {
+    ) {
         if (
             ($status = $modules->enable($record->name)) &&
             $status === ModuleStatus::EnabledSuccess
@@ -77,8 +75,7 @@ class ListModules extends ListRecords
     public function bulkEnableModules(
         ModuleRepository $modules,
         Collection $records
-    )
-    {
+    ) {
         foreach ($records as $record) {
             if (
                 ($status = $modules->enable($record->name)) &&
@@ -104,8 +101,7 @@ class ListModules extends ListRecords
     public function disableModule(
         ModuleRepository $modules,
         Module $record
-    )
-    {
+    ) {
         if (
             ($status = $modules->disable($record->name)) &&
             $status === ModuleStatus::DisabledSuccess
@@ -129,8 +125,7 @@ class ListModules extends ListRecords
     public function bulkDisableModules(
         ModuleRepository $modules,
         Collection $records
-    )
-    {
+    ) {
         foreach ($records as $record) {
             if (
                 ($status = $modules->disable($record->name)) &&
@@ -156,8 +151,7 @@ class ListModules extends ListRecords
     public function deleteModule(
         ModuleRepository $modules,
         Module $record
-    )
-    {
+    ) {
         if (
             ($status = $modules->delete($record->name)) &&
             $status === ModuleStatus::DeleteSuccess
@@ -181,8 +175,7 @@ class ListModules extends ListRecords
     public function bulkDeleteModules(
         ModuleRepository $modules,
         Collection $records
-    )
-    {
+    ) {
         foreach ($records as $record) {
             if (
                 ($status = $modules->delete($record->name)) &&
