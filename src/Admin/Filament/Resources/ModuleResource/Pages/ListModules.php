@@ -36,13 +36,13 @@ class ListModules extends ListRecords
             ) {
                 Notification::make()
                     ->success()
-                    ->title(__('nox::modules.install.success.title', ['name' => $name]))
+                    ->title(__('nox::module.install.success.title', ['name' => $name]))
                     ->body(__($status->value))
                     ->send();
             } else {
                 Notification::make()
                     ->danger()
-                    ->title(__('nox::modules.install.failed.title'))
+                    ->title(__('nox::module.install.failed.title'))
                     ->body(__($status->value))
                     ->send();
             }

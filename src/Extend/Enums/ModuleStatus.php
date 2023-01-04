@@ -4,33 +4,33 @@ namespace Nox\Framework\Extend\Enums;
 
 enum ModuleStatus: string
 {
-    case NotFound = 'nox::modules.not_found';
+    case NotFound = 'nox::module.not_found';
 
-    case BootFailed = 'nox::modules.boot_failed';
+    case BootFailed = 'nox::module.boot_failed';
 
-    case PublishSuccess = 'nox::modules.publish.success.body';
+    case PublishSuccess = 'nox::module.publish.success.body';
 
-    case PublishFailed = 'nox::modules.publish.failed.body';
+    case PublishFailed = 'nox::module.publish.failed.body';
 
-    case EnabledSuccess = 'nox::modules.enabled.success.body';
+    case EnabledSuccess = 'nox::module.enabled.success.body';
 
-    case DisabledSuccess = 'nox::modules.disabled.success.body';
+    case DisabledSuccess = 'nox::module.disabled.success.body';
 
-    case InstallSuccess = 'nox::modules.installed.success.body';
+    case InstallSuccess = 'nox::module.installed.success.body';
 
-    case InstallFileNotFound = 'nox::modules.installed.failed.file_not_found';
+    case InstallFileNotFound = 'nox::module.installed.failed.file_not_found';
 
-    case InstallManifestNotFound = 'nox::modules.installed.failed.manifest_not_found';
+    case InstallManifestNotFound = 'nox::module.installed.failed.manifest_not_found';
 
-    case InstallManifestLoadFailed = 'nox::modules.installed.failed.manifest_load_failed';
+    case InstallManifestLoadFailed = 'nox::module.installed.failed.manifest_load_failed';
 
-    case InstallInvalidManifest = 'nox::modules.installed.failed.invalid_manifest';
+    case InstallInvalidManifest = 'nox::module.installed.failed.invalid_manifest';
 
-    case InstallAlreadyInstalled = 'nox::modules.installed.failed.already_installed';
+    case InstallAlreadyInstalled = 'nox::module.installed.failed.already_installed';
 
-    case InstallExtractFailed = 'nox::modules.installed.failed.extract_failed';
+    case InstallExtractFailed = 'nox::module.installed.failed.extract_failed';
 
-    case DeleteSuccess = 'nox::modules.delete.success.body';
+    case DeleteSuccess = 'nox::module.delete.success.body';
 
-    case DeleteFailed = 'nox::modules.delete.failed.body';
+    case DeleteFailed = 'nox::module.delete.failed.body';
 }
