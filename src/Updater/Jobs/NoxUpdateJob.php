@@ -41,8 +41,12 @@ class NoxUpdateJob implements ShouldQueue, ShouldBeUnique
         $currentVersion = InstalledVersions::getVersion('nox-php/framework');
 
         rescue(function () use ($composer, $currentVersion) {
+            Artisan::call('down');
+
             $this->update($composer, $currentVersion);
         }, function (Exception $e) use ($currentVersion) {
+            Artisan::call('up');
+
             $log = activity()
                 ->by($this->user)
                 ->event('nox.update')
