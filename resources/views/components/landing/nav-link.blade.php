@@ -15,7 +15,7 @@
         </button>
     @else
         <a
-            {{$attributes->merge(['href' => $to])->class($classes)}}
+            {{$attributes->merge(['href' => $to, 'target' => '_blank'])->class($classes)}}
         >
             {{ $slot }}
         </a>

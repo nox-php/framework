@@ -184,7 +184,9 @@ class ModuleRepository implements ModuleRepositoryContract
     protected function bootProviders(array $providers): void
     {
         foreach ($providers as $provider) {
-            app()->register($provider);
+            if(class_exists($provider)) {
+                app()->register($provider);
+            }
         }
     }
 
