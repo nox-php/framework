@@ -44,6 +44,7 @@ class Composer
             '-W' => true,
             '-o' => true,
             '--no-scripts' => true,
+            '--no-dev' => true
         ]);
     }
 

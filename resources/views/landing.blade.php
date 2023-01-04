@@ -46,7 +46,7 @@
                 </x-nox::landing.nav-link>
 
                 <x-nox::landing.nav-link to="https://github.com/nox-php/framework">
-                    <x-nox::icons.github class="h-5 w-5"/>
+                    <x-nox::icons.github class="h-6 w-6"/>
                 </x-nox::landing.nav-link>
             </ul>
         </div>
