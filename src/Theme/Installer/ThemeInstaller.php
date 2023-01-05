@@ -18,7 +18,7 @@ class ThemeInstaller
         protected ThemeLoader $loader,
         ?string $path = null
     ) {
-        $this->path = $path ?? base_path('/themes');
+        $this->path = $path ?? base_path('themes');
     }
 
     public function install(string $path, ?ThemeStatus &$status = null): ?string

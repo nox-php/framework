@@ -19,7 +19,7 @@ class Composer
     {
         $input = new ArrayInput([
             'command' => $command,
-            '-d' => base_path('/'),
+            '-d' => base_path(),
             ...$extraParameters,
         ]);
 

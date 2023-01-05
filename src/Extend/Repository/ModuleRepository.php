@@ -21,7 +21,7 @@ class ModuleRepository implements ModuleRepositoryContract
         protected ModuleLoader $loader,
         protected ModuleInstaller $installer
     ) {
-        $this->directory = base_path('/modules');
+        $this->directory = base_path('modules');
         $this->installer->setPath($this->directory);
     }
 

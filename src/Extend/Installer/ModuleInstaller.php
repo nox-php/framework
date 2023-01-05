@@ -18,7 +18,7 @@ class ModuleInstaller
         protected ModuleLoader $loader,
         ?string $path = null
     ) {
-        $this->path = $path ?? base_path('/modules');
+        $this->path = $path ?? base_path('modules');
     }
 
     public function install(string $path, ?ModuleStatus &$status = null): ?string

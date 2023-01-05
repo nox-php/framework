@@ -23,7 +23,7 @@ class ThemeRepository implements ThemeRepositoryContract
         protected ThemeLoader $loader,
         protected ThemeInstaller $installer
     ) {
-        $this->directory = base_path('/themes');
+        $this->directory = base_path('themes');
         $this->installer->setPath($this->directory);
     }
 
