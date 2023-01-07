@@ -3,6 +3,8 @@
 The purpose of this framework is to provide a modular foundation that supports integration with any
 game servers on any platform.
 
+It's still very, very, early days, and currently the focus is on getting a working PoC (proof-of-concept) for people to play with (they're a visual client and thus requested a usable demo to play with). 
+
 ### Summary of features so far:
 - Module support (install custom systems, including custom integrations for games)
 - Theme support (serve a personalised theme for your game, with support for parent themes)
